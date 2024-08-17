@@ -1,0 +1,42 @@
+.button {
+  border-radius: 64px;
+  background: var(--Accent, #465244);
+  border: none;
+  color: var(--White_text, #f6f6f6);
+  font-family: Ubuntu;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: center;
+  width: 100%;
+  height: 64px;
+  margin: 16px 0 0 0;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #3c443b;
+}
+
+.button:disabled {
+  color: #fff;
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.button:disabled:hover {
+  opacity: 1;
+}
+
+@media screen and (max-width: 600px) {
+  .button {
+    max-width: 328px;
+    height: 52px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+    padding: 9px 0;
+  }
+}

@@ -1,0 +1,114 @@
+.text__block {
+  height: 389px;
+  background-color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  padding: 0 80px;
+}
+
+.text__title {
+  font-family: Spectral;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 79px;
+  letter-spacing: 0em;
+  margin: 80px 0 0 0;
+  text-align: left;
+}
+
+.text__text {
+  font-family: Spectral;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 49px;
+  letter-spacing: 0em;
+  margin: 40px 0 92px 0;
+  width: 100%; /* Take full width */
+  /* text-align: right; */
+}
+
+@media screen and (max-width: 767px) {
+  .text__block {
+    height: 403px;
+    padding: 0 16px;
+  }
+
+  .text__title {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 49px;
+    letter-spacing: 0em;
+    width: auto;
+    margin: 40px 0 0 0;
+    padding: 0;
+  }
+
+  .text__text {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0em;
+    margin: 16px 0 0 0;
+    /* text-align: right; */
+    width: auto; /* Auto width for larger screens */
+    height: auto; /* Auto height for larger screens */
+  }
+}
+
+/* .text__block {
+  height: 389px;
+  background-color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+}
+.text__title {
+  font-family: Spectral;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 79px;
+  letter-spacing: 0em;
+  margin: 80px 0 0 0;
+  padding: 0 0 0 80px;
+  text-align: left;
+}
+
+.text__text {
+  font-family: Spectral;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 49px;
+  letter-spacing: 0em;
+  padding: 0 0 0 406px;
+  margin: 40px 0 92px 0;
+  width: 954px;
+  height: 98px;
+  text-align: right;
+}
+
+@media screen and (max-width: 767px) {
+  .text__block {
+    height: 403px;
+    padding: 0 16px;
+  }
+  .text__title {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 49px;
+    letter-spacing: 0em;
+    width: 328px;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+  }
+
+  .text__text {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0em;
+    padding: 0 0 0 0;
+    margin: 16px 0 0 0;
+    text-align: right;
+    width: 328px;
+    height: 120px;
+  }
+} */

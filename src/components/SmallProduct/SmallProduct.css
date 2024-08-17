@@ -1,0 +1,56 @@
+/* .smallproduct {
+    width: 280px;
+}
+*/
+.smallproduct__container {
+  width: 280px;
+}
+
+.smallproduct__image {
+  width: 280px;
+  height: 280px;
+}
+
+.smallproduct__title {
+  font-family: Ubuntu;
+  color: var(--Black_text, #0f100f);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 16px 0 24px 0;
+}
+
+.smallproduct__description {
+  font-family: Ubuntu;
+  color: var(--Black_text, #0f100f);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@media screen and (max-width: 767px) {
+  .smallproduct__container {
+    width: 220px;
+  }
+
+  .smallproduct__image {
+    width: 220px;
+    height: 220px;
+  }
+
+  .smallproduct__title {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+  }
+
+  .smallproduct__description {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0em;
+  }
+}

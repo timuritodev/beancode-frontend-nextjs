@@ -1,0 +1,146 @@
+.popup {
+  background-color: rgba(43, 47, 51, 0.4);
+  width: 100vw;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  z-index: 25;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity ease 0.3s;
+  overflow: auto;
+}
+
+.popup_opened {
+  visibility: visible;
+  opacity: 1;
+  overflow-y: scroll;
+}
+
+.popup__container {
+  max-width: 620px;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 50px auto 100px;
+  padding: 40px;
+  border-radius: 30px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.popup__title {
+  font-size: 30px;
+  line-height: 39px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.popup__text {
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 400;
+  padding: 30px 0;
+  margin: 0;
+}
+
+.popup__close {
+  border-radius: 64px;
+  background: var(--Accent, #465244);
+  border: none;
+  color: var(--White_text, #f6f6f6);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  max-width: 574px;
+  height: 64px;
+  margin: 16px 0 0 0;
+  cursor: pointer;
+}
+
+.popup__close:hover {
+  color: #0c0c0c;
+}
+
+.body__scroll-lock {
+  height: 100%;
+  overflow: hidden;
+}
+.popup__x-btn {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: transparent;
+  background: url("../../images/x-button.svg") center no-repeat;
+  border: none;
+  transition: opacity 0.5s;
+  display: block;
+}
+
+.popup__x-btn:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.popup__link {
+  font-family: Ubuntu;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-decoration: none;
+  color: #0f100f;
+}
+
+@media screen and (max-width: 767px) {
+  .popup__container {
+    max-width: 320px;
+    border-radius: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .popup__link {
+    font-size: 15px;
+  }
+
+  .popup__x-btn {
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    right: 10px;
+  }
+  .popup__close {
+    height: 35px;
+  }
+  .popup__title {
+    font-size: 20px;
+    line-height: normal;
+  }
+
+  .popup__text {
+    font-size: 15px;
+    line-height: normal;
+  }
+  .popup__x-btn {
+    display: block;
+  }
+
+  .popup__close {
+    font-size: 16px;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-bottom: 5px;
+  }
+}

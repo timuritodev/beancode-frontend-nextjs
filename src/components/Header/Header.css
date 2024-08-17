@@ -1,0 +1,143 @@
+.header {
+  width: 100%;
+  margin: 0 auto;
+  padding: 52px 0 52px 0;
+  background: var(--White_bg, #f8f8f8);
+}
+
+.header_dark {
+  background: #e3e5e4;
+}
+
+.header__container {
+  max-width: 1280px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 47px;
+  margin: 0 auto;
+}
+
+.header__logo {
+  width: 208px;
+  height: 30px;
+}
+
+.header__links {
+  display: flex;
+  gap: 24px;
+  text-decoration: none;
+}
+.header__link {
+  font-family: Ubuntu;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none; /* Убираем дефолтное подчеркивание */
+  color: inherit;
+}
+
+.header__search__container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.header__search {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-width: 300px;
+  height: 45px;
+  border-radius: 40px;
+  border: 1px solid var(--Black_text, #0f100f);
+}
+
+.header__search-input {
+  background-color: transparent;
+  border: none;
+  color: var(--grey, #797979);
+  /* font-family: Poppins; */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  max-width: 300px;
+  width: 100%;
+  outline: none;
+}
+
+.header__search-button_search {
+  margin: 0 8px 0 12px;
+}
+
+.header__profile-icon {
+  width: 22px;
+  height: 26px;
+}
+
+@media screen and (max-width: 1279px) {
+  .header {
+    padding: 24px 0 16px 0;
+  }
+
+  .header__container {
+    max-width: 768px;
+    justify-content: space-around;
+    height: 24px;
+  }
+
+  .header__logo {
+    width: 160px;
+    height: 23px;
+  }
+
+  .header__links {
+    display: flex;
+    gap: 24px;
+    text-decoration: none;
+  }
+  .header__link {
+    font-family: Ubuntu;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0em;
+  }
+
+  .header__search-button_search {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+  }
+
+  .header__search__container {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .header__profile-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    padding: 24px 0 16px 0;
+  }
+
+  .header__container {
+    max-width: 768px;
+    justify-content: space-around;
+    height: 24px;
+  }
+
+  .header__links {
+    display: none;
+  }
+}

@@ -1,0 +1,335 @@
+@font-face {
+  font-family: "Ubuntu";
+  src: url("./Ubuntu/Ubuntu-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("./Ubuntu/Ubuntu-Regular.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("./Ubuntu/Ubuntu-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("./Ubuntu/Ubuntu-Medium.ttf") format("ttf");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("./Ubuntu/Ubuntu-Medium.woff") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("./Ubuntu/Ubuntu-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+/* @font-face {
+	font-family: 'Ubuntu';
+	src: url('./Ubuntu/Ubuntu-SemiBold.ttf') format('ttf');
+	font-weight: 600;
+	font-display: swap;
+  }
+  
+  @font-face {
+	font-family: 'Ubuntu';
+	src: url('./Ubuntu/Ubuntu-SemiBold.woff') format('woff');
+	font-weight: 600;
+	font-display: swap;
+  }
+  
+  @font-face {
+	font-family: 'Ubuntu';
+	src: url('./Ubuntu/Ubuntu-SemiBold.woff2') format('woff2');
+	font-weight: 600;
+	font-display: swap;
+  } */
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("./Ubuntu/Ubuntu-Bold.ttf") format("ttf");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("./Ubuntu/Ubuntu-Bold.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("./Ubuntu/Ubuntu-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./Poppins/Poppins-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./Poppins/Poppins-Regular.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./Poppins/Poppins-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./Poppins/Poppins-Medium.ttf") format("ttf");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./Poppins/Poppins-Medium.woff") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./Poppins/Poppins-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./Poppins/Poppins-SemiBold.ttf") format("ttf");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./Poppins/Poppins-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./Poppins/Poppins-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./Poppins/Poppins-Bold.ttf") format("ttf");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./Poppins/Poppins-Bold.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./Poppins/Poppins-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spectral";
+  src: url("./Spectral/Spectral-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spectral";
+  src: url("./Spectral/Spectral-Regular.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spectral";
+  src: url("./Spectral/Spectral-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spectral";
+  src: url("./Spectral/Spectral-Medium.ttf") format("ttf");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spectral";
+  src: url("./Spectral/Spectral-Medium.woff") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spectral";
+  src: url("./Spectral/Spectral-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spectral";
+  src: url("./Spectral/Spectral-SemiBold.ttf") format("ttf");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spectral";
+  src: url("./Spectral/Spectral-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spectral";
+  src: url("./Spectral/Spectral-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spectral";
+  src: url("./Spectral/Spectral-Bold.ttf") format("ttf");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spectral";
+  src: url("./Spectral/Spectral-Bold.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Spectral";
+  src: url("./Spectral/Spectral-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-Regular.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-Medium.ttf") format("ttf");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-Medium.woff") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-SemiBold.ttf") format("ttf");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-Bold.ttf") format("ttf");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-Bold.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Montserrat/Montserrat-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}

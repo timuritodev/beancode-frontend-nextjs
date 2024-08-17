@@ -1,0 +1,35 @@
+.products__wrapper {
+  display: flex;
+  align-items: center;
+  margin: 32px 0 0 0;
+}
+
+.grain {
+  display: inline-block;
+  width: 16px;
+  height: 17px;
+  /* background-image: url('path/to/combined-grain.png');  */
+  background-size: cover;
+  margin: 0 8px 0 0;
+}
+
+.grains__container {
+  margin: 0 35px 0 0;
+}
+
+.filled {
+  background-image: url(../../images/bean_full.svg);
+}
+
+.empty {
+  background-image: url(../../images/bean_empy.svg);
+}
+
+.products__info {
+  color: var(--Black_text, #0f100f);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 23px;
+  letter-spacing: 0em;
+  margin: 0;
+}

@@ -1,0 +1,31 @@
+.product-images-slider_container {
+  width: 100%;
+  margin: 20px auto;
+  max-width: 513px;
+
+}
+
+.product-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-image {
+  width: 100%;
+  max-width: 600px; /* Можете настроить по вашему дизайну */
+  height: auto;
+  display: block;
+}
+
+.product-image {
+  width: 513px;
+  height: 489px;
+}
+
+@media screen and (max-width: 767px) {
+  .product-image {
+    width: 328px;
+    height: 328px;
+  }
+}

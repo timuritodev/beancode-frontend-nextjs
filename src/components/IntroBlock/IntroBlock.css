@@ -1,0 +1,120 @@
+.intro__block {
+  position: relative;
+  overflow: hidden;
+  height: 685px;
+}
+
+.intro__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../../images/beans.png);
+  transform-origin: center center;
+  overflow: visible;
+  z-index: 0;
+}
+
+/* .intro__background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.5));
+  z-index: 0; 
+} */
+
+.intro__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.intro__title {
+  font-family: Spectral;
+  font-size: 90px;
+  font-weight: 700;
+  line-height: 95px;
+  letter-spacing: 0em;
+  text-align: center;
+  margin: 0 0 30px 0;
+  /* color: var(--grey, #797979); */
+  z-index: 2;
+}
+
+.intro__text {
+  font-family: Ubuntu;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 40px;
+  letter-spacing: 0em;
+  z-index: 2;
+  margin: 40px 0 40px 0;
+  text-align: center;
+  margin: 0 0 40px 0;
+  /* color: var(--grey, #797979); */
+}
+
+.intro__button {
+  width: 308px;
+  /* height: 64px; */
+  margin: 0;
+  padding: 15px 0;
+  border-radius: 64px;
+  background-color: #465244;
+  border: none;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0em;
+  color: #f8f8f8;
+  cursor: pointer;
+  text-align: center;
+  z-index: 6;
+}
+
+@media screen and (min-width: 1600px) {
+  .intro__block {
+    overflow:visible;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .intro__block {
+    height: 628px;
+  }
+
+  .intro__background {
+    margin: -75px 0 0 0;
+    background: url(../../images/beans-small.png);
+  }
+
+  .intro__title {
+    font-family: Spectral;
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 60px;
+    letter-spacing: 0em;
+    margin: 0 0 30px 0;
+    text-align: center;
+  }
+
+  .intro__text {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    margin: 0 0 30px 0;
+  }
+
+  .intro__button {
+    width: 328px;
+  }
+}

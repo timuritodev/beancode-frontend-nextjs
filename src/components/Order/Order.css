@@ -1,0 +1,129 @@
+.orderlist {
+  max-width: 896px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 48px;
+}
+
+.order {
+  display: flex;
+  gap: 90px;
+}
+
+.order__number {
+  color: var(--Black_text, #0f100f);
+  font-family: Ubuntu;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  width: 141px;
+}
+
+.order__text_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.order__info {
+  color: var(--Black_text, #0f100f);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+.order_delivery {
+  color: var(--grey, #797979);
+  font-family: Ubuntu;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  width: 250px;
+}
+
+.order__status {
+  color: #4D702B;
+  font-family: Ubuntu;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+.order__products {
+  color: var(--Black_text, #0f100f);
+  font-family: Ubuntu;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  width: 270px;
+  line-height: normal;
+  margin: 0;
+}
+
+.order__link {
+  color: var(--Black_text, #0f100f);
+  font-family: Ubuntu;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+  margin: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .orderlist {
+    gap: 24px;
+  }
+
+  .order {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 0 24px 0;
+    border-bottom: 1px solid #c8cac8;
+  }
+
+  .order__number {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0em;
+  }
+
+  .order__text_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .order__info {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0em;
+  }
+
+  .order_delivery {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0em;
+  }
+
+  .order__link {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0em;
+  }
+}
