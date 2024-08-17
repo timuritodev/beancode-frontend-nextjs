@@ -1,0 +1,1 @@
+# beancode-frontend-nextjs
