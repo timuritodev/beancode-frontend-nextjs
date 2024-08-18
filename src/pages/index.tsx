@@ -11,6 +11,7 @@ import { getOrdersApi } from "@/services/redux/slices/order/order";
 import { selectUser } from "@/services/redux/slices/user/user";
 import { useAppDispatch, useAppSelector } from "@/services/typeHooks";
 import { useEffect } from "react";
+import styles from "./index.module.scss";
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
@@ -26,8 +27,8 @@ const MainPage = () => {
   }, [dispatch, user.id, user.token]);
 
   return (
-    <section className="main">
-      <div className="main__container">
+    <section className={styles.main}>
+      <div className={styles.main__container}>
         <IntroBlock />
         <TextBlock />
         <InfoBlock />

@@ -1,26 +1,37 @@
-import "./PackageBlock.css";
-import package_photo from "../../images/package.jpg";
-import package_block from "../../images/package_block.jpeg";
+import styles from "./style.module.scss"; // Import CSS Module
+import roast_photo from "../../images/roast_block.jpeg"; // Image for roast block
+import { useResize } from "../../hooks/useResize"; // Custom hook for responsive design
 
-const PackageBlock = () => {
+const RoastBlock = () => {
+  const { width } = useResize(); // Get the current window width
+
+  // Render different content based on the screen width
   return (
-    <div className="package">
-      <div className="package__container">
-        <div className="package__text__container">
-          <div className="package__digit-title__container">
-            <p className="package__digit">03</p>
-            <h2 className="package__title">Процесс дозировки и упаковки</h2>
+    <div className={styles.roastBlock}>
+      <img className={styles.roastImg} src={roast_photo} alt="roast machine" />
+      <div className={styles.roastOverlay}></div>
+      <div className={styles.roastBlockContainer}>
+        <div className={styles.roastContainer}>
+          <div className={styles.roastDigitTitleContainer}>
+            <p className={styles.roastDigit}>02</p>
+            <h2 className={styles.roastTitle}>
+              Процесс обжарки
+              <br /> и сортировки
+            </h2>
           </div>
-          <p className="package__text">
-            Упаковочное оборудование, разработанное и произведенное российской
-            компанией, позволяет осуществлять упаковку в высоком темпе с
-            точностью до 1 гр.
+          <p className={styles.roastText}>
+            Мы обжариваем наши зёрна на ростере Giesen. Это оборудование,
+            которое отличается стабильностью результата, позволяя получать
+            неизменный вкус кофе. Единовременная загрузка зеленого зёрна у этого
+            ростера составляет от до 15 кг. Максимально, за час работы, нам
+            удаётся обжарить 60 кг кофе. Мы сортируем кофе от камней в
+            специальных машинах - дистоунерах Giesen, надежно защищая кофемолки
+            наших потребителей.
           </p>
         </div>
-        <img className="package__img" src={package_block} alt="image of package"/>
       </div>
     </div>
   );
 };
 
-export default PackageBlock;
+export default RoastBlock;
