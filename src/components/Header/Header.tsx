@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import "./Header.css";
-import { Link, useLocation } from "react-router-dom";
+import styles from "./style.module.scss";
 import logo from "../../images/logo.svg";
 import icon from "../../images/person_active.svg";
 import loop from "../../images/loop.svg";
@@ -11,10 +10,12 @@ import { useResize } from "../../hooks/useResize";
 import { BurgerButton } from "../BurgerButton/BurgerButton";
 import { useAppSelector } from "../../services/typeHooks";
 import { selectUser } from "../../services/redux/slices/user/user";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Header: FC = () => {
   const user = useAppSelector(selectUser);
-  const location = useLocation();
+  const router = useRouter();
 
   const [values, setValues] = useState("");
   const [isOpenSearch, setIsOpenSearch] = useState(false);
@@ -48,57 +49,57 @@ const Header: FC = () => {
 
   return (
     <header
-      className={`header ${location.pathname === "/" ? "header_dark" : ""}`}
+      className={`${styles.header} ${router.pathname === "/" ? styles.header_dark : ""}`}
     >
-      <div className="header__container">
+      <div className={styles.header__container}>
         {width < 767 && (
           <BurgerButton isPopupOpen={isPopupOpen} switchPopup={switchPopup} />
         )}
-        <Link to="/">
-          <img className="header__logo" alt="logo" src={logo} />
+        <Link href="/">
+          <img className={styles.header__logo} alt="logo" src={logo} />
         </Link>
-        <div className="header__links">
+        <div className={styles.header__links}>
           {/* {user.token && (
-            <Link to="/catalog" className="header__link">
+            <Link href="/catalog" className={styles.header__link}>
               Интернет-магазин
             </Link>
           )} */}
           {user.token === "" && (
             <>
-              <Link to="/sign-up" className="header__link">
+              <Link href="/sign-up" className={styles.header__link}>
                 Регистрация
               </Link>
-              <Link to="/sign-in" className="header__link">
+              <Link href="/sign-in" className={styles.header__link}>
                 Вход в учетную запись
               </Link>
             </>
           )}
-          <Link to="/catalog" className="header__link">
+          <Link href="/catalog" className={styles.header__link}>
             Товары
           </Link>
-          <Link to="/wholesale-page" className="header__link">
+          <Link href="/wholesale" className={styles.header__link}>
             Кофе для бизнеса
           </Link>
         </div>
 
-        <div className="header__search__container">
+        <div className={styles.header__search__container}>
           {width < 1279 ? (
             <img
-              className="header__search-button_search"
+              className={styles.header__search_button_search}
               src={loop_small}
               alt="Кнопка поиска"
               onClick={switchPopup}
             />
           ) : (
             // TODO
-            <form className="header__search">
+            <form className={styles.header__search}>
               <img
-                className="header__search-button_search"
+                className={styles.header__search_button_search}
                 src={loop}
                 alt="Кнопка поиска"
               />
               <input
-                className="header__search-input"
+                className={styles.header__search_input}
                 id="name"
                 name="name"
                 type="text"
@@ -115,8 +116,8 @@ const Header: FC = () => {
               />
             </form>
           )}
-          <Link to="/profile">
-            <img className="header__profile-icon" alt="icon" src={icon} />
+          <Link href="/profile">
+            <img className={styles.header__profile_icon} alt="icon" src={icon} />
           </Link>
         </div>
       </div>
@@ -126,3 +127,4 @@ const Header: FC = () => {
 };
 
 export default Header;
+

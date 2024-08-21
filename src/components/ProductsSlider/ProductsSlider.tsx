@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import "./ProductsSlider.css";
+import styles from "./style.module.scss";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -41,8 +41,8 @@ export const ProductsSlider: FC<IProductsProp> = ({ data }) => {
   };
 
   return (
-    <div className="slick-slider_container">
-      <Slider {...settings} className="slick-slider">
+    <div className={styles.container}>
+      <Slider {...settings} className={styles.slider}>
         {data.map((item) => (
           <SmallProduct key={item.id} data={item} />
         ))}

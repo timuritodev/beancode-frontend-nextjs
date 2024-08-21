@@ -1,6 +1,6 @@
 import { FC, useEffect } from "react";
-import { useLocation } from "react-router-dom"; // Подключаем хук для получения текущего адреса страницы
-import "./CustomButton.css";
+import { useRouter } from "next/router";
+import styles from "./style.module.scss";
 
 export interface ICustomButton {
   buttonText: string;
@@ -17,10 +17,10 @@ export const CustomButton: FC<ICustomButton> = ({
   disabled,
   className,
 }) => {
-  const location = useLocation(); // Получаем текущий адрес страницы
+  const router = useRouter();
 
   const handleKeyDown = (evt: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (evt.key === "Enter" && location.pathname !== "/order-page") {
+    if (evt.key === "Enter" && router.pathname !== "/order-page") {
       evt.preventDefault(); // Prevent default behavior of triggering the button click
       evt.stopPropagation(); // Stop event propagation to prevent multiple handlers from firing
 
@@ -30,7 +30,7 @@ export const CustomButton: FC<ICustomButton> = ({
 
   useEffect(() => {
     const handleEnterClick = (evt: KeyboardEvent) => {
-      if (evt.key === "Enter" && location.pathname !== "/order-page") {
+      if (evt.key === "Enter" && router.pathname !== "/order-page") {
         handleButtonClick && handleButtonClick();
       }
     };
@@ -38,11 +38,11 @@ export const CustomButton: FC<ICustomButton> = ({
     document.addEventListener("keydown", handleEnterClick);
 
     return () => document.removeEventListener("keydown", handleEnterClick);
-  }, [handleButtonClick, location]);
+  }, [handleButtonClick, router]);
 
   return (
     <button
-      className="button"
+      className={styles.button}
       disabled={disabled}
       type={type}
       onClick={handleButtonClick}

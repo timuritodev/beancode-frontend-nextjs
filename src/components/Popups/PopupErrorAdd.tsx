@@ -1,6 +1,7 @@
 import { FC } from "react";
 import Popup from "./Popup";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import styles from "./style.module.scss";
 
 interface IChangesSavedPopup {
   isOpened: boolean;
@@ -13,34 +14,34 @@ export const PopupErrorAdd: FC<IChangesSavedPopup> = ({
 }) => {
   return (
     <Popup isOpened={isOpened} setIsOpened={setIsOpened}>
-      <div className="popup__container">
+      <div className={styles.popup__container}>
         <button
           type="button"
-          className="popup__x-btn"
+          className={styles.btn_close}
           onClick={() => setIsOpened(false)}
         ></button>
-        <h4 className="popup__title profile__title_type_saved-changes">
+        <h4 className={styles.popup__title}>
           Ошибка добавления товара в корзину
         </h4>
-        <p className="popup__text profile__text_type_saved-changes">
+        <p className={styles.popup__text}>
           Для добавления товара в корзину нужно зарегистрироваться
         </p>
         <Link
-          to="/sign-up"
-          className="popup__link"
+          href="/sign-up"
+          className={styles.popup__link}
           onClick={() => setIsOpened(false)}
         >
           Регистрация
         </Link>
         <Link
-          to="/sign-in"
-          className="popup__link"
+          href="/sign-in"
+          className={styles.popup__link}
           onClick={() => setIsOpened(false)}
         >
           Вход в учетную запись
         </Link>
         <button
-          className="popup__close popup__close_type_saved-changes"
+          className={styles.popup__close}
           onClick={() => setIsOpened(false)}
         >
           Закрыть
@@ -49,3 +50,4 @@ export const PopupErrorAdd: FC<IChangesSavedPopup> = ({
     </Popup>
   );
 };
+

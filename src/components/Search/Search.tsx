@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import "./Search.css";
+import styles from "./style.module.scss";
 import { useAppSelector } from "../../services/typeHooks";
 import { useState, useEffect, FC } from "react";
 import { SearchCardList } from "../SearchCard/SearchCardList";
@@ -28,12 +27,12 @@ const Search: FC<SearchProps> = ({ isOpenSearch, values, isClose, switchPopup })
   }, [filteredCards?.length, values]);
 
   return (
-    <div className={`search ${isOpenSearch && "search_open"}`}>
-      <div className="search__cards" id="search__cards">
+    <div className={`${styles.search} ${isOpenSearch && styles.search_open}`}>
+      <div className={styles.search__cards} id="search__cards">
         {!isFiltredCards ? (
           <SearchCardList data={filteredCards} isClose={isClose} switchPopup={switchPopup}/>
         ) : (
-          <p className="search__card-none">
+          <p className={styles.search__card_none}>
             По вашему запросу ничего не найдено
           </p>
         )}
@@ -43,3 +42,4 @@ const Search: FC<SearchProps> = ({ isOpenSearch, values, isClose, switchPopup })
 };
 
 export default Search;
+

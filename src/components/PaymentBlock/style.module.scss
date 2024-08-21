@@ -1,17 +1,17 @@
-.payment-block {
+.block {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.payment-block__radio-label {
+.block__radio_label {
   display: flex;
   align-items: center;
   cursor: pointer;
   gap: 24px;
 }
 
-.payment-block__radio-button[type="radio"] {
+.block__radio_button[type="radio"] {
   position: absolute;
   overflow: hidden;
   outline: none;
@@ -19,11 +19,11 @@
   appearance: none;
 }
 
-.payment-block__radio-button[type="radio"]:hover {
+.block__radio_button[type="radio"]:hover {
   cursor: pointer;
 }
 
-.payment-block__radio-pseudo-item {
+.block__radio_pseudoitem {
   width: 25px;
   height: 25px;
   border: 1px solid #c8cac8;
@@ -36,7 +36,7 @@
   background-image: none;
 }
 
-.payment-block__radio-text {
+.block__radio_text {
   color: var(--Black_text, #0f100f);
   font-family: Ubuntu;
   font-size: 20px;
@@ -45,25 +45,25 @@
   line-height: normal;
 }
 
-.payment-block__radio-button[type="radio"]:checked
-  + .payment-block__radio-pseudo-item {
+.block__radio_button[type="radio"]:checked
+  + .block__radio_pseudoitem {
   background-image: radial-gradient(circle, #465244 35%, transparent 30%);
   transition: background-image 0.3s;
 }
 
-.payment-block__radio-button[type="radio"]:hover
-  + .payment-block__radio-pseudo-item {
+.block__radio_button[type="radio"]:hover
+  + .block__radio_pseudoitem {
   color: #d1d5db;
   opacity: 0.6;
   cursor: pointer;
 }
 
 @media screen and (max-width: 767px) {
-  .payment-block {
+  .block {
     margin: 0 0 0 16px;
   }
 
-  .payment-block__radio-text {
+  .block__radio_text {
     font-size: 18px;
     font-weight: 400;
     line-height: 21px;

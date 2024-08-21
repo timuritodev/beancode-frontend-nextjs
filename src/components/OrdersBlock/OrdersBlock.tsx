@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { OrderCardList } from "../OrderCard/OrderCardList";
-import "./OrdersBlock.css";
+import styles from "./style.module.scss";
 import { FC, useEffect, useState } from "react";
 import button from "../../images/promo_button.svg";
 import ic_info from "../../images/ic_info.svg";
@@ -291,42 +291,42 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   }, [redirecting, formUrl, dispatch, user.id]);
 
   return (
-    <div className="order-block">
-      <h3 className="order-block__title">Ваш заказ</h3>
+    <div className={styles.orderBlock}>
+      <h3 className={styles.orderBlock__title}>Ваш заказ</h3>
       <OrderCardList data={cartproducts} />
-      <div className="order-block__details">
-        <p className="order-block__text">
+      <div className={styles.orderBlock__details}>
+        <p className={styles.orderBlock__text}>
           {cartproducts.length} {getProductCountLabel(cartproducts.length)} на
           сумму
         </p>
-        <p className="order-block__text">{sum} ₽</p>
+        <p className={styles.orderBlock__text}>{sum} ₽</p>
       </div>
       {discount !== 0 ? (
-        <p className="order-block__sale">{discountedSum} ₽ с учетом скидки {discount} %</p>
+        <p className={styles.orderBlock__sale}>{discountedSum} ₽ с учетом скидки {discount} %</p>
       ) : (
         ""
       )}
-      {/* <div className="order-block__details">
-        <p className="order-block__text">Курьером...</p>
-        <p className="order-block__text">{sum} ₽</p>
+      {/* <div className={styles.orderBlock__details}>
+        <p className{styles.orderBlock__text}rderBlock__text">Курьером...</p>
+        <p className={styles.orderBlock__text}>{sum} ₽</p>
       </div> */}
-      {/* <div className="order-block__details"> */}
+      {/* <div className={styles.orderBlock__details}> */}
       {/* {totalWeight < 1000 ? (
-        <p className="order-block__text">
-          Итого - <span className="order-block__total">{discountedSum} ₽</span>,
+        <p className={styles.orderBlock__text}>
+          Итого - <span className={styles.orderBlock__total}>{discountedSum} ₽</span>,
           включая стоимость доставки 250 ₽
         </p>
       ) : (
-        <p className="order-block__text">
-          Итого - <span className="order-block__total">{discountedSum} ₽</span>
+        <p className={styles.orderBlock__text}>
+          Итого - <span className={styles.orderBlock__total}>{discountedSum} ₽</span>
         </p>
       )}
-      <p className="order-block__text">
+      <p className={styles.orderBlock__text}>
         При заказе от 1кг доставка бесплатная по набережным челнам
       </p> */}
       {/* </div> */}
       <form
-        className="order-block__input_container"
+        className={styles.orderBlock__input_container}
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
@@ -339,9 +339,9 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
           // placeholder="email@example.com"
           error={errors?.promo?.message}
         />
-        <button className="order-block__button">
+        <button className={styles.orderBlock__button}>
           <img
-            className="subscribe__button_img"
+            className={styles.subscribe__button_img}
             alt="subscribe button image"
             src={button}
             onClick={handleSubmit(onSubmit)}
@@ -353,34 +353,34 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         handleButtonClick={handleClickPayButton}
         disabled={isPayButtonDisabled}
         type="submit"
-        className="order-block__pay-button"
+        className={styles.orderBlock__pay_button}
       />
       {/* <CustomButton
         buttonText={"Доставка"}
         handleButtonClick={handleDeliverOrder}
         disabled={!dataSaved}
         type="submit"
-        className="order-block__pay-button"
+        className={styles.orderBlock__pay_button}
       /> */}
-      <p className="order-block__disclaimer">
+      <p className={styles.orderBlock__disclaimer}>
         Нажимая на кнопку, я соглашаюсь на обработку моих персональных данных и
         ознакомлен(а) с условиями обработки персональных данных и регистрацией в
         программе лояльности.
       </p>
-      <label className="checkbox__order-block">
+      <label className={styles.checkbox__order_block}>
         <input
           type="checkbox"
-          className="order__checkbox-button"
+          className={styles.order__checkbox_button}
           id="female"
           value={1}
           checked={isChecked}
           onChange={handleCheckboxChange}
         />
-        <span className="order__checkbox-pseudo-item"></span>
-        <span className="span__checkbox">
+        <span className={styles.order__checkbox_pseudoitem}></span>
+        <span className={styles.span__checkbox}>
           Получать новости и спецпредложения
         </span>
-        <img className="checkbox__img" src={ic_info} alt="checkbox" />
+        <img className={styles.checkbox__img} src={ic_info} alt="checkbox" />
       </label>
       <PopupPromo
         isOpened={isPromoPopupOpened}
@@ -394,3 +394,4 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
     </div>
   );
 };
+

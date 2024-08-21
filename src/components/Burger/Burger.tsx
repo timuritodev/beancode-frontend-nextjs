@@ -1,7 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import "./Burger.css";
-import "../Header/Header.css";
-import { Link } from "react-router-dom";
+import styles from "./style.module.scss";
 import Search from "../Search/Search";
 import icon from "../../images/person_active.svg";
 import loop from "../../images/loop.svg";
@@ -9,6 +7,7 @@ import loop_small from "../../images/loop_small.svg";
 import logo from "../../images/logo.svg";
 import { selectUser } from "../../services/redux/slices/user/user";
 import { useAppSelector } from "../../services/typeHooks";
+import Link from "next/link";
 
 interface BurgerProps {
   isPopupOpen: boolean;
@@ -44,33 +43,33 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
     }
   }, [values]);
   return (
-    <div className={`burger ${isPopupOpen ? "burger_opened" : ""}`}>
-      <div className="burger__content">
-        <div className="burger__container">
-          <div className="burger-header__container">
+    <div className={`${styles.burger} ${isPopupOpen ? styles.burger_opened : ""}`}>
+      <div className={styles.burger__content}>
+        <div className={styles.burger__container}>
+          <div className={styles.burger_header__container}>
             <button
-              className="burger__close"
+              className={styles.burger__close}
               type="button"
               onClick={switchPopup}
             />
-            <Link to="/">
+            <Link href="/">
               <img
-                className="header__logo"
+                className={styles.header__logo}
                 alt="logo"
                 src={logo}
                 onClick={switchPopup}
               />
             </Link>
-            <div className="burger-links__wrapper">
+            <div className={styles.burger_links__wrapper}>
               <img
-                className="header__search-button_search"
+                className={styles.header__search_button_search}
                 src={loop_small}
                 alt="Кнопка поиска"
                 onClick={switchPopup}
               />
-              <Link to="/profile">
+              <Link href="/profile">
                 <img
-                  className="header__profile-icon"
+                  className={styles.header__profile_icon}
                   alt="icon"
                   src={icon}
                   onClick={switchPopup}
@@ -78,14 +77,14 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
               </Link>
             </div>
           </div>
-          <form className="burger__search">
+          <form className={styles.burger__search}>
             <img
-              className="burger__search-button_search"
+              className={styles.burger__search_button_search}
               src={loop}
               alt="Кнопка поиска"
             />
             <input
-              className="burger__search-input"
+              className={styles.burger__search_input}
               id="name"
               name="name"
               type="text"
@@ -102,11 +101,11 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
               switchPopup={switchPopup}
             />
           </form>
-          <div className="burger__links-container">
+          <div className={styles.burger__links_container}>
             {/* {user.token && (
               <Link
-                to="/catalog"
-                className="burger__link"
+                href="/catalog"
+                className={styles.burger__link}
                 onClick={handleLinkClick}
               >
                 Интернет-магазин
@@ -115,15 +114,15 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
             {user.token === "" && (
               <>
                 <Link
-                  to="/sign-up"
-                  className="burger__link"
+                  href="/sign-up"
+                  className={styles.burger__link}
                   onClick={handleLinkClick}
                 >
                   Регистрация
                 </Link>
                 <Link
-                  to="/sign-in"
-                  className="burger__link"
+                  href="/sign-in"
+                  className={styles.burger__link}
                   onClick={handleLinkClick}
                 >
                   Вход в учетную запись
@@ -131,15 +130,15 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
               </>
             )}
             <Link
-              to="/catalog"
-              className="header__link"
+              href="/catalog"
+              className={styles.header__link}
               onClick={handleLinkClick}
             >
               Товары
             </Link>
             <Link
-              to="/wholesale-page"
-              className="header__link"
+              href="/wholesale-page"
+              className={styles.header__link}
               onClick={handleLinkClick}
             >
               Кофе для бизнеса
@@ -150,3 +149,4 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
     </div>
   );
 };
+

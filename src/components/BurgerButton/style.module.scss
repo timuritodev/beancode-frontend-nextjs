@@ -1,4 +1,4 @@
-.burger-button__image {
+.burgerButton__image {
   width: 22px;
   height: 16px;
   background-image: url(../../images/burger-menu.svg);
@@ -10,7 +10,7 @@
 }
 
 @media screen and (max-width: 1410px) {
-  .burger-button__image {
+  .burgerButton__image {
     display: block;
   }
 }

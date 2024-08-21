@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import "./DeliveryBlock.css";
+import "./DeliveryBlock.css"; // TODO Импортируйте CSS Module
 import {
   editUserInfo,
   getUserInfo,
@@ -161,3 +161,4 @@ export const DeliveryBlock = () => {
     </div>
   );
 };
+

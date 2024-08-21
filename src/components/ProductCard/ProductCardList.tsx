@@ -2,6 +2,7 @@ import { FC } from "react";
 import { ProductCard } from "./ProductCard";
 import { ICart } from "../../types/Cart.types";
 import { hashString } from "../../utils/constants";
+import styles from "./style.module.scss";
 
 interface ProductCardListProps {
   data: ICart[];
@@ -33,7 +34,7 @@ export const ProductCardList: FC<ProductCardListProps> = ({ data }) => {
   });
 
   return (
-    <div className="product-card-list">
+    <div className={styles["product-card-list"]}>
       {uniqueData.length !== 0 &&
         uniqueData.map((item) => (
           <ProductCard

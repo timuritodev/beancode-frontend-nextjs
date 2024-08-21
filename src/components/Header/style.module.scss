@@ -56,7 +56,7 @@
   border: 1px solid var(--Black_text, #0f100f);
 }
 
-.header__search-input {
+.header__search_input {
   background-color: transparent;
   border: none;
   color: var(--grey, #797979);
@@ -74,7 +74,7 @@
   margin: 0 8px 0 12px;
 }
 
-.header__profile-icon {
+.header__profile_icon {
   width: 22px;
   height: 26px;
 }
@@ -120,7 +120,7 @@
     align-items: center;
   }
 
-  .header__profile-icon {
+  .header__profile_icon {
     width: 18px;
     height: 18px;
   }

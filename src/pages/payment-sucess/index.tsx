@@ -1,14 +1,14 @@
-import "./InfoPaymentPage.css";
+import styles from "./style.module.scss";
 import { useAppSelector, useAppDispatch } from "../../services/typeHooks";
 import { selectUser } from "../../services/redux/slices/user/user";
 import { getStatusApi } from "../../services/redux/slices/orderStatus/orderStatus";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import {
   createOrderApi,
   getOrdersApi,
 } from "../../services/redux/slices/order/order";
 import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
+import { useRouter } from "next/router";
 
 export const InfoPaymentPageSucess = () => {
   const dispatch = useAppDispatch();
@@ -20,8 +20,8 @@ export const InfoPaymentPageSucess = () => {
   const payApiUsername = process.env.REACT_APP_PAY_API_USERNAME;
   const payApiPassword = process.env.REACT_APP_PAY_API_PASSWORD;
 
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
+  const location = useRouter();
+  const queryParams = new URLSearchParams(location.search); // TODO
   const orderId = queryParams.get("orderId");
   const userId = queryParams.get("userId");
   const email = queryParams.get("email");
@@ -29,16 +29,6 @@ export const InfoPaymentPageSucess = () => {
   const sum = queryParams.get("sum");
   const product_quantity = queryParams.get("product_quantity");
   const products_info = queryParams.get("product_info");
-
-  // const products_info2 = queryParams.get("product_info")?.split(', ').map(item => decodeURI(decodeURIComponent(item))) || [];
-
-  // const products_info3 = queryParams.get("product_info")?.split(', ').map(item => item.trim()) || [];
-
-  // const decodedProductsInfo = products_info2.join(", ");
-  // console.log(decodedProductsInfo, 3333);
-  // console.log(products_info3, 444);
-
-  // const isOrderProcessed = orderStatus.OrderNumber === orderId;
 
   const isOrderProcessed = orders.some(
     (order) => order.orderNumber === orderId
@@ -99,13 +89,17 @@ export const InfoPaymentPageSucess = () => {
   ]);
 
   return (
-    <section className="info-payment">
-      <div className="info-payment__container">
-        <h1 className="info-payment__title">Оплата прошла успешно</h1>
-        <p className="info-payment__text">
+    <section className={styles.infoPayment}>
+      <div className={styles.infoPayment__container}>
+        <h1 className={styles.infoPayment__title}>
+          Оплата прошла успешно
+        </h1>
+        <p className={styles.infoPayment__text}>
           В ближайшее время с вами свяжется менеджер и уточнит детали заказа
         </p>
       </div>
     </section>
   );
 };
+
+

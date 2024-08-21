@@ -1,28 +1,19 @@
-import { FC } from "react";
-import { Outlet, useLocation } from "react-router-dom";
-
+import { FC, ReactNode } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-import "./Layout.css";
+interface LayoutProps {
+  children: ReactNode;
+}
 
-export const Layout: FC = () => {
-  const location = useLocation();
-
+const Layout: FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="layout">
-      {/* {location.pathname === "/" ? (
-        <Outlet />
-      ) : (
-        <>
-          <Header />
-          <Outlet />
-          <Footer />
-        </>
-      )} */}
+    <div>
       <Header />
-      <Outlet />
+      <main>{children}</main>
       <Footer />
     </div>
   );
 };
+
+export default Layout;

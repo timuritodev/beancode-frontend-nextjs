@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import "./OrderInputs.css";
+import styles from "./style.module.scss";
 import {
   editUserInfo,
   getUserInfo,
@@ -80,9 +80,9 @@ export const OrderInputs = () => {
   }, [dispatch, user]);
 
   return (
-    <div className="account__container">
+    <div className={styles.account__container}>
       <form
-        className="input__container"
+        className={styles.input__container}
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
@@ -172,3 +172,4 @@ export const OrderInputs = () => {
     </div>
   );
 };
+

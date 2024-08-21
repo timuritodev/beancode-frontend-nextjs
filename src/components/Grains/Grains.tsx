@@ -1,5 +1,5 @@
 import { FC } from "react";
-import "./Grains.css";
+import styles from "./style.module.scss";
 
 interface ProductCardListProps {
   acidity: number;
@@ -8,28 +8,28 @@ interface ProductCardListProps {
 
 export const Grains: FC<ProductCardListProps> = ({ acidity, density }) => {
   return (
-    <div className="products__wrapper">
-      <div className="grains__container">
-        <div className="products__grains">
+    <div className={styles.grains__wrapper}>
+      <div className={styles.grains__container}>
+        <div className={styles.grains__row}>
           {[...Array(5)].map((_, index) => (
             <span
               key={index}
-              className={`grain ${index < acidity ? "filled" : "empty"}`}
+              className={`${styles.grains__grain} ${index < acidity ? styles.grains__grain_filled : styles.grains__grain_empty}`}
             ></span>
           ))}
         </div>
-        <p className="products__info">Кислотность</p>
+        <p className={styles.grains__info}>Кислотность</p>
       </div>
-      <div className="grains__container">
-        <div className="products__grains">
+      <div className={styles.grains__container}>
+        <div className={styles.grains__row}>
           {[...Array(5)].map((_, index) => (
             <span
               key={index}
-              className={`grain ${index < density ? "filled" : "empty"}`}
+              className={`${styles.grains__grain} ${index < density ? styles.grains__grain_filled : styles.grains__grain_empty}`}
             ></span>
           ))}
         </div>
-        <p className="products__info">Плотность</p>
+        <p className={styles.grains__info}>Плотность</p>
       </div>
     </div>
   );

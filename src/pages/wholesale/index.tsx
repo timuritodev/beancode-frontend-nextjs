@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import "./WholesalePage.css";
+import styles from "./style.module.scss";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import { CustomInputTypes } from "../../types/CustomInput.types";
 import { useAppDispatch } from "../../services/typeHooks";
@@ -18,7 +18,7 @@ import { createWholesaleApi } from "../../services/redux/slices/wholesale/wholes
 import { PopupWholesale } from "../../components/Popups/PopupWholesale";
 import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
 
-export const WholesalePage = () => {
+const WholesalePage = () => {
   const dispatch = useAppDispatch();
 
   const [isSavedPopupOpened, setIsSavedPopupOpened] = useState<boolean>(false);
@@ -63,11 +63,11 @@ export const WholesalePage = () => {
   }, []);
 
   return (
-    <section className="signup">
-      <div className="signup__container">
-        <h1 className="signup__title">Отправка формы</h1>
+    <section className={styles.signup}>
+      <div className={styles.signup__container}>
+        <h1 className={styles.signup__title}>Отправка формы</h1>
         <form
-          className="signup__form"
+          className={styles.signup__form}
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >
@@ -140,3 +140,5 @@ export const WholesalePage = () => {
     </section>
   );
 };
+
+export default WholesalePage;

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import "./ProductImagesSlider.css";
+import styles from "./style.module.scss";
 
 interface IProductImagesSliderProps {
   images: string[] | undefined;
@@ -17,22 +17,22 @@ export const ProductImagesSlider: FC<IProductImagesSliderProps> = ({ images }) =
     slidesToScroll: 1,
     arrows: true,
     responsive: [
-        {
-          breakpoint: 767,
-          settings: {
-            arrows: false,
-            dots: true,
-          },
+      {
+        breakpoint: 767,
+        settings: {
+          arrows: false,
+          dots: true,
         },
-      ],
+      },
+    ],
   };
 
   return (
-    <div className="product-images-slider_container">
+    <div className={styles.slider}>
       <Slider {...settings}>
         {images?.map((image, index) => (
-          <div key={index} className="product-image-wrapper">
-            <img src={image} alt={`Product Image ${index + 1}`} className="product-image" />
+          <div key={index} className={styles.wrapper}>
+            <img src={image} alt={`Product Image ${index + 1}`} className={styles.image} />
           </div>
         ))}
       </Slider>

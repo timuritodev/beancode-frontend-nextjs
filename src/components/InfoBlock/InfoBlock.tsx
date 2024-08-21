@@ -23,8 +23,8 @@ const InfoBlock = () => {
               </p>
               <img
                 className={styles.info__img}
-                src={info_block}
                 alt="image of coffee beans"
+                src={info_block} // TODO
               />
             </div>
           </>

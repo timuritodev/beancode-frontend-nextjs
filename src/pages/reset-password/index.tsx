@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
-import "./AuthPage.css";
+import styles from "./style.module.scss";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import { CustomInputTypes } from "../../types/CustomInput.types";
 import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
@@ -20,8 +19,9 @@ import {
 } from "../../types/Auth.types";
 import { selectUser } from "../../services/redux/slices/user/user";
 import { PopupResetPassword } from "../../components/Popups/PopupResetPassword";
+import { useRouter } from "next/router";
 
-export const ResetPasswordPage = () => {
+const ResetPasswordPage = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 
@@ -29,9 +29,9 @@ export const ResetPasswordPage = () => {
   const [isSavedPopupOpened, setIsSavedPopupOpened] = useState<boolean>(false);
   const [isErrorPopupOpened, setIsErrorPopupOpened] = useState<boolean>(false);
 
-  const location = useLocation();
+  const location = useRouter();
 
-  const queryParams = new URLSearchParams(location.search);
+  const queryParams = new URLSearchParams(location.search); // TODO
   const token = queryParams.get("token");
 
   const {
@@ -69,11 +69,11 @@ export const ResetPasswordPage = () => {
   }, []);
 
   return (
-    <section className="signup">
-      <div className="signup__container">
-        <h1 className="signup__title">Введите новый пароль</h1>
+    <section className={styles.signup}>
+      <div className={styles.signup__container}>
+        <h1 className={styles.signup__title}>Введите новый пароль</h1>
         <form
-          className="signup__form"
+          className={styles.signup__form}
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >
@@ -105,3 +105,5 @@ export const ResetPasswordPage = () => {
     </section>
   );
 };
+
+export default ResetPasswordPage;

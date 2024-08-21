@@ -1,0 +1,103 @@
+.ordercardlist {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0 0 32px 0;
+  border-bottom: 1px solid var(--grey_light, #C8CAC8);
+}
+
+.orderCard {
+  display: flex;
+  width: 402px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.orderCard__img {
+  width: 85px;
+  height: 80px;
+}
+
+.orderCard__title {
+  color: var(--Black_text, #0F100F);
+  font-family: Ubuntu;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+.orderCard__number {
+  color: var(--Black_text, #0F100F);
+  font-family: Ubuntu;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+.orderCard__price {
+  color: var(--Black_text, #0F100F);
+  font-family: Ubuntu;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .ordercardlist {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 0 32px 0;
+    border-bottom: 1px solid var(--grey_light, #C8CAC8);
+  }
+
+  .orderCard {
+    display: flex;
+    width: 328px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .orderCard__img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .orderCard__title {
+    color: var(--Black_text, #0F100F);
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+  }
+
+  .orderCard__number {
+    color: var(--Black_text, #0F100F);
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+  }
+
+  .orderCard__price {
+    color: var(--Black_text, #0F100F);
+    font-family: Ubuntu;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+  }
+}

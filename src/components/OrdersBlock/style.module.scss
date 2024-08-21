@@ -1,4 +1,4 @@
-.order-block {
+.orderBlock {
   width: 413px;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@
   padding: 16px 30px 48px 30px;
 }
 
-.order-block__title {
+.orderBlock__title {
   color: var(--Black_text, #0f100f);
   font-family: Ubuntu;
   font-size: 20px;
@@ -20,13 +20,13 @@
   /* margin-right: auto; */
 }
 
-.order-block__details {
+.orderBlock__details {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.order-block__text {
+.orderBlock__text {
   color: var(--Black_text, #0f100f);
   font-family: Ubuntu;
   font-size: 16px;
@@ -36,7 +36,7 @@
   margin: 20px 0;
 }
 
-.order-block__sale {
+.orderBlock__sale {
   color: var(--Black_text, #0f100f);
   font-family: Ubuntu;
   font-size: 16px;
@@ -47,7 +47,7 @@
   text-align: left;
 }
 
-.order-block__total {
+.orderBlock__total {
   color: var(--Black_text, #0f100f);
   font-family: Ubuntu;
   font-size: 24px;
@@ -57,7 +57,7 @@
   margin: 0;
 }
 
-.order-block__input_container {
+.orderBlock__input_container {
   display: grid;
   grid-template-columns: 360px 27px;
   grid-gap: 24px;
@@ -65,7 +65,7 @@
   margin: 32px 0 0 0;
 }
 
-.order-block__input {
+.orderBlock__input {
   color: var(--grey_light, #c8cac8);
   font-size: 16px;
   font-style: normal;
@@ -81,7 +81,7 @@
   border-bottom: 1px solid var(--Black_text, #0f100f);
 }
 
-.order-block__button {
+.orderBlock__button {
   width: 24px;
   height: 24px;
   background: transparent;
@@ -89,7 +89,7 @@
   padding: 0;
 }
 
-.order-block__pay-button {
+.orderBlock__pay_button {
   border-radius: 64px;
   background: var(--Accent, #465244);
   border: none;
@@ -104,7 +104,7 @@
   margin: 40px 0 0 0;
 }
 
-.order-block__disclaimer {
+.orderBlock__disclaimer {
   max-width: 100%;
   color: var(--grey, #797979);
   font-family: Ubuntu;
@@ -115,12 +115,12 @@
   margin: 24px 0 24px 0;
 }
 
-.checkbox__order-block__container {
+.checkbox__order_block__container {
   display: flex;
   align-items: baseline;
 }
 
-.checkbox__order-block {
+.checkbox__order_block {
   width: 100%;
   display: flex;
   align-items: center;
@@ -137,18 +137,18 @@
   cursor: pointer;
 }
 
-.order__checkbox-button[type="checkbox"] {
+.order__checkbox_button[type="checkbox"] {
   position: absolute;
   overflow: hidden;
   outline: none;
   appearance: none;
 }
 
-.order__checkbox-button[type="checkbox"]:hover {
+.order__checkbox_button[type="checkbox"]:hover {
   cursor: pointer;
 }
 
-.order__checkbox-pseudo-item {
+.order__checkbox_pseudoitem {
   width: 22px;
   height: 22px;
   border: 1px solid #c8cac8;
@@ -160,8 +160,8 @@
   background-image: none;
 }
 
-.order__checkbox-button[type="checkbox"]:checked
-  + .order__checkbox-pseudo-item {
+.order__checkbox_button[type="checkbox"]:checked
+  + .order__checkbox_pseudoitem {
   background-image: url(../../images/Checkbox.svg);
   width: 24px;
   height: 24px;
@@ -172,7 +172,7 @@
   width: 87%;
 }
 @media screen and (max-width: 767px) {
-  .order-block {
+  .orderBlock {
     width: 328px;
     display: flex;
     flex-direction: column;
@@ -184,7 +184,7 @@
     margin: 0 16px;
   }
 
-  .order-block__title {
+  .orderBlock__title {
     color: var(--Black_text, #0f100f);
     font-family: Ubuntu;
     font-size: 20px;
@@ -194,13 +194,13 @@
     margin: 0 0 40px 0;
   }
 
-  .order-block__details {
+  .orderBlock__details {
     width: 328px;
     display: flex;
     justify-content: space-between;
   }
 
-  .order-block__text {
+  .orderBlock__text {
     color: var(--Black_text, #0f100f);
     font-family: Ubuntu;
     font-size: 16px;
@@ -210,7 +210,7 @@
     margin: 20px 0;
   }
 
-  .order-block__sale {
+  .orderBlock__sale {
     color: var(--Black_text, #0f100f);
     font-family: Ubuntu;
     font-size: 16px;
@@ -220,17 +220,17 @@
     margin: 0;
   }
 
-  .order-block__total {
+  .orderBlock__total {
     font-size: 20px;
     font-weight: 600;
     line-height: 30px;
     letter-spacing: 0em;
   }
 
-  .order-block__input_container {
+  .orderBlock__input_container {
     grid-template-columns: 277px 27px;
   }
-  .order-block__input {
+  .orderBlock__input {
     color: var(--grey_light, #c8cac8);
     font-size: 16px;
     font-style: normal;
@@ -246,7 +246,7 @@
     border-bottom: 1px solid var(--Black_text, #0f100f);
   }
 
-  .order-block__button {
+  .orderBlock__button {
     width: 24px;
     height: 24px;
     background: transparent;
@@ -254,7 +254,7 @@
     padding: 0;
   }
 
-  .order-block__pay-button {
+  .orderBlock__pay_button {
     border-radius: 64px;
     background: var(--Accent, #465244);
     border: none;
@@ -269,7 +269,7 @@
     margin: 40px 0 0 0;
   }
 
-  .order-block__disclaimer {
+  .orderBlock__disclaimer {
     max-width: 87%;
     color: var(--grey, #797979);
     font-family: Ubuntu;
@@ -280,12 +280,12 @@
     margin: 24px 0 24px 0;
   }
 
-  .checkbox__order-block__container {
+  .checkbox__orderBlock__container {
     display: flex;
     align-items: baseline;
   }
 
-  .checkbox__order-block {
+  .checkbox__orderBlock {
     width: 328px;
     display: flex;
     align-items: center;
@@ -302,18 +302,18 @@
     cursor: pointer;
   }
 
-  .order__checkbox-button[type="checkbox"] {
+  .order__checkbox_button[type="checkbox"] {
     position: absolute;
     overflow: hidden;
     outline: none;
     appearance: none;
   }
 
-  .order__checkbox-button[type="checkbox"]:hover {
+  .order__checkbox_button[type="checkbox"]:hover {
     cursor: pointer;
   }
 
-  .order__checkbox-pseudo-item {
+  .order__checkbox_pseudoitem {
     width: 22px;
     height: 22px;
     border: 1px solid #c8cac8;
@@ -325,8 +325,8 @@
     background-image: none;
   }
 
-  .order__checkbox-button[type="checkbox"]:checked
-    + .order__checkbox-pseudo-item {
+  .order__checkbox_button[type="checkbox"]:checked
+    + .order__checkbox_pseudoitem {
     background-image: url(../../images/Checkbox.svg);
     width: 24px;
     height: 24px;

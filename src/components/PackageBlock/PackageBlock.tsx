@@ -1,37 +1,27 @@
 import styles from "./style.module.scss"; // Import CSS Module
-import roast_photo from "../../images/roast_block.jpeg"; // Image for roast block
-import { useResize } from "../../hooks/useResize"; // Custom hook for responsive design
+import package_block from "../../images/roast_block.jpeg"; // Image for roast block
 
-const RoastBlock = () => {
-  const { width } = useResize(); // Get the current window width
-
-  // Render different content based on the screen width
+const PackageBlock = () => {
   return (
-    <div className={styles.roastBlock}>
-      <img className={styles.roastImg} src={roast_photo} alt="roast machine" />
-      <div className={styles.roastOverlay}></div>
-      <div className={styles.roastBlockContainer}>
-        <div className={styles.roastContainer}>
-          <div className={styles.roastDigitTitleContainer}>
-            <p className={styles.roastDigit}>02</p>
-            <h2 className={styles.roastTitle}>
-              Процесс обжарки
-              <br /> и сортировки
-            </h2>
+    <div className={styles.package}>
+      <div className={styles.package__container}>
+        <div className={styles.package__text__container}>
+          <div className={styles.package__digit__title__container}>
+            <p className={styles.package__digit}>03</p>
+            <h2 className={styles.package__title}>Процесс дозировки и упаковки</h2>
           </div>
-          <p className={styles.roastText}>
-            Мы обжариваем наши зёрна на ростере Giesen. Это оборудование,
-            которое отличается стабильностью результата, позволяя получать
-            неизменный вкус кофе. Единовременная загрузка зеленого зёрна у этого
-            ростера составляет от до 15 кг. Максимально, за час работы, нам
-            удаётся обжарить 60 кг кофе. Мы сортируем кофе от камней в
-            специальных машинах - дистоунерах Giesen, надежно защищая кофемолки
-            наших потребителей.
+          <p className={styles.package__text}>
+            Упаковочное оборудование, разработанное и произведенное российской
+            компанией, позволяет осуществлять упаковку в высоком темпе с
+            точностью до 1 гр.
           </p>
         </div>
+        <img className={styles.package__img} src={package_block} alt="image of package" />
+        {/* TODO */}
       </div>
     </div>
   );
 };
 
-export default RoastBlock;
+export default PackageBlock;
+

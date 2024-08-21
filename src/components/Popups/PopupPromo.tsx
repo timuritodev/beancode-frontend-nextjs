@@ -1,5 +1,6 @@
 import { FC } from "react";
 import Popup from "./Popup";
+import styles from "./style.module.scss";
 
 interface IChangesSavedPopup {
   isOpened: boolean;
@@ -18,20 +19,20 @@ export const PopupPromo: FC<IChangesSavedPopup> = ({
 
   return (
     <Popup isOpened={isOpened} setIsOpened={setIsOpened}>
-      <div className="popup__container">
+      <div className={styles.popup__container}>
         <button
           type="button"
-          className="popup__x-btn"
+          className={styles.btn_close}
           onClick={() => setIsOpened(false)}
         ></button>
-        <h4 className="popup__title profile__title_type_saved-changes">
+        <h4 className={styles.popup__title}>
           Применение промокода
         </h4>
-        <p className="popup__text profile__text_type_saved-changes">
+        <p className={styles.popup__text}>
           Вы успешно применили промокод на {discount}%
         </p>
         <button
-          className="popup__close popup__close_type_saved-changes"
+          className={styles.popup__close}
           onClick={handleClickClose}
         >
           Закрыть
@@ -40,3 +41,4 @@ export const PopupPromo: FC<IChangesSavedPopup> = ({
     </Popup>
   );
 };
+

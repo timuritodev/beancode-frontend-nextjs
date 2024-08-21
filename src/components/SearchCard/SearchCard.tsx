@@ -1,7 +1,7 @@
-import "./SearchCard.css";
+import styles from "./style.module.scss";
 import { FC } from "react";
 import { IProduct } from "../../types/Product.types";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 import { useAppDispatch } from "../../services/typeHooks";
 import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
 import { API_BASE_URL } from "../../utils/constants";
@@ -14,10 +14,8 @@ export interface SearchCardProps {
 
 export const SearchCard: FC<SearchCardProps> = ({ data, isClose, switchPopup }) => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const handleClick = (id: number) => {
-    navigate("/product-page");
     dispatch(getProductbyidApi(id));
     isClose();
     switchPopup();
@@ -26,20 +24,26 @@ export const SearchCard: FC<SearchCardProps> = ({ data, isClose, switchPopup }) 
 
   const imageUrl = API_BASE_URL + data.v_picture;
 
+  const router = useRouter();
+
   return (
     <div
       key={data.id}
-      onClick={() => handleClick(data.id)}
-      className="search__card"
+      onClick={() => {
+        router.push("/product-page");
+        handleClick(data.id);
+      }}
+      className={styles.search__card}
     >
-      <img className="search__card-poster" src={imageUrl} alt={data.title} />
-      <article className="search__card-desc">
-        <p className="search__card-name">{data.title}</p>
-        <div className="search__card-info">
-          <p className="search__card-year">{data.low_price} ₽</p>
-          <p className="search__card-year">{data.low_weight}</p>
+      <img className={styles.search__card_poster} src={imageUrl} alt={data.title} />
+      <article className={styles.search__card_desc}>
+        <p className={styles.search__card_name}>{data.title}</p>
+        <div className={styles.search__card_info}>
+          <p className={styles.search__card_year}>{data.low_price} ₽</p>
+          <p className={styles.search__card_year}>{data.low_weight}</p>
         </div>
       </article>
     </div>
   );
 };
+

@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import "../OrderInputs/OrderInputs.css";
+import styles from "./style.module.scss";
 import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ISignUpData } from "../../types/Auth.types";
@@ -78,9 +77,9 @@ export const SessionOrderInputs: FC<SessionOrderInputsProps> = ({
   }, []);
 
   return (
-    <div className="account__container">
+    <div className={styles.container}>
       <form
-        className="input__container"
+        className={styles.form}
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
@@ -158,3 +157,4 @@ export const SessionOrderInputs: FC<SessionOrderInputsProps> = ({
     </div>
   );
 };
+

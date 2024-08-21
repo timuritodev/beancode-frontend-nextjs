@@ -1,8 +1,7 @@
-import "./Order.css";
+import styles from "./style.module.scss";
 // import { useNavigate } from "react-router";
 // import { useAppDispatch } from "../../services/typeHooks";
 import { IOrderDetails } from "../../types/Order.types";
-import { Link } from "react-router-dom";
 
 export const Order = ({ data }: { data: IOrderDetails }) => {
   //   const dispatch = useAppDispatch();
@@ -18,21 +17,22 @@ export const Order = ({ data }: { data: IOrderDetails }) => {
   }
 
   return (
-    <div className="order">
-      <p className="order__number">№{data.orderNumber}</p>
-      {/* <div className="order__text_wrapper">
-        <p className="order__info">{data.info}</p>
-        <p className="order_delivery">{data.delivery}</p>
+    <div className={styles.order}>
+      <p className={styles.order__number}>№{data.orderNumber}</p>
+      {/* <div className={styles.order__text_wrapper}>
+        <p className={styles.order__info}>{data.info}</p>
+        <p className={styles.order_delivery}>{data.delivery}</p>
       </div> */}
-      <p className="order__status">Оплачено</p>
-      <p className="order__products">{data.products_info}</p>
-      <p className="order__link">{formatDate(dateOrder)}</p>
-      {/* <Link className="order__link" to="/">
+      <p className={styles.order__status}>Оплачено</p>
+      <p className={styles.order__products}>{data.products_info}</p>
+      <p className={styles.order__link}>{formatDate(dateOrder)}</p>
+      {/* <Link className={styles.order__link} to="/">
         Детали
       </Link> */}
-      {/* <Link className="order__link" to="/">
+      {/* <Link className={styles.order__link} to="/">
         Оставить отзыв
       </Link> */}
     </div>
   );
 };
+

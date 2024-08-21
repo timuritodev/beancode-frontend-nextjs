@@ -1,6 +1,7 @@
 import { FC } from "react";
 import Popup from "./Popup";
-import { useNavigate } from "react-router";
+import { useRouter } from "next/router";
+import styles from "./style.module.scss";
 
 interface IChangesSavedPopup {
   isOpened: boolean;
@@ -11,29 +12,29 @@ export const PopupErrorWholesale: FC<IChangesSavedPopup> = ({
   isOpened,
   setIsOpened,
 }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleClickClose = () => {
     setIsOpened(false);
-    navigate("/catalog");
+    router.push("/catalog");
   };
 
   return (
     <Popup isOpened={isOpened} setIsOpened={setIsOpened}>
-      <div className="popup__container">
+      <div className={styles.popup__container}>
         <button
           type="button"
-          className="popup__x-btn"
+          className={styles.btn_close}
           onClick={() => setIsOpened(false)}
         ></button>
-        <h4 className="popup__title profile__title_type_saved-changes">
+        <h4 className={styles.popup__title}>
           Оптовая страница
         </h4>
-        <p className="popup__text profile__text_type_saved-changes">
+        <p className={styles.popup__text}>
           Ошибка отправки формы
         </p>
         <button
-          className="popup__close popup__close_type_saved-changes"
+          className={styles.popup__close}
           onClick={handleClickClose}
         >
           Закрыть
@@ -42,3 +43,4 @@ export const PopupErrorWholesale: FC<IChangesSavedPopup> = ({
     </Popup>
   );
 };
+

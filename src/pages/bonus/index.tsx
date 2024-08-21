@@ -1,11 +1,11 @@
-import "./BonusPage.css";
+import styles from "./style.module.scss";
 
 export const BonusPage = () => {
   return (
-    <section className="bonus">
-      <div className="bonus__container">
-        <h1 className="bonus__title">Бонусная программа</h1>
-        <p className="bonus__text">
+    <section className={styles.bonus}>
+      <div className={styles.bonus__container}>
+        <h1 className={styles.bonus__title}>Бонусная программа</h1>
+        <p className={styles.bonus__text}>
           Для зарегистрированных пользователей у нас предусмотрена накопительная
           <br /> система скидок
         </p>
@@ -13,3 +13,4 @@ export const BonusPage = () => {
     </section>
   );
 };
+

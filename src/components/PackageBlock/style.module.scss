@@ -7,10 +7,11 @@
   padding: 0 80px 0 80px;
 }
 
-.package__digit-title__container {
+.package__digit__title__container {
   display: flex;
   gap: 48px;
 }
+
 .package__digit {
   color: var(--Black_text, #0f100f);
   font-family: Spectral;
@@ -60,7 +61,7 @@
     padding: 0 16px;
   }
 
-  .package__digit-title__container {
+  .package__digit__title__container {
     gap: 24px;
   }
   .package__digit {

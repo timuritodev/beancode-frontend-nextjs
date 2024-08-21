@@ -44,7 +44,7 @@
   line-height: normal;
 }
 
-.footer-input__container {
+.footer_input__container {
   /* display: flex;
   align-items: center;
   justify-content: space-between; */
@@ -198,7 +198,7 @@
     letter-spacing: 0em;
   }
 
-  .footer-input__container {
+  .footer_input__container {
     display: grid;
     grid-template-columns: 70% 20%; /* Ширина первого блока - 300px, второго - 50px */
     grid-gap: 22px;

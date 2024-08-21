@@ -1,4 +1,4 @@
-import "./ProfileInputs.css";
+import styles from "./style.module.scss";
 import {
   editUserInfo,
   getUserInfo,
@@ -21,7 +21,7 @@ import {
 } from "../../utils/constants";
 import { PopupChanges } from "../Popups/PopupChanges";
 import { CustomButton } from "../CustomButton/CustomButton";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 export const ProfileInputs = () => {
   const dispatch = useAppDispatch();
@@ -80,9 +80,9 @@ export const ProfileInputs = () => {
   }, [dispatch, user]);
 
   return (
-    <div className="account__container">
+    <div className={styles.account__container}>
       <form
-        className="input__container"
+        className={styles.input__container}
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
@@ -164,7 +164,7 @@ export const ProfileInputs = () => {
           disabled={!isDirty || !isValid}
           type="button"
         />
-        <Link to="/change-password" className="profile__link">
+        <Link href="/change-password" className={styles.profile__link}>
           Сменить пароль
         </Link>
       </form>

@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import "./AuthPage.css";
+import styles from "./style.module.scss";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import { CustomInputTypes } from "../../types/CustomInput.types";
 import { useAppDispatch } from "../../services/typeHooks";
@@ -24,7 +24,7 @@ import { useEffect, useState } from "react";
 import { PopupRegister } from "../../components/Popups/PopupRegister";
 import { PopupErrorRegister } from "../../components/Popups/PopupErrorRegister";
 
-export const SignUpPage = () => {
+const SignUpPage = () => {
   const dispatch = useAppDispatch();
 
   const [isSavedPopupOpened, setIsSavedPopupOpened] = useState<boolean>(false);
@@ -79,11 +79,11 @@ export const SignUpPage = () => {
   }, []);
 
   return (
-    <section className="signup">
-      <div className="signup__container">
-        <h1 className="signup__title">Регистрация</h1>
+    <section className={styles.signup}>
+      <div className={styles.signup__container}>
+        <h1 className={styles.signup__title}>Регистрация</h1>
         <form
-          className="signup__form"
+          className={styles.signup__form}
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >
@@ -202,3 +202,5 @@ export const SignUpPage = () => {
     </section>
   );
 };
+
+export default SignUpPage;

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import "./ProductPage.css";
+import styles from "./style.module.scss";
 import { useAppSelector } from "../../services/typeHooks";
 import { ProductsSlider } from "../../components/ProductsSlider/ProductsSlider";
 import { useEffect, useState } from "react";
@@ -40,14 +40,16 @@ const ProductPage = () => {
       {loading === "loading" ? (
         <Loader />
       ) : (
-        <div className="products">
+        <div className={styles.products}>
           {width > 767 ? (
-            <div className="products__container">
-              <div className="products__container__wrapper">
-                <div className="products__info__container">
-                  <h2 className="products__title">{product.title}</h2>
-                  <p className="products__description">{product.description}</p>
-                  <p className="product__big-description">
+            <div className={styles.products__container}>
+              <div className={styles.products__container__wrapper}>
+                <div className={styles.products__info__container}>
+                  <h2 className={styles.products__title}>{product.title}</h2>
+                  <p className={styles.products__description}>
+                    {product.description}
+                  </p>
+                  <p className={styles.product__big_description}>
                     {product.big_description}
                   </p>
                   {product.density !== 0 && (
@@ -58,70 +60,71 @@ const ProductPage = () => {
                   )}
                   <select
                     id="dropdown"
-                    className="products__dropdown"
+                    className={styles.products__dropdown}
                     onChange={() => handleDropdownChange}
                   >
                     <option value="option1">В зернах</option>
                     {/* <option value="option2">Опция 2</option> */}
                     {/* <option value="option3">Опция 3</option> */}
                   </select>
-                  <div className="product__big-weight__container">
+                  <div className={styles.product__big_weight__container}>
                     {product.price !== "0" && (
                       <div
-                        className={`products__price__container ${
+                        className={`${styles.products__price__container} ${
                           selectedPrice === product.price
-                            ? "product-selected"
-                            : "product-not-selected"
+                            ? styles.product_selected
+                            : styles.product_not_selected
                         }`}
                         onClick={() =>
                           handleChange(product.price, product.weight)
                         }
                       >
-                        <p className="products__big-weight">
+                        <p className={styles.products__big_weight}>
                           {" "}
                           {product.weight}
                         </p>
                       </div>
                     )}
                     <div
-                      className={`products__price__container ${
+                      className={`${styles.products__price__container} ${
                         selectedPrice === product.low_price
-                          ? "product-selected"
-                          : "product-not-selected"
+                          ? styles.product_selected
+                          : styles.product_not_selected
                       }`}
                       onClick={() =>
                         handleChange(product.low_price, product.low_weight)
                       }
                     >
-                      <p className="products__big-weight">
+                      <p className={styles.products__big_weight}>
                         {" "}
                         {product.low_weight}
                       </p>
                     </div>
                   </div>
                 </div>
-                <div className="products__info__container">
+                <div className={styles.products__info__container}>
                   <img
-                    className="products__image"
+                    className={styles.products__image}
                     src={imageUrl}
                     alt={product.title}
                   />
                   {/* <ProductImagesSlider images={product.additional_pictures} /> */}
-                  <div className="products__wrapper_2">
+                  <div className={styles.products__wrapper_2}>
                     {selectedPrice === product.price ? (
-                      <div className="products__price__container">
-                        <p className="products__price">
+                      <div className={styles.products__price__container}>
+                        <p className={styles.products__price}>
                           {product.price} ₽&nbsp;
                         </p>
-                        <p className="products__weight"> {product.weight}</p>
+                        <p className={styles.products__weight}>
+                          {product.weight}
+                        </p>
                       </div>
                     ) : (
-                      <div className="products__price__container">
-                        <p className="products__price">
+                      <div className={styles.products__price__container}>
+                        <p className={styles.products__price}>
                           {product.low_price} ₽&nbsp;
                         </p>
-                        <p className="products__weight">
-                          {" "}
+                        <p className={styles.products__weight}>
                           {product.low_weight}
                         </p>
                       </div>
@@ -134,90 +137,95 @@ const ProductPage = () => {
                   </div>
                 </div>
               </div>
-              <h2 className="products__title_slider">Вам может понравиться</h2>
-              <div className="products__slider__container">
+              <h2 className={styles.products__title_slider}>
+                Вам может понравиться
+              </h2>
+              <div className={styles.products__slider__container}>
                 <ProductsSlider data={products} />
               </div>
             </div>
           ) : (
-            <div className="products__container">
-              <div className="products__container__wrapper">
-                <div className="products__info__container">
-                  <h2 className="products__title">{product.title}</h2>
-                  <p className="products__description">{product.description}</p>
-                  <p className="product__big-description">
+            <div className={styles.products__container}>
+              <div className={styles.products__container__wrapper}>
+                <div className={styles.products__info__container}>
+                  <h2 className={styles.products__title}>{product.title}</h2>
+                  <p className={styles.products__description}>
+                    {product.description}
+                  </p>
+                  <p className={styles.product__big_description}>
                     {product.big_description}
                   </p>
                 </div>
-                <div className="products__info__container">
+                <div className={styles.products__info__container}>
                   <img
-                    className="products__image"
+                    className={styles.products__image}
                     src={imageUrl}
                     alt={product.title}
                   />
                   {/* <ProductImagesSlider images={product.additional_pictures} /> */}
-                  <div className="">
+                  <div>
                     <Grains
                       acidity={product.acidity}
                       density={product.density}
                     />
                     <select
                       id="dropdown"
-                      className="products__dropdown"
+                      className={styles.products__dropdown}
                       onChange={() => handleDropdownChange}
                     >
                       <option value="option1">В зернах</option>
                       {/* <option value="option2">Опция 2</option> */}
                       {/* <option value="option3">Опция 3</option> */}
                     </select>
-                    <div className="product__big-weight__container">
+                    <div className={styles.product__big_weight__container}>
                       <div
-                        className={`products__price__container ${
+                        className={`${styles.products__price__container} ${
                           selectedPrice === product.price
-                            ? "product-selected"
-                            : "product-not-selected"
+                            ? styles.product_selected
+                            : styles.product_not_selected
                         }`}
                         onClick={() =>
                           handleChange(product.price, product.weight)
                         }
                       >
-                        <p className="products__big-weight">
+                        <p className={styles.products__big_weight}>
                           {" "}
                           {product.weight}
                         </p>
                       </div>
                       <div
-                        className={`products__price__container ${
+                        className={`${styles.products__price__container} ${
                           selectedPrice === product.low_price
-                            ? "product-selected"
-                            : "product-not-selected"
+                            ? styles.product_selected
+                            : styles.product_not_selected
                         }`}
                         onClick={() =>
                           handleChange(product.low_price, product.low_weight)
                         }
                       >
-                        <p className="products__big-weight">
+                        <p className={styles.products__big_weight}>
                           {" "}
                           {product.low_weight}
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div className="products__wrapper_2">
+                  <div className={styles.products__wrapper_2}>
                     {selectedPrice === product.price ? (
-                      <div className="products__price__container">
-                        <p className="products__price">
+                      <div className={styles.products__price__container}>
+                        <p className={styles.products__price}>
                           {product.price} ₽&nbsp;
                         </p>
-                        <p className="products__weight"> {product.weight}</p>
+                        <p className={styles.products__weight}>
+                          {product.weight}
+                        </p>
                       </div>
                     ) : (
-                      <div className="products__price__container">
-                        <p className="products__price">
+                      <div className={styles.products__price__container}>
+                        <p className={styles.products__price}>
                           {product.low_price} ₽&nbsp;
                         </p>
-                        <p className="products__weight">
-                          {" "}
+                        <p className={styles.products__weight}>
                           {product.low_weight}
                         </p>
                       </div>
@@ -230,8 +238,10 @@ const ProductPage = () => {
                   />
                 </div>
               </div>
-              <h2 className="products__title_slider">Вам может понравиться</h2>
-              <div className="products__slider__container">
+              <h2 className={styles.products__title_slider}>
+                Вам может понравиться
+              </h2>
+              <div className={styles.products__slider__container}>
                 <ProductsSlider data={products} />
               </div>
             </div>
@@ -243,3 +253,4 @@ const ProductPage = () => {
 };
 
 export default ProductPage;
+

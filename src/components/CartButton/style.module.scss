@@ -1,11 +1,11 @@
-.cart-button {
+.cartButton {
   position: fixed;
   right: 0;
   top: 274px;
   z-index: 10;
 }
 
-.cart-button__button {
+.cartButtonBtn {
   width: 176px;
   height: 128px;
   border: none;
@@ -18,7 +18,7 @@
   align-items: center;
 }
 
-.cart-button__text {
+.cartButtonText {
   font-family: Ubuntu;
   font-size: 16px;
   font-weight: 400;
@@ -27,23 +27,23 @@
   color: #000;
 }
 
-.cart-button__img {
+.cartButtonImg {
   width: 32px;
   height: 32px;
 }
 
 @media screen and (max-width: 767px) {
-  .cart-button {
+  .cartButton {
     right: 16px;
   }
 
-  .cart-button__button {
+  .cartButtonBtn {
     width: 80px;
     height: 80px;
     border-radius: 100px 100px;
   }
 
-  .cart-button__img {
+  .cartButtonImg {
     width: 32px;
     height: 32px;
   }

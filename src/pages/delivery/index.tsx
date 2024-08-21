@@ -1,11 +1,11 @@
-import "./DeliveryPage.css";
+import styles from "./style.module.scss";
 
 const DeliveryPage = () => {
   return (
-    <section className="delivery">
-      <div className="delivery__container">
-        <h1 className="delivery__title">О доставке</h1>
-        <p className="delivery__text">
+    <section className={styles.delivery}>
+      <div className={styles.delivery__container}>
+        <h1 className={styles.delivery__title}>О доставке</h1>
+        <p className={styles.delivery__text}>
           Мы сотрудничаем с крупными транспортными компаниями и доставляем
           заказы
           <br /> до двери, пунктов выдачи и постаматов. Доставка за наш счёт.

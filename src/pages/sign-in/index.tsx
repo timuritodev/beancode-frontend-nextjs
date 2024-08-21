@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
-import "./AuthPage.css";
+import styles from "./style.module.scss";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import { CustomInputTypes } from "../../types/CustomInput.types";
 import { useAppDispatch } from "../../services/typeHooks";
@@ -18,8 +17,9 @@ import {
 import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { PopupLogin } from "../../components/Popups/PopupLogin";
 import { PopupErrorLogin } from "../../components/Popups/PopupErrorLogin";
+import Link from "next/link";
 
-export const SignInPage = () => {
+const SignInPage = () => {
   const dispatch = useAppDispatch();
 
   const [authError, setAuthError] = useState(false);
@@ -63,11 +63,11 @@ export const SignInPage = () => {
   }, []);
 
   return (
-    <section className="signup">
-      <div className="signup__container">
-        <h1 className="signup__title">Вход в личный кабинет</h1>
+    <section className={styles.signup}>
+      <div className={styles.signup__container}>
+        <h1 className={styles.signup__title}>Вход в личный кабинет</h1>
         <form
-          className="signup__form"
+          className={styles.signup__form}
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >
@@ -88,8 +88,8 @@ export const SignInPage = () => {
             error={errors?.password?.message}
           />
           <Link
-            to="/recover-password"
-            className="auth__link auth__recover-link"
+            href="/recover-password"
+            className={styles.auth__link + " " + styles.auth__recoverLink}
           >
             Забыли пароль?
           </Link>
@@ -100,7 +100,11 @@ export const SignInPage = () => {
             disabled={!isDirty || !isValid}
             type="button"
           />
-          <Link to="/sign-up" className="signup__link">
+          <Link
+            href="/sign-up"
+            className={styles.auth__link + " " + styles.auth__link} 
+            // TODO
+          >
             Зарегистрироваться
           </Link>
         </form>
@@ -116,3 +120,5 @@ export const SignInPage = () => {
     </section>
   );
 };
+
+export default SignInPage;

@@ -1,6 +1,6 @@
 import { FC } from "react";
-import "./BurgerButton.css";
-import { Burger } from "../Burger/Burger.tsx";
+import styles from "./style.module.scss";
+import { Burger } from "../Burger/Burger";
 
 interface IBurgerButtonProps {
   isPopupOpen: boolean;
@@ -11,8 +11,8 @@ export const BurgerButton: FC<IBurgerButtonProps> = ({
   switchPopup,
 }) => {
   return (
-    <div className="burger-button">
-      <button className="burger-button__image" onClick={switchPopup} />
+    <div className={styles.burgerButton}>
+      <button className={styles.burgerButton__image} onClick={switchPopup} />
       <Burger isPopupOpen={isPopupOpen} switchPopup={switchPopup} />
     </div>
   );

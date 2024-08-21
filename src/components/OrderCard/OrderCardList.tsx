@@ -1,4 +1,4 @@
-import "./OrderCard.css";
+import styles from "./style.module.scss";
 import { FC } from "react";
 import { IOrderCardProps } from "../../types/Order.types";
 import { OrderCard } from "./OrderCard";
@@ -30,7 +30,7 @@ export const OrderCardList: FC<IOrderCardProps> = ({ data }) => {
   });
 
   return (
-    <div className="order-cardlist">
+    <div className={styles.ordercardlist}>
       {uniqueData.length !== 0 &&
         uniqueData.map((item) => (
           <OrderCard key={item.id} data={item as ICart} count={item.count} />

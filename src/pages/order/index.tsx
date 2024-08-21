@@ -7,7 +7,7 @@ import { PaymentBlock } from "../../components/PaymentBlock/PaymentBlock";
 import { SessionOrderInputs } from "../../components/SessionOrderInputs/SessionOrderInputs";
 import { selectUser } from "../../services/redux/slices/user/user";
 import { useAppSelector } from "../../services/typeHooks";
-import "./OrderPage.css";
+import styles from "./style.module.scss";
 
 export const OrderPage = () => {
   const user = useAppSelector(selectUser);
@@ -28,13 +28,13 @@ export const OrderPage = () => {
   };
 
   return (
-    <section className="order-page">
-      <div className="order-page__container">
-        <h1 className="order-page__title">Оформление заказа</h1>
-        <div className="order-page__wrapper">
-          <div className="order-page__sec-wrapper">
+    <section className={styles.orderPage}>
+      <div className={styles.orderPage__container}>
+        <h1 className={styles.orderPage__title}>Оформление заказа</h1>
+        <div className={styles.orderPage__wrapper}>
+          <div className={styles.orderPage__secWrapper}>
             <div>
-              <h2 className="order-page__subtitle">Личные данные</h2>
+              <h2 className={styles.orderPage__subtitle}>Личные данные</h2>
               {user.token ? (
                 <OrderInputs />
               ) : (
@@ -42,13 +42,13 @@ export const OrderPage = () => {
               )}
             </div>
             {/* <div>
-              <h2 className="order-page__subtitle">Способы доставки</h2>
+              <h2 className={styles.orderPage__subtitle}>Способы доставки</h2>
               <DeliveryBlock />   
               <Widget />
             </div> */}
             {/*
             <div>
-              <h2 className="order-page__subtitle">Способы оплаты</h2>
+              <h2 className={styles.orderPage__subtitle}>Способы оплаты</h2>
               <PaymentBlock /> 
             </div> */}
           </div>
@@ -58,3 +58,4 @@ export const OrderPage = () => {
     </section>
   );
 };
+

@@ -1,4 +1,4 @@
-import "./SearchCard.css";
+import styles from "./style.module.scss";
 import { IProduct } from "../../types/Product.types";
 import { FC } from "react";
 import { SearchCard } from "./SearchCard";
@@ -11,9 +11,9 @@ interface SearchCardListProps {
 
 export const SearchCardList: FC<SearchCardListProps> = ({ data, isClose, switchPopup }) => {
   return (
-    <div className="searchcardlist">
+    <div className={styles.searchcardlist}>
       {data.length !== 0 &&
-        data.map((item) => <SearchCard key={item.id} data={item} isClose={isClose} switchPopup={switchPopup}/>)}
+        data.map((item) => <SearchCard key={item.id} data={item} isClose={isClose} switchPopup={switchPopup} />)}
     </div>
   );
 };

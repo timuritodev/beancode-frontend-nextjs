@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import { ICustomInput } from "../../types/CustomInput.types";
-import InputMask  from "react-input-mask"; 
+import InputMask from "react-input-mask";
 
-import "./CustomInput.css";
+import styles from "./style.module.scss";
 
 const CustomInput: FC<ICustomInput> = ({
   inputType,
@@ -33,25 +33,23 @@ const CustomInput: FC<ICustomInput> = ({
     inputType === "password" || inputType === "oldPassword" || inputType === "newPassword" && isPasswordHidden === false
       ? "text"
       : inputType === "repeatPassword"
-      ? "password" || "oldPassword" || "newPassword"
-      : inputType;
+        ? "password" // TODO check
+        : inputType;
 
   const InputComponent = inputType === "phone" ? InputMask : "input";
 
   return (
-    <div className="input__wrapper">
-      <div className="input__hints">
+    <div className={styles.input__wrapper}>
+      <div className={styles.input__hints}>
         {labelText ? (
           <label
-            className={`input__label input__label_color_${
-              color !== "white" ? "white" : "black"
-            }`}
+            className={`${styles.input__label} ${styles[`input__label_color_${color}`]}`}
             htmlFor={inputType}
           >
             {labelText}
           </label>
         ) : null}
-        {error ? <span className="input__error">{error}</span> : null}
+        {error ? <span className={styles.input__error}>{error}</span> : null}
       </div>
       <InputComponent
         {...validation}
@@ -59,12 +57,11 @@ const CustomInput: FC<ICustomInput> = ({
           onChange
             ? onChange
             : (e) => {
-                validation.onChange(e);
-              }
+              validation.onChange(e);
+            }
         }
-        className={`input__field input__field_type_${inputType} input__field_color_${color} ${
-          error ? "input__field_invalid" : ""
-        }`}
+        className={`${styles.input__field} ${styles[`input__field_type_${inputType}`]} ${styles[`input__field_color_${color}`]} ${error ? styles.input__field_invalid : ""
+          }`}
         type={inputTextType}
         name={inputType}
         id={inputType}
@@ -78,7 +75,7 @@ const CustomInput: FC<ICustomInput> = ({
       />
       {showPasswordButton ? (
         <button
-          className="input__button"
+          className={styles.input__button}
           type="button"
           onClick={togglePassword}
         />
@@ -88,3 +85,4 @@ const CustomInput: FC<ICustomInput> = ({
 };
 
 export default CustomInput;
+

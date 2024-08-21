@@ -1,4 +1,4 @@
-.popup-cart {
+.popupCart {
   display: flex;
   width: 100vw;
   height: 100vh;
@@ -12,18 +12,18 @@
   z-index: 20;
 }
 
-.popup-cart_opened {
+.popupCart_opened {
   opacity: 1;
   visibility: visible;
 }
 
-.popup-cart__content {
+.popupCart__content {
   position: relative;
   display: flex;
   flex-direction: column;
 }
 
-.popup-cart__title {
+.popupCart__title {
   color: var(--Black_text, #0f100f);
   text-align: center;
   font-family: Spectral;
@@ -34,7 +34,7 @@
   margin: 40px 0 64px 0;
 }
 
-.popup-cart__text {
+.popupCart__text {
   font-family: Ubuntu;
   color: var(--grey, #797979);
   font-size: 16px;
@@ -44,14 +44,14 @@
   margin: 0;
 }
 
-.popup-cart__info__container {
+.popupCart__info__container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 33px 0 0 0;
 }
 
-.popup-cart__button-delete {
+.popupCart__button_delete {
   background-color: transparent;
   padding: 0;
   margin: 0;
@@ -64,7 +64,7 @@
   line-height: normal;
 }
 
-.popup-cart__text__sum {
+.popupCart__text__sum {
   color: var(--Black_text, #0f100f);
   font-size: 20px;
   font-style: normal;
@@ -74,12 +74,12 @@
   font-family: Ubuntu;
 }
 
-.popup-cart__button__container {
+.popupCart__button__container {
   display: flex;
   justify-content: center;
   margin: 97px 0 0 0;
 }
-.popup-cart__button-continue {
+.popupCart__button_continue {
   font-family: Ubuntu;
   background-color: transparent;
   padding: 0 32px 0 0;
@@ -92,7 +92,7 @@
   line-height: normal;
 }
 
-.popup-cart__button-order {
+.popupCart__button_order {
   border-radius: 64px;
   font-family: Ubuntu;
   background: var(--Accent, #465244);
@@ -109,7 +109,7 @@
   margin: 16px 0 0 0;
 }
 
-.popup-cart__close {
+.popupCart__close {
   position: absolute;
   width: 16px;
   height: 16px;
@@ -124,12 +124,12 @@
   z-index: 10;
 }
 
-.no-scroll {
+.noScroll {
   overflow: hidden;
 }
 
 @media screen and (max-width: 767px) {
-  .popup-cart {
+  .popupCart {
     display: flex;
     width: 100vw;
     height: 100vh;
@@ -143,18 +143,18 @@
     z-index: 20;
   }
 
-  .popup-cart_opened {
+  .popupCart_opened {
     opacity: 1;
     visibility: visible;
   }
 
-  .popup-cart__content {
+  .popupCart__content {
     position: relative;
     display: flex;
     flex-direction: column;
   }
 
-  .popup-cart__title {
+  .popupCart__title {
     font-size: 24px;
     font-weight: 500;
     line-height: 37px;
@@ -162,40 +162,40 @@
     margin: 30px 0 32px 0;
   }
 
-  .popup-cart__text {
+  .popupCart__text {
     font-size: 16px;
     font-weight: 400;
     line-height: 18px;
     letter-spacing: 0em;
   }
 
-  .popup-cart__info__container {
+  .popupCart__info__container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin: 20px 0 0 0;
   }
 
-  .popup-cart__button-delete {
+  .popupCart__button-delete {
     font-size: 16px;
     font-weight: 400;
     line-height: 18px;
     letter-spacing: 0em;
   }
 
-  .popup-cart__text__sum {
+  .popupCart__text__sum {
     font-size: 20px;
     font-weight: 400;
     line-height: 23px;
     letter-spacing: 0em;
   }
 
-  .popup-cart__button__container {
+  .popupCart__button__container {
     flex-direction: column;
     margin: 25px 0 0 0;
   }
 
-  .popup-cart__button-continue {
+  .popupCart__button-continue {
     padding: 0;
     margin: 0;
     font-size: 20px;
@@ -204,7 +204,7 @@
     letter-spacing: 0em;
   }
 
-  .popup-cart__button-order {
+  .popupCart__button-order {
     width: 328px;
     height: 52px;
     margin: 24px 0 0 0;
@@ -214,7 +214,7 @@
     letter-spacing: 0em;
   }
 
-  .popup-cart__close {
+  .popupCart__close {
     top: 16px;
     right: 16px;
   }

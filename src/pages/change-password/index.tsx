@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import "./AuthPage.css";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import { CustomInputTypes } from "../../types/CustomInput.types";
 import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
@@ -13,6 +12,7 @@ import { IChangePassword } from "../../types/Auth.types";
 import { selectUser } from "../../services/redux/slices/user/user";
 import { PopupChangePassword } from "../../components/Popups/PopupChangePassword";
 import { PopupErrorChangePassword } from "../../components/Popups/PopupErrorChangePassword";
+import styles from "./style.module.scss";
 
 export const ChangePasswordPage = () => {
   const dispatch = useAppDispatch();
@@ -61,11 +61,11 @@ export const ChangePasswordPage = () => {
   }, [reset]);
 
   return (
-    <section className="signup">
-      <div className="signup__container">
-        <h1 className="signup__title">Смена пароля</h1>
+    <section className={styles.signup}>
+      <div className={styles.signup__container}>
+        <h1 className={styles.signup__title}>Смена пароля</h1>
         <form
-          className="signup__form"
+          className={styles.signup__form}
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >

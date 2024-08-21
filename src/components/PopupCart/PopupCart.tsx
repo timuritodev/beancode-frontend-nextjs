@@ -1,10 +1,10 @@
 import { useAppSelector, useAppDispatch } from "../../services/typeHooks";
 import { FC, useEffect } from "react";
-import "./PopupCart.css";
+import styles from "./style.module.scss";
 import { ProductCardList } from "../ProductCard/ProductCardList";
 import { deleteAllApi, deleteAllSessionApi } from "../../services/redux/slices/cart/cart";
 import { selectUser } from "../../services/redux/slices/user/user";
-import { useNavigate } from "react-router";
+import { useRouter } from "next/router";
 
 interface PopupCartProps {
   isPopupOpen: boolean;
@@ -16,12 +16,12 @@ export const PopupCart: FC<PopupCartProps> = ({
   switchPopupTrailer,
 }) => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const router = useRouter();
   const user = useAppSelector(selectUser);
   const cartproducts = useAppSelector((state) => state.cart.cart);
 
   const handleClickOrderButton = () => {
-    navigate("/order-page");
+    router.push("/order");
     switchPopupTrailer();
   };
 
@@ -33,12 +33,12 @@ export const PopupCart: FC<PopupCartProps> = ({
 
   useEffect(() => {
     if (isPopupOpen) {
-      document.body.classList.add("no-scroll");
+      document.body.classList.add(styles.noScroll);
     } else {
-      document.body.classList.remove("no-scroll");
+      document.body.classList.remove(styles.noScroll);
     }
     return () => {
-      document.body.classList.remove("no-scroll");
+      document.body.classList.remove(styles.noScroll);
     };
   }, [isPopupOpen]);
 
@@ -49,16 +49,16 @@ export const PopupCart: FC<PopupCartProps> = ({
   }, [cartproducts.length, isPopupOpen, switchPopupTrailer]);
 
   return (
-    <div className={`popup-cart ${isPopupOpen ? "popup-cart_opened" : ""}`}>
-      <div className="popup-cart__content">
-        <h1 className="popup-cart__title">Ваша корзина</h1>
-        <p className="popup-cart__text">
+    <div className={`${styles.popupCart} ${isPopupOpen ? styles.popupCart_opened : ""}`}>
+      <div className={styles.popupCart__content}>
+        <h1 className={styles.popupCart__title}>Ваша корзина</h1>
+        <p className={styles.popupCart__text}>
           В вашей корзине {cartproducts.length} товаров
         </p>
         <ProductCardList data={cartproducts} />
-        <div className="popup-cart__info__container">
+        <div className={styles.popupCart__info__container}>
           <button
-            className="popup-cart__button-delete"
+            className={styles.popupCart__button_delete}
             type="button"
             onClick={() => {
               user.token ? dispatch(deleteAllApi(user.id)) : dispatch(deleteAllSessionApi());
@@ -67,18 +67,18 @@ export const PopupCart: FC<PopupCartProps> = ({
           >
             Удалить все
           </button>
-          <p className="popup-cart__text__sum">Всего: {sum} ₽</p>
+          <p className={styles.popupCart__text__sum}>Всего: {sum} ₽</p>
         </div>
-        <div className="popup-cart__button__container">
+        <div className={styles.popupCart__button__container}>
           <button
-            className="popup-cart__button-continue"
+            className={styles.popupCart__button_continue}
             type="button"
             onClick={switchPopupTrailer}
           >
             Продолжить покупки
           </button>
           <button
-            className="popup-cart__button-order"
+            className={styles.popupCart__button_order}
             type="button"
             onClick={handleClickOrderButton}
           >
@@ -87,10 +87,11 @@ export const PopupCart: FC<PopupCartProps> = ({
         </div>
       </div>
       <button
-        className="popup-cart__close"
+        className={styles.popupCart__close}
         type="button"
         onClick={switchPopupTrailer}
       />
     </div>
   );
 };
+

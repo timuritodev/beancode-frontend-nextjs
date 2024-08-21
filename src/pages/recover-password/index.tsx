@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import styles from "./style.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
-import "./AuthPage.css";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import { CustomInputTypes } from "../../types/CustomInput.types";
 import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
@@ -17,7 +16,7 @@ import { IRecoverPassword } from "../../types/Auth.types";
 import { PopupErrorRecoverPassword } from "../../components/Popups/PopupErrorRecoverPassword";
 import { PopupRecoverPassword } from "../../components/Popups/PopupRecoverPassword";
 
-export const RecoverPasswordPage = () => {
+const RecoverPasswordPage = () => {
   const dispatch = useAppDispatch();
 
   const [isSavedPopupOpened, setIsSavedPopupOpened] = useState<boolean>(false);
@@ -52,11 +51,11 @@ export const RecoverPasswordPage = () => {
   }, []);
 
   return (
-    <section className="signup">
-      <div className="signup__container">
-        <h1 className="signup__title">Введите электронную почту</h1>
+    <section className={styles.signup}>
+      <div className={styles.signup__container}>
+        <h1 className={styles.signup__title}>Введите электронную почту</h1>
         <form
-          className="signup__form"
+          className={styles.signup__form}
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >
@@ -67,7 +66,7 @@ export const RecoverPasswordPage = () => {
               ...register("email", EMAIL_VALIDATION_CONFIG),
             }}
             error={errors?.email?.message}
-            // maxLength={VALIDATION_SETTINGS.email.maxLength}
+          // maxLength={VALIDATION_SETTINGS.email.maxLength}
           />
           <CustomButton
             buttonText={"Отправить"}
@@ -88,3 +87,5 @@ export const RecoverPasswordPage = () => {
     </section>
   );
 };
+
+export default RecoverPasswordPage;

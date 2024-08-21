@@ -1,7 +1,6 @@
 import { FC } from "react";
-import "./Footer.css";
+import styles from "./style.module.scss";
 import button from "../../images/paper-airplane.svg";
-import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import { useAppDispatch } from "../../services/typeHooks";
 import { subcribeApi } from "../../services/redux/slices/subscription/subscription";
@@ -11,10 +10,12 @@ import { CustomInputTypes } from "../../types/CustomInput.types";
 import { EMAIL_VALIDATION_CONFIG } from "../../utils/constants";
 import { ISubcription } from "../../types/Subcription.types";
 import { useResize } from "../../hooks/useResize";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Footer: FC = () => {
   const dispatch = useAppDispatch();
-  const location = useLocation();
+  const router = useRouter();
 
   const { width } = useResize();
 
@@ -29,18 +30,16 @@ const Footer: FC = () => {
     dispatch(subcribeApi({ email: getValues("email") })).unwrap();
   };
   return (
-    <footer
-      className={`footer ${location.pathname === "/" ? "footer_dark" : ""}`}
-    >
-      <div className="footer__container">
-        <div className="footer__blocks">
-          <div className="subsribe__block">
-            <h2 className="subscribe__title">Подпишитесь на нас,</h2>
-            <p className="subscribe__text">
+    <footer className={`${styles.footer} ${router.pathname === "/" ? styles.footer_dark : ""}`}>
+      <div className={styles.footer__container}>
+        <div className={styles.footer__blocks}>
+          <div className={styles.subsribe__block}>
+            <h2 className={styles.subscribe__title}>Подпишитесь на нас,</h2>
+            <p className={styles.subscribe__text}>
               Чтобы узнавать о новинках и скидках
             </p>
             <form
-              className="footer-input__container"
+              className={styles.footer_input__container}
               onSubmit={handleSubmit(onSubmit)}
               noValidate
             >
@@ -53,9 +52,9 @@ const Footer: FC = () => {
                 placeholder="email@example.com"
                 error={errors?.email?.message}
               />
-              <button className="subscribe__button">
+              <button className={styles.subscribe__button}>
                 <img
-                  className="subscribe__button_img"
+                  className={styles.subscribe__button_img}
                   alt="subscribe button image"
                   src={button}
                   onClick={handleSubmit(onSubmit)}
@@ -63,40 +62,40 @@ const Footer: FC = () => {
               </button>
             </form>
           </div>
-          <div className="faq__block">
-            <h2 className="faq__title">FAQ</h2>
-            <Link to="/delivery-page" className="faq__link">
+          <div className={styles.faq__block}>
+            <h2 className={styles.faq__title}>FAQ</h2>
+            <Link href="/delivery" className={styles.faq__link}>
               О доставке
             </Link>
-            <Link to="/payment-page" className="faq__link">
+            <Link href="/payment" className={styles.faq__link}>
               Об оплате
             </Link>
-            {/* <Link to="/bonus-page" className="faq__link">
+            {/* <Link href="/bonus" className={styles.faq__link}>
               Бонусная программа
             </Link> */}
-            <Link to="/about-page" className="faq__link">
+            <Link href="/about" className={styles.faq__link}>
               О компании
             </Link>
           </div>
-          <div className="contacts__block">
-            <h2 className="contacts__title">Контакты</h2>
-            <p className="contacts__text">По всем вопросам:</p>
-            {/*<p className="contacts__number">+7911 910-33-29</p>
-            <p className="contacts__text">Интернет-магазин</p>
-            <p className="contacts__number">+921 912-00-95</p> */}
-            <p className="contacts__number">+7 960 061-33-30</p>
+          <div className={styles.contacts__block}>
+            <h2 className={styles.contacts__title}>Контакты</h2>
+            <p className={styles.contacts__text}>По всем вопросам:</p>
+            {/*<p className={styles.contacts__number}>+7911 910-33-29</p>
+            <p className={styles.contacts__text}>Интернет-магазин</p>
+            <p className={styles.contacts__number}>+921 912-00-95</p> */}
+            <p className={styles.contacts__number}>+7 960 061-33-30</p>
             {width < 767 && (
-              <h2 className="footer__email">coffee@beancode.ru</h2>
+              <h2 className={styles.footer__email}>coffee@beancode.ru</h2>
             )}
           </div>
         </div>
-        <div className="logo__block">
-          <img className="footer__logo" src={logo} alt="footer logo"/>
-          {width > 767 && <h2 className="footer__email">coffee@beancode.ru</h2>}
+        <div className={styles.logo__block}>
+          <img className={styles.footer__logo} src={logo} alt="footer logo"/>
+          {width > 767 && <h2 className={styles.footer__email}>coffee@beancode.ru</h2>}
         </div>
-        <div className="copyright__block">
-          <p className="copyright__text">© 2023. BEANCODE Все права защищены</p>
-          {/* <p className="copyright__text">Дизайн - Гюзель Саберова</p> */}
+        <div className={styles.copyright__block}>
+          <p className={styles.copyright__text}>© 2023. BEANCODE Все права защищены</p>
+          {/* <p className={styles.copyright__text}>Дизайн - Гюзель Саберова</p> */}
         </div>
       </div>
     </footer>
@@ -104,3 +103,4 @@ const Footer: FC = () => {
 };
 
 export default Footer;
+

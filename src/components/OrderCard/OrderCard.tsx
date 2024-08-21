@@ -1,4 +1,4 @@
-import "./OrderCard.css";
+import styles from "./style.module.scss";
 import { ICart } from "../../types/Cart.types";
 import { FC } from "react";
 import { API_BASE_URL } from "../../utils/constants";
@@ -13,11 +13,12 @@ export const OrderCard: FC<OrderCardProps> = ({ data, count }) => {
   const imageUrl = API_BASE_URL + data.v_picture;
 
   return (
-    <div className="order-card">
-      <img className="order-card__img" src={imageUrl} alt="image of product"/>
-      <p className="order-card__title">{data.title}</p>
-      <p className="order-card__number">x{count}</p>
-      <p className="order-card__price">{data.price} ₽</p>
+    <div className={styles.orderCard}>
+      <img className={styles.orderCard__img} src={imageUrl} alt="image of product" />
+      <p className={styles.orderCard__title}>{data.title}</p>
+      <p className={styles.orderCard__number}>x{count}</p>
+      <p className={styles.orderCard__price}>{data.price} ₽</p>
     </div>
   );
 };
+

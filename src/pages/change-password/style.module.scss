@@ -1,0 +1,221 @@
+.signup {
+  width: 100%;
+  margin: 0 auto;
+  background: var(--White_bg, #f8f8f8);
+}
+
+.signup__container {
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  padding: 48px 0 120px 0;
+}
+
+.signup__form {
+  display: flex;
+  flex-direction: column;
+  width: 574px;
+  gap: 48px;
+}
+
+.signup__title {
+  color: var(--Black_text, #0f100f);
+  font-family: Spectral;
+  font-size: 52px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 70px; /* 134.615% */
+  margin: 0 0 80px 0;
+}
+
+.signup__label {
+  color: var(--Black-600, #7e7e7e);
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 171.429% */
+  letter-spacing: -0.154px;
+  margin: 0 0 8px 0;
+}
+
+.signup__input {
+  color: var(--grey_light, #c8cac8);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  border-radius: var(--Border-Radius-rounded-none, 0px);
+  border-bottom: 1px solid var(--Black_text, #0f100f);
+  margin: 0 0 48px 0;
+  padding: 0 0 12px 0;
+}
+
+.signup__input::placeholder {
+  color: var(--placeholder-color, #a0a0a0);
+  text-indent: 12px;
+}
+
+.signup__button {
+  border-radius: 64px;
+  background: var(--Accent, #465244);
+  border: none;
+  color: var(--White_text, #f6f6f6);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 574px;
+  height: 64px;
+  margin: 16px 0 0 0;
+}
+
+.signin__link {
+  color: var(--Black_text, #0f100f);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+  margin: 24px 0 64px 0;
+}
+
+.signin__link_add {
+  text-align: center;
+  margin: 24px 0 0 0;
+}
+
+.auth__link_text {
+  font-size: 18px;
+  line-height: 23px;
+  padding: 30px 0 0;
+  margin: 0;
+}
+
+.auth__link {
+  padding: 0 0 0 4px;
+  color: #4285f4;
+  transition: opacity 0.2s;
+  text-decoration: none;
+}
+
+.auth__link:hover {
+  opacity: 0.7;
+}
+
+.auth__recover-link {
+  font-family: Ubuntu;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #0f100f;
+}
+
+.auth__form {
+  padding: 30px 0 0;
+  max-height: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.signup__link {
+  font-family: Ubuntu;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: center;
+  margin: 0;
+  text-decoration: none;
+  color: #0f100f;
+}
+.auth__form-error {
+  color: #ea4335;
+}
+
+@media screen and (max-width: 767px) {
+  .signup {
+    width: 100%;
+    margin: 0 auto;
+    background: var(--White_bg, #f8f8f8);
+  }
+
+  .signup__container {
+    max-width: 1280px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+    padding: 48px 0 120px 0;
+  }
+
+  .signup__form {
+    display: flex;
+    flex-direction: column;
+    width: 328px;
+    gap: 48px;
+  }
+
+  .signup__title {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 39px;
+    letter-spacing: 0em;
+    margin: 0 0 40px 0;
+    text-align: center;
+  }
+
+  .signup__label {
+    color: var(--Black-600, #7e7e7e);
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 171.429% */
+    letter-spacing: -0.154px;
+    margin: 0 0 8px 0;
+  }
+
+  .signup__input {
+    color: var(--grey_light, #c8cac8);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border-radius: var(--Border-Radius-rounded-none, 0px);
+    border-bottom: 1px solid var(--Black_text, #0f100f);
+    margin: 0 0 48px 0;
+    padding: 0 0 12px 0;
+  }
+
+  .signup__input::placeholder {
+    color: var(--placeholder-color, #a0a0a0);
+    text-indent: 12px;
+  }
+
+  .signin__link {
+    color: var(--Black_text, #0f100f);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration: none;
+    margin: 24px 0 64px 0;
+  }
+
+  .signin__link_add {
+    text-align: center;
+    margin: 24px 0 0 0;
+  }
+}

@@ -1,14 +1,13 @@
-.products__wrapper {
+.grains__wrapper {
   display: flex;
   align-items: center;
   margin: 32px 0 0 0;
 }
 
-.grain {
+.grains__grain {
   display: inline-block;
   width: 16px;
   height: 17px;
-  /* background-image: url('path/to/combined-grain.png');  */
   background-size: cover;
   margin: 0 8px 0 0;
 }
@@ -17,19 +16,23 @@
   margin: 0 35px 0 0;
 }
 
-.filled {
+.grains__grain_filled {
   background-image: url(../../images/bean_full.svg);
 }
 
-.empty {
+.grains__grain_empty {
   background-image: url(../../images/bean_empy.svg);
 }
 
-.products__info {
+.grains__info {
   color: var(--Black_text, #0f100f);
   font-size: 20px;
   font-weight: 400;
   line-height: 23px;
   letter-spacing: 0em;
   margin: 0;
+}
+
+.grains__row {
+  display: flex;
 }

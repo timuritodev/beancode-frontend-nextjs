@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC } from "react";
 import arrow_next_2 from "../../images/arrow_next_2.svg";
 import arrow_prev_2 from "../../images/arrow_prev_2.svg";
+import styles from "./styles.module.scss"; // Import CSS Module
 
 interface IArrowProps {
   currentSlide: number;
@@ -9,11 +9,11 @@ interface IArrowProps {
 }
 
 export const CustomPrevArrow = () => (
-  <img className="slick-prev" src={arrow_prev_2} alt="Previous" />
+  <img className={styles.slickPrev} src={arrow_prev_2} alt="Previous" />
 );
 
 export const CustomNextArrow = () => (
-  <img className="slick-next" src={arrow_next_2} alt="Next" />
+  <img className={styles.slickNext} src={arrow_next_2} alt="Next" />
 );
 
 export const SlickArrowLeft: FC<IArrowProps> = ({
@@ -23,11 +23,9 @@ export const SlickArrowLeft: FC<IArrowProps> = ({
 }) => (
   <img
     {...props}
-    className={`slick-prev slick-arrow${
-      currentSlide === 0 ? " slick-disabled" : ""
-    }`}
+    className={`${styles.slickPrev} ${currentSlide === 0 ? styles.slickDisabled : ""}`}
     aria-hidden="true"
-    aria-disabled={currentSlide === 0 ? true : false}
+    aria-disabled={currentSlide === 0}
     src={arrow_next_2}
     alt="Next"
   />
@@ -40,11 +38,9 @@ export const SlickArrowRight: FC<IArrowProps> = ({
 }) => (
   <img
     {...props}
-    className={`slick-next slick-arrow${
-      currentSlide === slideCount - 1 ? " slick-disabled" : ""
-    }`}
+    className={`${styles.slickNext} ${currentSlide === slideCount - 1 ? styles.slickDisabled : ""}`}
     aria-hidden="true"
-    aria-disabled={currentSlide === slideCount - 1 ? true : false}
+    aria-disabled={currentSlide === slideCount - 1}
     src={arrow_prev_2}
     alt="Previous"
   />

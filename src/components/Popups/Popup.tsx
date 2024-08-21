@@ -1,6 +1,5 @@
 import { FC, ReactNode, useEffect } from 'react';
-
-import './Popup.css';
+import styles from './style.module.scss';
 
 interface IPopup {
 	children: ReactNode;
@@ -30,13 +29,15 @@ const Popup: FC<IPopup> = ({ children, isOpened, setIsOpened }) => {
 	useEffect(() => {
 		const body = document.querySelector('body');
 		if (isOpened) {
-			body?.classList.add('body__scroll-lock');
-		} else body?.classList.remove('body__scroll-lock');
+			body?.classList.add(styles.bodyScrollLock);
+		} else {
+			body?.classList.remove(styles.bodyScrollLock);
+		}
 	}, [isOpened]);
 
 	return (
 		<div
-			className={`popup ${isOpened ? 'popup_opened' : ''}`}
+			className={`${styles.popup} ${isOpened ? styles.popup_opened : ''}`}
 			onClick={handleOverlayClick}
 		>
 			{children}

@@ -2,11 +2,11 @@ import styles from "./style.module.scss"; // Импортируйте CSS Module
 
 const TextBlock = () => {
   return (
-    <div className={styles.textBlock}>
-      <h2 className={styles.textTitle}>
+    <div className={styles.text__block}>
+      <h2 className={styles.text__title}>
         СТАБИЛЬНЫЙ ВКУС В КАЖДОЙ ЧАШКЕ
       </h2>
-      <p className={styles.textText}>
+      <p className={styles.text__ext}>
         ВЫСТРОЕННЫЕ ПРОЦЕССЫ В КОМПАНИИ ПОЗВОЛЯЮТ ДОСТИЧЬ ПОВТОРЯЕМЫХ
         РЕЗУЛЬТАТОВ
       </p>

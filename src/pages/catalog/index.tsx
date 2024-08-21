@@ -1,24 +1,20 @@
-import "./CatalogPage.css";
 import React, { useState, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
-import { getProductsApi } from "../../services/redux/slices/product/product";
-import { ProductList } from "../../components/Product/ProductList";
-import { IProduct } from "../../types/Product.types";
+import { useAppDispatch, useAppSelector } from "@/services/typeHooks";
+import { getProductsApi } from "@/services/redux/slices/product/product";
+import { ProductList } from "@/components/Product/ProductList";
+import { IProduct } from "@/types/Product.types";
 import {
   getCartApi,
   getSessionCartApi,
-} from "../../services/redux/slices/cart/cart";
-import { selectUser } from "../../services/redux/slices/user/user";
-// import { PopupWeight } from "../../components/Popups/PopupWeight";
+} from "@/services/redux/slices/cart/cart";
+import { selectUser } from "@/services/redux/slices/user/user";
+import styles from "./style.module.scss"; // Импорт стилей
 
 export const CatalogPage = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 
   const products = useAppSelector((state) => state.products.products);
-  // const cartproducts = useAppSelector((state) => state.cart.cart);
-
-  // const [isPopupOpened, setIsPopupOpened] = useState<boolean>(false);
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
   const [sortOption, setSortOption] = useState("");
 
@@ -71,27 +67,14 @@ export const CatalogPage = () => {
     );
   };
 
-  // const totalWeight = cartproducts
-  //   .map((item) => {
-  //     const weight = item.weight.replace(" гр", "").trim();
-  //     return parseFloat(weight);
-  //   })
-  //   .reduce((total, weight) => total + weight, 0);
-
-  // useEffect(() => {
-  //   if (totalWeight === 5000) {
-  //     setIsPopupOpened(true);
-  //   }
-  // }, [totalWeight]);
-
   return (
-    <section className="catalog">
-      <div className="catalog__container">
-        <h1 className="catalog__title">Интернет-магазин</h1>
-        <form className="catalog__form">
+    <section className={styles.catalog}>
+      <div className={styles.catalog__container}>
+        <h1 className={styles.catalog__title}>Интернет-магазин</h1>
+        <form className={styles.catalog__form}>
           <select
             id="sortDropdown"
-            className="catalog__dropdown"
+            className={styles.catalog__dropdown}
             name="sortOption"
             value={sortOption}
             onChange={handleSortChange}
@@ -104,23 +87,18 @@ export const CatalogPage = () => {
             <option value="density">Плотности</option>
           </select>
         </form>
-        <h1 className="catalog__subtitle">Кофе для эспрессо</h1>
-        <h2 className="catalog__description">Бразилия</h2>
+        <h1 className={styles.catalog__subtitle}>Кофе для эспрессо</h1>
+        <h2 className={styles.catalog__description}>Бразилия</h2>
         <ProductList data={filterProductsByCountry("Бразилия")} />
-        <h2 className="catalog__description">Америка</h2>
+        <h2 className={styles.catalog__description}>Америка</h2>
         <ProductList data={filterProductsByCountry("Америка")} />
-        <h2 className="catalog__description">Африка</h2>
+        <h2 className={styles.catalog__description}>Африка</h2>
         <ProductList data={filterProductsByCountry("Африка")} />
-        <h2 className="catalog__description">Наборы</h2>
+        <h2 className={styles.catalog__description}>Наборы</h2>
         <ProductList data={filterProductsByCountry("Набор")} />
-        {/* <h1 className="">Кофе для фильтра</h1>
-        <ProductList data={filterProductsByCountry("Америка")} /> */}
       </div>
-      {/* <PopupWeight
-        isOpened={isPopupOpened}
-        setIsOpened={setIsPopupOpened}
-        weight={totalWeight}
-      /> */}
     </section>
   );
 };
+
+export default CatalogPage;

@@ -1,6 +1,7 @@
 import { FC } from "react";
 import Popup from "./Popup";
-import { useNavigate } from "react-router-dom";
+import styles from "./style.module.scss";
+import { useRouter } from "next/router";
 
 interface IChangesSavedPopup {
   isOpened: boolean;
@@ -11,34 +12,28 @@ export const PopupLogin: FC<IChangesSavedPopup> = ({
   isOpened,
   setIsOpened,
 }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleClickClose = () => {
     setIsOpened(false);
-    navigate("/catalog");
+    router.push("/catalog");
   };
 
   return (
     <Popup isOpened={isOpened} setIsOpened={setIsOpened}>
-      <div className="popup__container">
+      <div className={styles.popup__container}>
         <button
           type="button"
-          className="popup__x-btn"
+          className={styles.btn_close}
           onClick={() => setIsOpened(false)}
         ></button>
-        <h4 className="popup__title profile__title_type_saved-changes">
-          Авторизация
-        </h4>
-        <p className="popup__text profile__text_type_saved-changes">
-          Вы успешно зашли в личный аккаунт
-        </p>
-        <button
-          className="popup__close popup__close_type_saved-changes"
-          onClick={handleClickClose}
-        >
+        <h4 className={styles.popup__title}>Авторизация</h4>
+        <p className={styles.popup__text}>Вы успешно зашли в личный аккаунт</p>
+        <button className={styles.popup__close} onClick={handleClickClose}>
           Закрыть
         </button>
       </div>
     </Popup>
   );
 };
+

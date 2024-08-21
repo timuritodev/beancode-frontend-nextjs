@@ -1,4 +1,4 @@
-import "./PaymentBlock.css";
+import styles from "./style.module.scss";
 import { useState } from "react";
 
 export const PaymentBlock = () => {
@@ -16,31 +16,33 @@ export const PaymentBlock = () => {
   };
 
   return (
-    <div className="payment-block">
-      <label className="payment-block__radio-label">
+    <div className={styles.block}>
+      <label className={styles.block__radio_label}>
         <input
           type="radio"
-          className="payment-block__radio-button"
+          className={styles.block__radio_button}
           id="card"
           checked={isCart}
           onChange={handleCardButtonClick}
         />
-        <span className="payment-block__radio-pseudo-item"></span>
-        <span className="payment-block__radio-text">
+        <span className={styles.block__radio_pseudoitem}></span>
+        <span className={styles.block__radio_text}>
           Банковской картой на сайте
         </span>
       </label>
-      <label className="payment-block__radio-label">
+      <label className={styles.block__radio_label}>
         <input
           type="radio"
-          className="payment-block__radio-button"
+          className={styles.block__radio_button}
           id="later"
           checked={isLater}
           onChange={handleLaterButtonClick}
         />
-        <span className="payment-block__radio-pseudo-item"></span>
-        <span className="payment-block__radio-text">Оплата при получении </span>
+        <span className={styles.block__radio_pseudoitem}></span>
+        <span className={styles.block__radio_text}>Оплата при получении </span>
       </label>
     </div>
   );
 };
+
+
