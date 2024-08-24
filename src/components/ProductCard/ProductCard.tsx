@@ -16,6 +16,7 @@ import { getProductbyidApi } from "../../services/redux/slices/productbyid/produ
 import { ICart } from "../../types/Cart.types";
 import { useResize } from "../../hooks/useResize";
 import { API_BASE_URL } from "../../utils/constants";
+import Image from "next/image";
 
 interface ProductCardProps {
   data: ICart;
@@ -29,7 +30,7 @@ export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
   const { width } = useResize();
 
   const handleClickImage = () => {
-    router.push("/product-page");
+    router.push("/product");
     dispatch(getProductbyidApi(data.id));
   };
 
@@ -68,11 +69,12 @@ export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
 
   return (
     <div className={styles.productCard}>
-      <img
+      <Image
         className={styles.productCard__img}
         src={imageUrl}
         alt={data.title}
         onClick={handleClickImage}
+        width={100} height={100}
       />
       <div className={styles.productCard__textContainer}>
         <h3 className={styles.productCard__title}>{data.title}</h3>
@@ -82,11 +84,11 @@ export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
         <>
           <div className={styles.productCard__countContainer}>
             <button className={styles.productCard__button} onClick={handleClickMinus}>
-              <img className={styles.productCard__button__imgMinus} src={minus} alt="icon minus" />
+              <Image className={styles.productCard__button__imgMinus} src={minus} alt="icon minus" width={24} height={32}/>
             </button>
             <p className={styles.productCard__count}>{count}</p>
             <button className={styles.productCard__button} onClick={handleClickPlus}>
-              <img className={styles.productCard__button__imgPlus} src={plus} alt="icon plus" />
+              <Image className={styles.productCard__button__imgPlus} src={plus} alt="icon plus" width={24} height={32}/>
             </button>
           </div>
           <p className={styles.productCard__price}>{data.price} ₽</p>
@@ -96,11 +98,11 @@ export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
           <p className={styles.productCard__price}>{data.price} ₽</p>
           <div className={styles.productCard__countContainer}>
             <button className={styles.productCard__button} onClick={handleClickMinus}>
-              <img className={styles.productCard__button__imgMinus} src={minus} alt="icon minus" />
+              <Image className={styles.productCard__button__imgMinus} src={minus} alt="icon minus" width={24} height={32}/>
             </button>
             <p className={styles.productCard__count}>{count}</p>
             <button className={styles.productCard__button} onClick={handleClickPlus}>
-              <img className={styles.productCard__button__imgPlus} src={plus} alt="icon plus" />
+              <Image className={styles.productCard__button__imgPlus} src={plus} alt="icon plus" width={24} height={32}/>
             </button>
           </div>
         </>

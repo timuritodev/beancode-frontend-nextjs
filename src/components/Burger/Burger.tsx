@@ -8,6 +8,7 @@ import logo from "../../images/logo.svg";
 import { selectUser } from "../../services/redux/slices/user/user";
 import { useAppSelector } from "../../services/typeHooks";
 import Link from "next/link";
+import Image from "next/image";
 
 interface BurgerProps {
   isPopupOpen: boolean;
@@ -53,7 +54,7 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
               onClick={switchPopup}
             />
             <Link href="/">
-              <img
+              <Image
                 className={styles.header__logo}
                 alt="logo"
                 src={logo}
@@ -61,14 +62,14 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
               />
             </Link>
             <div className={styles.burger_links__wrapper}>
-              <img
+              <Image
                 className={styles.header__search_button_search}
                 src={loop_small}
                 alt="Кнопка поиска"
                 onClick={switchPopup}
               />
               <Link href="/profile">
-                <img
+                <Image
                   className={styles.header__profile_icon}
                   alt="icon"
                   src={icon}
@@ -78,7 +79,7 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
             </div>
           </div>
           <form className={styles.burger__search}>
-            <img
+            <Image
               className={styles.burger__search_button_search}
               src={loop}
               alt="Кнопка поиска"

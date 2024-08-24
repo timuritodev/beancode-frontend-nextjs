@@ -7,6 +7,7 @@ import { useAppDispatch } from "../../services/typeHooks";
 import { MinusPlusButtons } from "../MinusPlusButtons/MinusPlusButtons";
 import { API_BASE_URL } from "../../utils/constants";
 import { Grains } from "../Grains/Grains";
+import Image from "next/image";
 
 export const Product = ({ data }: { data: IProduct }) => {
   const dispatch = useAppDispatch();
@@ -16,7 +17,7 @@ export const Product = ({ data }: { data: IProduct }) => {
   const [selectedWeight, setSelectedWeight] = useState(data.low_weight);
 
   const handleClickImage = () => {
-    router.push("/product-page"); // Use router.push for navigation
+    router.push("/product"); // Use router.push for navigation
     dispatch(getProductbyidApi(data.id));
   };
 
@@ -30,11 +31,12 @@ export const Product = ({ data }: { data: IProduct }) => {
   return (
     <div className={styles.product}>
       <div className={styles.product__container}>
-        <img
+        <Image
           className={styles.product__image}
           src={imageUrl}
           alt={data.title}
           onClick={handleClickImage}
+          width={85} height={80}
         />
         <h2 className={styles.product__title}>{data.title}</h2>
         <p className={styles.product__description}>{data.description}</p>

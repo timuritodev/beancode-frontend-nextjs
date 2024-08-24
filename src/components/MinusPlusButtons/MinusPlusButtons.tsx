@@ -13,6 +13,7 @@ import {
 import { PopupErrorAdd } from "../Popups/PopupErrorAdd";
 import { useRouter } from "next/router"; // Use useRouter from next/router
 import styles from "./style.module.scss";
+import Image from "next/image";
 
 interface MinusPlusButtonsProps {
   data: IProduct;
@@ -100,7 +101,7 @@ export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({
             className={`${styles.minusPlus__button} ${styles.minusPlus__button_minus}`}
             onClick={handleClickMinus}
           >
-            <img
+            <Image
               className={styles.minusPlus__button__img_minus}
               src={minus}
               alt="icon minus"
@@ -111,7 +112,7 @@ export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({
             className={`${styles.minusPlus__button} ${styles.minusPlus__button_plus}`}
             onClick={handleClickPlus}
           >
-            <img
+            <Image
               className={styles.minusPlus__button__img_plus}
               src={plus}
               alt="icon plus"

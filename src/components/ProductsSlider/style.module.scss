@@ -11,14 +11,14 @@
     text-align: left;
 }
 
-.slick-next:before {
-    content: url('../../images/arrow_next_2.svg') !important;
-}
+// .slick-next:before {
+//     content: url('../../images/arrow_next_2.svg') !important;
+// }
 
-.slick-prev:before {
-    content: url('../../images/arrow_prev_2.svg') !important;
-    margin: 0 0 0 -90px;
-}
+// .slick-prev:before {
+//     content: url('../../images/arrow_prev_2.svg') !important;
+//     margin: 0 0 0 -90px;
+// }
 
 @media screen and (max-width: 767px) {
     .container {

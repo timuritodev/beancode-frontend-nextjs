@@ -6,7 +6,7 @@ const TextBlock = () => {
       <h2 className={styles.text__title}>
         СТАБИЛЬНЫЙ ВКУС В КАЖДОЙ ЧАШКЕ
       </h2>
-      <p className={styles.text__ext}>
+      <p className={styles.text__text}>
         ВЫСТРОЕННЫЕ ПРОЦЕССЫ В КОМПАНИИ ПОЗВОЛЯЮТ ДОСТИЧЬ ПОВТОРЯЕМЫХ
         РЕЗУЛЬТАТОВ
       </p>

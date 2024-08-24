@@ -16,6 +16,7 @@ import {
 } from "../../services/redux/slices/order/order";
 import { useResize } from "../../hooks/useResize";
 import Link from "next/link";
+import Image from "next/image";
 
 const ProfilePage = () => {
   const dispatch = useAppDispatch();
@@ -51,7 +52,7 @@ const ProfilePage = () => {
             className={styles.button__profile}
             onClick={handleAccountButtonClick}
           >
-            <img
+            <Image
               className={styles.button__profile__img}
               src={isAccountVisible ? person_active : person}
               alt="icon profile"
@@ -64,7 +65,7 @@ const ProfilePage = () => {
             </span>
           </button>
           <button className={styles.button__profile} onClick={handleOrderButtonClick}>
-            <img
+            <Image
               className={styles.button__profile__img}
               src={isOrderVisible ? cart_active : cart}
               alt="icon cart"
@@ -85,7 +86,7 @@ const ProfilePage = () => {
                 dispatch(resetOrders());
               }}
             >
-              <img className={styles.button__profile__img} src={exit_button} alt="icon exit" />
+              <Image className={styles.button__profile__img} src={exit_button} alt="icon exit" />
               <span className={styles.button__profile__text}>Выйти</span>
             </button>
           )}
@@ -121,7 +122,7 @@ const ProfilePage = () => {
               dispatch(resetOrders());
             }}
           >
-            <img className={styles.button__profile__img} src={exit_button} alt="icon exit" />
+            <Image className={styles.button__profile__img} src={exit_button} alt="icon exit" />
             <span className={styles.button__profile__text}>Выйти</span>
           </button>
         )}

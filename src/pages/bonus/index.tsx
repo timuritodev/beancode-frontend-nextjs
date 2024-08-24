@@ -1,6 +1,6 @@
 import styles from "./style.module.scss";
 
-export const BonusPage = () => {
+const BonusPage = () => {
   return (
     <section className={styles.bonus}>
       <div className={styles.bonus__container}>
@@ -14,3 +14,4 @@ export const BonusPage = () => {
   );
 };
 
+export default BonusPage;

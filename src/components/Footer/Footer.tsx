@@ -12,6 +12,7 @@ import { ISubcription } from "../../types/Subcription.types";
 import { useResize } from "../../hooks/useResize";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Image from "next/image";
 
 const Footer: FC = () => {
   const dispatch = useAppDispatch();
@@ -53,7 +54,7 @@ const Footer: FC = () => {
                 error={errors?.email?.message}
               />
               <button className={styles.subscribe__button}>
-                <img
+                <Image
                   className={styles.subscribe__button_img}
                   alt="subscribe button image"
                   src={button}
@@ -90,7 +91,7 @@ const Footer: FC = () => {
           </div>
         </div>
         <div className={styles.logo__block}>
-          <img className={styles.footer__logo} src={logo} alt="footer logo"/>
+          <Image className={styles.footer__logo} src={logo} alt="footer logo"/>
           {width > 767 && <h2 className={styles.footer__email}>coffee@beancode.ru</h2>}
         </div>
         <div className={styles.copyright__block}>

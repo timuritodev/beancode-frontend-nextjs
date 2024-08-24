@@ -14,7 +14,7 @@ import { PopupChangePassword } from "../../components/Popups/PopupChangePassword
 import { PopupErrorChangePassword } from "../../components/Popups/PopupErrorChangePassword";
 import styles from "./style.module.scss";
 
-export const ChangePasswordPage = () => {
+const ChangePasswordPage = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 
@@ -112,3 +112,5 @@ export const ChangePasswordPage = () => {
     </section>
   );
 };
+
+export default ChangePasswordPage;

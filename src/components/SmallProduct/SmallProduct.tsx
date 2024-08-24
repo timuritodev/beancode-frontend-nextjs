@@ -4,6 +4,7 @@ import { useAppDispatch } from "../../services/typeHooks";
 import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
 import { API_BASE_URL } from "../../utils/constants";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 export const SmallProduct = ({ data }: { data: IProduct }) => {
   const dispatch = useAppDispatch();
@@ -19,11 +20,12 @@ export const SmallProduct = ({ data }: { data: IProduct }) => {
   return (
     <div className={styles.smallproduct}>
       <div className={styles.smallproduct__container}>
-        <img
+        <Image
           className={styles.smallproduct__image}
           src={imageUrl}
           alt={data.title}
           onClick={handleClickImage}
+          width={85} height={80}
         />
         <h2 className={styles.smallproduct__title}>{data.title}</h2>
         <p className={styles.smallproduct__description}>{data.description}</p>

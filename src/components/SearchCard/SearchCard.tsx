@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useAppDispatch } from "../../services/typeHooks";
 import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
 import { API_BASE_URL } from "../../utils/constants";
+import Image from "next/image";
 
 export interface SearchCardProps {
   data: IProduct;
@@ -30,12 +31,12 @@ export const SearchCard: FC<SearchCardProps> = ({ data, isClose, switchPopup }) 
     <div
       key={data.id}
       onClick={() => {
-        router.push("/product-page");
+        router.push("/product");
         handleClick(data.id);
       }}
       className={styles.search__card}
     >
-      <img className={styles.search__card_poster} src={imageUrl} alt={data.title} />
+      <Image className={styles.search__card_poster} src={imageUrl} alt={data.title} width={85} height={80}/>
       <article className={styles.search__card_desc}>
         <p className={styles.search__card_name}>{data.title}</p>
         <div className={styles.search__card_info}>

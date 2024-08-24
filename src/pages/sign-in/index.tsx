@@ -78,7 +78,7 @@ const SignInPage = () => {
               ...register("email", EMAIL_VALIDATION_CONFIG),
             }}
             error={errors?.email?.message}
-            // maxLength={VALIDATION_SETTINGS.email.maxLength}
+          // maxLength={VALIDATION_SETTINGS.email.maxLength}
           />
           <CustomInput
             inputType={CustomInputTypes.password}
@@ -89,7 +89,7 @@ const SignInPage = () => {
           />
           <Link
             href="/recover-password"
-            className={styles.auth__link + " " + styles.auth__recoverLink}
+            className={`${styles.auth__link} ${styles.auth__recover_link}`}
           >
             Забыли пароль?
           </Link>
@@ -102,8 +102,8 @@ const SignInPage = () => {
           />
           <Link
             href="/sign-up"
-            className={styles.auth__link + " " + styles.auth__link} 
-            // TODO
+            className={styles.signup__link}
+          // TODO
           >
             Зарегистрироваться
           </Link>

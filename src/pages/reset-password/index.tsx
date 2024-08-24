@@ -29,10 +29,9 @@ const ResetPasswordPage = () => {
   const [isSavedPopupOpened, setIsSavedPopupOpened] = useState<boolean>(false);
   const [isErrorPopupOpened, setIsErrorPopupOpened] = useState<boolean>(false);
 
-  const location = useRouter();
+  const { query } = useRouter();
 
-  const queryParams = new URLSearchParams(location.search); // TODO
-  const token = queryParams.get("token");
+  const token = query.token as string;
 
   const {
     register,

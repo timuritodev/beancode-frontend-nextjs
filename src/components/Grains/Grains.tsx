@@ -8,29 +8,30 @@ interface ProductCardListProps {
 
 export const Grains: FC<ProductCardListProps> = ({ acidity, density }) => {
   return (
-    <div className={styles.grains__wrapper}>
+    <div className={styles.products__wrapper}>
       <div className={styles.grains__container}>
-        <div className={styles.grains__row}>
+        <div className={styles.products__grains}>
           {[...Array(5)].map((_, index) => (
             <span
               key={index}
-              className={`${styles.grains__grain} ${index < acidity ? styles.grains__grain_filled : styles.grains__grain_empty}`}
+              className={`${styles.grain} ${index < acidity ? styles.filled : styles.empty}`}
             ></span>
           ))}
         </div>
-        <p className={styles.grains__info}>Кислотность</p>
+        <p className={styles.products__info}>Кислотность</p>
       </div>
       <div className={styles.grains__container}>
-        <div className={styles.grains__row}>
+        <div className={styles.products__grains}>
           {[...Array(5)].map((_, index) => (
             <span
               key={index}
-              className={`${styles.grains__grain} ${index < density ? styles.grains__grain_filled : styles.grains__grain_empty}`}
+              className={`${styles.grain} ${index < density ? styles.filled : styles.empty}`}
             ></span>
           ))}
         </div>
-        <p className={styles.grains__info}>Плотность</p>
+        <p className={styles.products__info}>Плотность</p>
       </div>
     </div>
   );
 };
+

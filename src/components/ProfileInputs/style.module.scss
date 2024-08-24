@@ -11,6 +11,20 @@
   margin: 0 auto;
 }
 
+
+.profile__link {
+  color: var(--grey, #797979);
+  font-family: Ubuntu;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+  /* margin: 82px 0 0 193px; */
+  margin: 0;
+  height: 30px;
+}
+
 @media screen and (max-width: 767px) {
   .input__container {
     display: flex;
@@ -20,5 +34,15 @@
     column-gap: 48px;
     width: 328px;
     margin: 0 16px;
+  }
+
+  .profile__link {
+    color: var(--grey, #797979);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    /* margin: 100px 0; */
+    margin: 0;
   }
 }

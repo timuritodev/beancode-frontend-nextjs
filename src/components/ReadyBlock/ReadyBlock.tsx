@@ -24,8 +24,8 @@ const ReadyBlock = () => {
                 Упаковка в пакеты с газоотводящим клапаном и Zip-lock замком
                 позволяет нашим потребителям дольше сохранить вкус зерна.
               </p>
-              <Link 
-                href="https://disk.yandex.ru/i/2mZekmtWRv35KQ" 
+              <Link
+                href="https://disk.yandex.ru/i/2mZekmtWRv35KQ"
                 className={styles.ready__link}
               >
                 Документация
@@ -47,9 +47,8 @@ const ReadyBlock = () => {
               className={styles.ready__img}
               src={ready_block}
               alt="image of beans"
-              layout="responsive"
-              width={600}
-              height={400}
+              width={393}
+              height={281}
             />
             <div className={styles.ready__text__container}>
               <h2 className={styles.ready__title}>Готовая продукция</h2>
@@ -60,8 +59,8 @@ const ReadyBlock = () => {
                 Упаковка в пакеты с газоотводящим клапаном и Zip-lock замком
                 позволяет нашим потребителям дольше сохранить вкус зерна.
               </p>
-              <Link 
-                href="https://disk.yandex.ru/i/2mZekmtWRv35KQ" 
+              <Link
+                href="https://disk.yandex.ru/i/2mZekmtWRv35KQ"
                 className={styles.ready__link}
               >
                 Документация

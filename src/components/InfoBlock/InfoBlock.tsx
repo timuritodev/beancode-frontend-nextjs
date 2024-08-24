@@ -1,6 +1,7 @@
 import styles from "./style.module.scss"; // Импортируйте CSS Module
 import info_block from "../../images/info_block.jpeg";
 import { useResize } from "../../hooks/useResize";
+import Image from "next/image";
 
 const InfoBlock = () => {
   const { width } = useResize();
@@ -21,7 +22,7 @@ const InfoBlock = () => {
                 Мы соблюдаем при входном контроле Российские и международные
                 стандарты
               </p>
-              <img
+              <Image
                 className={styles.info__img}
                 alt="image of coffee beans"
                 src={info_block} // TODO
@@ -31,7 +32,7 @@ const InfoBlock = () => {
         ) : (
           <>
             <p className={styles.info__digit}>01</p>
-            <img
+            <Image
               className={styles.info__img}
               src={info_block}
               alt="image of coffee beans"

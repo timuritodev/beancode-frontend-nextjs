@@ -1,5 +1,6 @@
 import styles from "./style.module.scss"; // Import CSS Module
-import package_block from "../../images/roast_block.jpeg"; // Image for roast block
+import package_block from "../../images/package_block.jpeg"; // Image for roast block
+import Image from "next/image";
 
 const PackageBlock = () => {
   return (
@@ -16,7 +17,7 @@ const PackageBlock = () => {
             точностью до 1 гр.
           </p>
         </div>
-        <img className={styles.package__img} src={package_block} alt="image of package" />
+        <Image className={styles.package__img} src={package_block} alt="image of package" />
         {/* TODO */}
       </div>
     </div>

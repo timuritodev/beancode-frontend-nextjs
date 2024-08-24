@@ -1,0 +1,21 @@
+:root {
+    margin: 0;
+    font-family: 'Ubuntu', 'Spectral', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #fff;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}
+
+.slick-next:before {
+    content: url('./images/arrow_next_2.svg') !important;
+}
+
+.slick-prev:before {
+    content: url('./images/arrow_prev_2.svg') !important;
+    margin: 0 0 0 -90px;
+}

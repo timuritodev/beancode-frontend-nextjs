@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Popup from "./Popup";
-import styles from "./Popup.module.css";
+import styles from "./style.module.scss";
 import { useRouter } from "next/router";
 
 interface IChangesSavedPopup {

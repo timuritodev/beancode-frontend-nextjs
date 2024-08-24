@@ -9,7 +9,7 @@ import { selectUser } from "../../services/redux/slices/user/user";
 import { useAppSelector } from "../../services/typeHooks";
 import styles from "./style.module.scss";
 
-export const OrderPage = () => {
+const OrderPage = () => {
   const user = useAppSelector(selectUser);
 
   const [dataSaved, setDataSaved] = useState(false);
@@ -59,3 +59,4 @@ export const OrderPage = () => {
   );
 };
 
+export default OrderPage;

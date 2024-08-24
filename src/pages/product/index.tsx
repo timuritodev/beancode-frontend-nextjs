@@ -9,6 +9,7 @@ import { useResize } from "../../hooks/useResize";
 import Loader from "../../components/Loader/Loader";
 import { API_BASE_URL } from "../../utils/constants";
 import { ProductImagesSlider } from "../../components/ProductImagesSlider/ProductImagesSlider";
+import Image from "next/image";
 
 const ProductPage = () => {
   const product = useAppSelector((state) => state.productbyid.product);
@@ -103,10 +104,11 @@ const ProductPage = () => {
                   </div>
                 </div>
                 <div className={styles.products__info__container}>
-                  <img
+                  <Image
                     className={styles.products__image}
                     src={imageUrl}
                     alt={product.title}
+                    width={85} height={80}
                   />
                   {/* <ProductImagesSlider images={product.additional_pictures} /> */}
                   <div className={styles.products__wrapper_2}>
@@ -157,10 +159,11 @@ const ProductPage = () => {
                   </p>
                 </div>
                 <div className={styles.products__info__container}>
-                  <img
+                  <Image
                     className={styles.products__image}
                     src={imageUrl}
                     alt={product.title}
+                    width={85} height={80}
                   />
                   {/* <ProductImagesSlider images={product.additional_pictures} /> */}
                   <div>

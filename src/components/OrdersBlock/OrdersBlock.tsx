@@ -32,6 +32,8 @@ import {
   authDeliverApi,
   deliverApi,
 } from "../../services/redux/slices/delivery/delivery";
+import Image from "next/image";
+import { useRouter } from "next/router";
 
 interface UserData {
   userId: number;
@@ -49,6 +51,7 @@ interface OrderBlockProps {
 
 export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const cartproducts = useAppSelector((state) => state.cart.cart);
   const user = useAppSelector(selectUser);
   const formUrl = useAppSelector((state) => state.pay.response.formUrl);
@@ -59,9 +62,8 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   const [redirecting, setRedirecting] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
-  const payApiUsername = process.env.REACT_APP_PAY_API_USERNAME;
-  const payApiPassword = process.env.REACT_APP_PAY_API_PASSWORD;
-  const payApiPasswordWa = process.env.REACT_APP_PAY_API_PASSWORD_ST;
+  const payApiUsername = process.env.NEXT_PUBLIC_PAY_API_USERNAME;
+  const payApiPassword = process.env.NEXT_PUBLIC_PAY_API_PASSWORD;
 
   const [isPromoPopupOpened, setIsPromoPopupOpened] = useState<boolean>(false);
   const [isErrorPopupOpened, setIsErrorPopupOpened] = useState<boolean>(false);
@@ -285,7 +287,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
 
   useEffect(() => {
     if (redirecting && formUrl) {
-      window.location.href = formUrl;
+      router.push(formUrl); // TODO: redirect to payment page
       setRedirecting(false);
     }
   }, [redirecting, formUrl, dispatch, user.id]);
@@ -340,7 +342,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
           error={errors?.promo?.message}
         />
         <button className={styles.orderBlock__button}>
-          <img
+          <Image
             className={styles.subscribe__button_img}
             alt="subscribe button image"
             src={button}
@@ -380,7 +382,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         <span className={styles.span__checkbox}>
           Получать новости и спецпредложения
         </span>
-        <img className={styles.checkbox__img} src={ic_info} alt="checkbox" />
+        <Image className={styles.checkbox__img} src={ic_info} alt="checkbox" />
       </label>
       <PopupPromo
         isOpened={isPromoPopupOpened}

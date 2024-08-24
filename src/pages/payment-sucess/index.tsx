@@ -10,25 +10,25 @@ import {
 import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
 import { useRouter } from "next/router";
 
-export const InfoPaymentPageSucess = () => {
+const InfoPaymentPageSucess = () => {
   const dispatch = useAppDispatch();
   const orderRes = useAppSelector((state) => state.pay.response);
   const orders = useAppSelector((state) => state.order.info);
   const orderStatus = useAppSelector((state) => state.orderStatus.response);
   const user = useAppSelector(selectUser);
 
-  const payApiUsername = process.env.REACT_APP_PAY_API_USERNAME;
-  const payApiPassword = process.env.REACT_APP_PAY_API_PASSWORD;
+  const payApiUsername = process.env.NEXT_PUBLIC_PAY_API_USERNAME;
+  const payApiPassword = process.env.NEXT_PUBLIC_PAY_API_PASSWORD;
 
-  const location = useRouter();
-  const queryParams = new URLSearchParams(location.search); // TODO
-  const orderId = queryParams.get("orderId");
-  const userId = queryParams.get("userId");
-  const email = queryParams.get("email");
-  const phone = queryParams.get("phone");
-  const sum = queryParams.get("sum");
-  const product_quantity = queryParams.get("product_quantity");
-  const products_info = queryParams.get("product_info");
+  const { query } = useRouter();
+
+  const orderId = query.orderId as string;
+  const userId = query.userId as string;
+  const email = query.email as string;
+  const phone = query.phone as string;
+  const sum = query.sum as string;
+  const product_quantity = query.product_quantity as string;
+  const products_info = query.products_info as string;
 
   const isOrderProcessed = orders.some(
     (order) => order.orderNumber === orderId
@@ -102,4 +102,5 @@ export const InfoPaymentPageSucess = () => {
   );
 };
 
+export default InfoPaymentPageSucess;
 

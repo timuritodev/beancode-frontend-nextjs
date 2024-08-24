@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styles from "./style.module.scss";
+import Image from "next/image";
 
 interface IProductImagesSliderProps {
   images: string[] | undefined;
@@ -32,7 +33,7 @@ export const ProductImagesSlider: FC<IProductImagesSliderProps> = ({ images }) =
       <Slider {...settings}>
         {images?.map((image, index) => (
           <div key={index} className={styles.wrapper}>
-            <img src={image} alt={`Product Image ${index + 1}`} className={styles.image} />
+            <Image src={image} alt={`Product Image ${index + 1}`} className={styles.image} width={85} height={80}/>
           </div>
         ))}
       </Slider>

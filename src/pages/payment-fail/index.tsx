@@ -1,6 +1,6 @@
 import styles from "./style.module.scss";
 
-export const InfoPaymentPageFail = () => {
+const InfoPaymentPageFail = () => {
   return (
     <section className={styles.infoPayment}>
       <div className={styles.infoPayment__container}>
@@ -9,3 +9,5 @@ export const InfoPaymentPageFail = () => {
     </section>
   );
 };
+
+export default InfoPaymentPageFail;

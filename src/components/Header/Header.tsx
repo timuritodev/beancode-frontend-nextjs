@@ -12,6 +12,7 @@ import { useAppSelector } from "../../services/typeHooks";
 import { selectUser } from "../../services/redux/slices/user/user";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Image from "next/image";
 
 const Header: FC = () => {
   const user = useAppSelector(selectUser);
@@ -56,7 +57,7 @@ const Header: FC = () => {
           <BurgerButton isPopupOpen={isPopupOpen} switchPopup={switchPopup} />
         )}
         <Link href="/">
-          <img className={styles.header__logo} alt="logo" src={logo} />
+          <Image className={styles.header__logo} alt="logo" src={logo} />
         </Link>
         <div className={styles.header__links}>
           {/* {user.token && (
@@ -84,7 +85,7 @@ const Header: FC = () => {
 
         <div className={styles.header__search__container}>
           {width < 1279 ? (
-            <img
+            <Image
               className={styles.header__search_button_search}
               src={loop_small}
               alt="Кнопка поиска"
@@ -93,7 +94,7 @@ const Header: FC = () => {
           ) : (
             // TODO
             <form className={styles.header__search}>
-              <img
+              <Image
                 className={styles.header__search_button_search}
                 src={loop}
                 alt="Кнопка поиска"
@@ -117,7 +118,7 @@ const Header: FC = () => {
             </form>
           )}
           <Link href="/profile">
-            <img className={styles.header__profile_icon} alt="icon" src={icon} />
+            <Image className={styles.header__profile_icon} alt="icon" src={icon} />
           </Link>
         </div>
       </div>

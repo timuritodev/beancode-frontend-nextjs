@@ -87,5 +87,5 @@ const RecoverPasswordPage = () => {
     </section>
   );
 };
-
+// TODO проверить восстановление пароля
 export default RecoverPasswordPage;
