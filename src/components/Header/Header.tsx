@@ -1,3 +1,4 @@
+"use client"
 import { FC, useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import logo from "../../images/logo.svg";
@@ -10,14 +11,14 @@ import { useResize } from "../../hooks/useResize";
 import { BurgerButton } from "../BurgerButton/BurgerButton";
 import { useAppSelector } from "../../services/typeHooks";
 import { selectUser } from "../../services/redux/slices/user/user";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const Header: FC = () => {
   const user = useAppSelector(selectUser);
-  const router = useRouter();
 
+  const pathname = usePathname();
   const [values, setValues] = useState("");
   const [isOpenSearch, setIsOpenSearch] = useState(false);
 
@@ -50,7 +51,7 @@ const Header: FC = () => {
 
   return (
     <header
-      className={`${styles.header} ${router.pathname === "/" ? styles.header_dark : ""}`}
+      className={`${styles.header} ${pathname === "/" ? styles.header_dark : ""}`}
     >
       <div className={styles.header__container}>
         {width < 767 && (

@@ -1,3 +1,4 @@
+"use client"
 import { FC } from "react";
 import styles from "./style.module.scss";
 import button from "../../images/paper-airplane.svg";
@@ -10,13 +11,14 @@ import { CustomInputTypes } from "../../types/CustomInput.types";
 import { EMAIL_VALIDATION_CONFIG } from "../../utils/constants";
 import { ISubcription } from "../../types/Subcription.types";
 import { useResize } from "../../hooks/useResize";
-import { useRouter } from "next/router";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
 const Footer: FC = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const pathname = usePathname();
 
   const { width } = useResize();
 
@@ -31,7 +33,7 @@ const Footer: FC = () => {
     dispatch(subcribeApi({ email: getValues("email") })).unwrap();
   };
   return (
-    <footer className={`${styles.footer} ${router.pathname === "/" ? styles.footer_dark : ""}`}>
+    <footer className={`${styles.footer} ${pathname === "/" ? styles.footer_dark : ""}`}>
       <div className={styles.footer__container}>
         <div className={styles.footer__blocks}>
           <div className={styles.subsribe__block}>

@@ -1,7 +1,7 @@
 import styles from "./style.module.scss";
 import { FC } from "react";
 import { IProduct } from "../../types/Product.types";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useAppDispatch } from "../../services/typeHooks";
 import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
 import { API_BASE_URL } from "../../utils/constants";

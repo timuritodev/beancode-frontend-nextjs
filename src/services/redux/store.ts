@@ -11,7 +11,6 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-
 import { userReducer } from './slices/user/user';
 import { productReducer } from './slices/product/product';
 import { productbyidReducer } from './slices/productbyid/productbyid';

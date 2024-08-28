@@ -4,7 +4,7 @@ import styles from "./style.module.scss";
 import { ProductCardList } from "../ProductCard/ProductCardList";
 import { deleteAllApi, deleteAllSessionApi } from "../../services/redux/slices/cart/cart";
 import { selectUser } from "../../services/redux/slices/user/user";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface PopupCartProps {
   isPopupOpen: boolean;
