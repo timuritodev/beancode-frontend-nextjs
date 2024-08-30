@@ -20,7 +20,7 @@ export const CustomButton: FC<ICustomButton> = ({
   const router = useRouter();
 
   const handleKeyDown = (evt: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (evt.key === "Enter" && router.pathname !== "/order-page") {
+    if (evt.key === "Enter" && router.pathname !== "/order") {
       evt.preventDefault(); // Prevent default behavior of triggering the button click
       evt.stopPropagation(); // Stop event propagation to prevent multiple handlers from firing
 
@@ -30,7 +30,7 @@ export const CustomButton: FC<ICustomButton> = ({
 
   useEffect(() => {
     const handleEnterClick = (evt: KeyboardEvent) => {
-      if (evt.key === "Enter" && router.pathname !== "/order-page") {
+      if (evt.key === "Enter" && router.pathname !== "/order") {
         handleButtonClick && handleButtonClick();
       }
     };

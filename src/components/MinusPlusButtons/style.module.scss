@@ -1,10 +1,12 @@
-.minusPlus__countContainer {
+.minusplus__count_container {
   border-radius: 64px;
   background: var(--Accent, #465244);
   border: none;
   color: var(--White_text, #f6f6f6);
   font-size: 20px;
+  font-style: normal;
   font-weight: 400;
+  line-height: normal;
   width: 180px;
   height: 52px;
   margin: 0 0 0 30px;
@@ -14,21 +16,26 @@
   justify-content: space-around;
 }
 
-.minusPlus__button {
+.minusplus__button {
   width: 24px;
   height: 32px;
+  flex-shrink: 0;
   background: transparent;
   border: none;
-  cursor: pointer;
   padding: 0;
+  margin: 0;
+  cursor: pointer;
   display: flex;
   align-items: center;
 }
 
-.minusPlus__count {
+.minusplus__count {
   color: var(--White_bg, #f8f8f8);
   text-align: center;
   font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
   width: 13px;
 }
 
@@ -38,27 +45,74 @@
   border: none;
   color: var(--White_text, #f6f6f6);
   font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
   width: 180px;
   height: 52px;
   margin: 0 0 0 30px;
   padding: 0;
 }
 
-.minusPlus__countContainer_add {
-  width: 328px !important;
-  margin: 24px 0 0 0 !important;
-}
-
 @media screen and (max-width: 767px) {
-  .minusPlus__countContainer {
+  .minusplus__count_container_add {
+    width: 328px !important;
+    margin: 24px 0 0 0 !important;
+  }
+
+  .minusplus__count_container {
+    border-radius: 64px;
+    background: var(--Accent, #465244);
+    border: none;
+    color: var(--White_text, #f6f6f6);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
     width: 180px;
     height: 52px;
     margin: 0 0 0 12px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .minusplus__button {
+    width: 24px;
+    height: 32px;
+    flex-shrink: 0;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .minusplus__count {
+    color: var(--White_bg, #f8f8f8);
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 13px;
   }
 
   .product__button {
+    border-radius: 64px;
+    background: var(--Accent, #465244);
+    border: none;
+    color: var(--White_text, #f6f6f6);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
     width: 180px;
     height: 52px;
     margin: 0 0 0 12px;
+    padding: 0;
   }
 }

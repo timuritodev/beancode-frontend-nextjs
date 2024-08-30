@@ -86,7 +86,7 @@ export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({
       {productCountInCart === 0 ? (
         <button
           type="submit"
-          className={`${styles.product__button} ${router.pathname === "/product-page" ? styles.minusPlus__countContainer_add : ""
+          className={`${styles.product__button} ${router.pathname === "/product" ? styles.minusplus__count_container_add : ""
             }`}
           onClick={handleClickButton}
         >
@@ -94,26 +94,26 @@ export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({
         </button>
       ) : (
         <div
-          className={`${styles.minusPlus__countContainer} ${router.pathname === "/product-page" ? styles.minusPlus__countContainer_add : ""
+          className={`${styles.minusplus__count_container} ${router.pathname === "/product" ? styles.minusplus__count_container_add : ""
             }`}
         >
           <button
-            className={`${styles.minusPlus__button} ${styles.minusPlus__button_minus}`}
+            className={`${styles.minusplus__button} ${styles.minusplus__button_minus}`}
             onClick={handleClickMinus}
           >
             <Image
-              className={styles.minusPlus__button__img_minus}
+              className={styles.minusplus__button__img_minus}
               src={minus}
               alt="icon minus"
             />
           </button>
-          <p className={styles.minusPlus__count}>{productCountInCart}</p>
+          <p className={styles.minusplus__count}>{productCountInCart}</p>
           <button
-            className={`${styles.minusPlus__button} ${styles.minusPlus__button_plus}`}
+            className={`${styles.minusplus__button} ${styles.minusplus__button_plus}`}
             onClick={handleClickPlus}
           >
             <Image
-              className={styles.minusPlus__button__img_plus}
+              className={styles.minusplus__button__img_plus}
               src={plus}
               alt="icon plus"
             />

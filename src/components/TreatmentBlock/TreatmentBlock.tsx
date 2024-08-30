@@ -18,7 +18,7 @@ const TreatmentBlock = () => {
             <br />
             индивидуального подбора смеси, формульного ценообразования.
           </p>
-          <Link href="/wholesale-page" className={styles.treatment__link}>
+          <Link href="/wholesale" className={styles.treatment__link}>
             Страница для оптовых покупателей
           </Link>
         </div>

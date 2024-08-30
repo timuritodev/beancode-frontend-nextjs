@@ -77,9 +77,9 @@ export const SessionOrderInputs: FC<SessionOrderInputsProps> = ({
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.account__container}>
       <form
-        className={styles.form}
+        className={styles.input__container}
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >

@@ -10,15 +10,11 @@ const NotFoundPage = () => {
       <h1 className={styles.notFound__title}>404</h1>
       <p className={styles.notFound__subtitle}>Страница не найдена</p>
       <button
-        className={`${styles.notFound__link}`}
+        className={`${styles.loginForm__link} ${styles.loginForm__link_profile} ${styles.notFound__link} ${styles.link}`}
         onClick={() => router.back()}
       >
         Назад
       </button>
-      <Link href="/" className={`${styles.loginForm__link} ${styles.loginForm__link_profile} ${styles.notFound__link} ${styles.link}`}>
-        На главную
-      </Link>
-      {/* тут доделать стили */}
     </section>
   );
 };

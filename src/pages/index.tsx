@@ -1,5 +1,5 @@
+import Head from 'next/head';
 import IntroBlock from "@/components/IntroBlock/IntroBlock";
-// import "./MainPage.css";
 import InfoBlock from "@/components/InfoBlock/InfoBlock";
 import PackageBlock from "@/components/PackageBlock/PackageBlock";
 import ReadyBlock from "@/components/ReadyBlock/ReadyBlock";
@@ -27,17 +27,30 @@ const MainPage = () => {
   }, [dispatch, user.id, user.token]);
 
   return (
-    <section className={styles.main}>
-      <div className={styles.main__container}>
-        <IntroBlock />
-        <TextBlock />
-        <InfoBlock />
-        <RoastBlock />
-        <PackageBlock />
-        <ReadyBlock />
-        <TreatmentBlock />
+    <>
+      <Head>
+        <title>Кофе в зернах - Beancode</title>
+        <meta name="description" content="Кофе в зернах с бесплатной доставкой до двери" />
+        <meta name="keywords" content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://beancode.ru" />
+        <meta property="og:title" content="Кофе в зернах с бесплатной доставкой" />
+        <meta property="og:description"
+          content="В Набережных Челнах открылось производство кофейного зерна. Прямые поставки сырья из Бразилии, Колумбии, Африки, Азии. Голландская линия обжарки. Международные стандарты качества" />
+        <meta property="og:image" content="https://bean-code.ru/images/open_graph.jpeg" />
+      </Head>
+      <div className={styles.main}>
+        <div className={styles.main__container}>
+          <IntroBlock />
+          <TextBlock />
+          <InfoBlock />
+          <RoastBlock />
+          <PackageBlock />
+          <ReadyBlock />
+          <TreatmentBlock />
+        </div>
       </div>
-    </section>
+    </>
   );
 };
 

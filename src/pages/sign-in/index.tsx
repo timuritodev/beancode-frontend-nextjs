@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import styles from "./style.module.scss";
@@ -63,61 +64,72 @@ const SignInPage = () => {
   }, []);
 
   return (
-    <section className={styles.signup}>
-      <div className={styles.signup__container}>
-        <h1 className={styles.signup__title}>Вход в личный кабинет</h1>
-        <form
-          className={styles.signup__form}
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate
-        >
-          <CustomInput
-            inputType={CustomInputTypes.email}
-            labelText="Электронная почта"
-            validation={{
-              ...register("email", EMAIL_VALIDATION_CONFIG),
-            }}
-            error={errors?.email?.message}
-          // maxLength={VALIDATION_SETTINGS.email.maxLength}
-          />
-          <CustomInput
-            inputType={CustomInputTypes.password}
-            labelText="Пароль"
-            showPasswordButton={true}
-            validation={{ ...register("password", PASSWORD_VALIDATION_CONFIG) }}
-            error={errors?.password?.message}
-          />
-          <Link
-            href="/recover-password"
-            className={`${styles.auth__link} ${styles.auth__recover_link}`}
+    <>
+      <Head>
+        <title>Вход в личный кабинет - Beancode</title>
+        <meta name="description" content="Введите свои данные для доступа в личный кабинет. Если у вас нет аккаунта, вы можете зарегистрироваться здесь." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://beancode.ru/sign-in" />
+        <meta property="og:title" content="Вход в личный кабинет - Beancode" />
+        <meta property="og:description" content="Введите свои данные для доступа в личный кабинет. Если у вас нет аккаунта, вы можете зарегистрироваться здесь." />
+        <meta property="og:image" content="https://beancode.ru/images/logo.png" />
+      </Head>
+      <div className={styles.signup}>
+        <div className={styles.signup__container}>
+          <h1 className={styles.signup__title}>Вход в личный кабинет</h1>
+          <form
+            className={styles.signup__form}
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
           >
-            Забыли пароль?
-          </Link>
-          {/* TODO recover button */}
-          <CustomButton
-            buttonText={"Войти"}
-            handleButtonClick={handleSubmit(onSubmit)}
-            disabled={!isDirty || !isValid}
-            type="button"
-          />
-          <Link
-            href="/sign-up"
-            className={styles.signup__link}
-          // TODO
-          >
-            Зарегистрироваться
-          </Link>
-        </form>
+            <CustomInput
+              inputType={CustomInputTypes.email}
+              labelText="Электронная почта"
+              validation={{
+                ...register("email", EMAIL_VALIDATION_CONFIG),
+              }}
+              error={errors?.email?.message}
+            // maxLength={VALIDATION_SETTINGS.email.maxLength}
+            />
+            <CustomInput
+              inputType={CustomInputTypes.password}
+              labelText="Пароль"
+              showPasswordButton={true}
+              validation={{ ...register("password", PASSWORD_VALIDATION_CONFIG) }}
+              error={errors?.password?.message}
+            />
+            <Link
+              href="/recover-password"
+              className={`${styles.auth__link} ${styles.auth__recover_link}`}
+            >
+              Забыли пароль?
+            </Link>
+            {/* TODO recover button */}
+            <CustomButton
+              buttonText={"Войти"}
+              handleButtonClick={handleSubmit(onSubmit)}
+              disabled={!isDirty || !isValid}
+              type="button"
+            />
+            <Link
+              href="/sign-up"
+              className={styles.signup__link}
+            // TODO
+            >
+              Зарегистрироваться
+            </Link>
+          </form>
+        </div>
+        <PopupLogin
+          isOpened={isSavedPopupOpened}
+          setIsOpened={setIsSavedPopupOpened}
+        />
+        <PopupErrorLogin
+          isOpened={isErrorPopupOpened}
+          setIsOpened={setIsErrorPopupOpened}
+        />
       </div>
-      <PopupLogin
-        isOpened={isSavedPopupOpened}
-        setIsOpened={setIsSavedPopupOpened}
-      />
-      <PopupErrorLogin
-        isOpened={isErrorPopupOpened}
-        setIsOpened={setIsErrorPopupOpened}
-      />
-    </section>
+    </>
   );
 };
 
