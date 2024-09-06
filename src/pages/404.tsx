@@ -6,7 +6,7 @@ const NotFoundPage = () => {
   const router = useRouter();
 
   return (
-    <section className={styles.notFound}>
+    <div className={styles.notFound}>
       <h1 className={styles.notFound__title}>404</h1>
       <p className={styles.notFound__subtitle}>Страница не найдена</p>
       <button
@@ -15,7 +15,7 @@ const NotFoundPage = () => {
       >
         Назад
       </button>
-    </section>
+    </div>
   );
 };
 

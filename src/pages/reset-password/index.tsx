@@ -20,6 +20,7 @@ import {
 import { selectUser } from "../../services/redux/slices/user/user";
 import { PopupResetPassword } from "../../components/Popups/PopupResetPassword";
 import { useRouter } from "next/router";
+import { Head } from "next/document";
 
 const ResetPasswordPage = () => {
   const dispatch = useAppDispatch();
@@ -68,40 +69,53 @@ const ResetPasswordPage = () => {
   }, []);
 
   return (
-    <section className={styles.signup}>
-      <div className={styles.signup__container}>
-        <h1 className={styles.signup__title}>Введите новый пароль</h1>
-        <form
-          className={styles.signup__form}
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate
-        >
-          <CustomInput
-            inputType={CustomInputTypes.newPassword}
-            labelText="Новый пароль"
-            showPasswordButton={true}
-            validation={{
-              ...register("newPassword", PASSWORD_VALIDATION_CONFIG),
-            }}
-            error={errors?.newPassword?.message}
-          />
-          <CustomButton
-            buttonText={"Сменить пароль"}
-            handleButtonClick={handleSubmit(onSubmit)}
-            disabled={!isDirty || !isValid}
-            type="button"
-          />
-        </form>
+    <>
+      <Head>
+        <title>Оптовая форма - Beancode</title>
+        <meta name="description" content="Кофе в зернах с бесплатной доставкой до двери" />
+        <meta name="keywords" content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://beancode.ru" />
+        <meta property="og:title" content="Кофе в зернах с бесплатной доставкой" />
+        <meta property="og:description"
+          content="В Набережных Челнах открылось производство кофейного зерна. Прямые поставки сырья из Бразилии, Колумбии, Африки, Азии. Голландская линия обжарки. Международные стандарты качества" />
+        <meta property="og:image" content="https://beancode.ru/images/open_graph.jpeg" />
+      </Head>
+      <div className={styles.signup}>
+        <div className={styles.signup__container}>
+          <h1 className={styles.signup__title}>Введите новый пароль</h1>
+          <form
+            className={styles.signup__form}
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
+          >
+            <CustomInput
+              inputType={CustomInputTypes.newPassword}
+              labelText="Новый пароль"
+              showPasswordButton={true}
+              validation={{
+                ...register("newPassword", PASSWORD_VALIDATION_CONFIG),
+              }}
+              error={errors?.newPassword?.message}
+            />
+            <CustomButton
+              buttonText={"Сменить пароль"}
+              handleButtonClick={handleSubmit(onSubmit)}
+              disabled={!isDirty || !isValid}
+              type="button"
+            />
+          </form>
+        </div>
+        <PopupResetPassword
+          isOpened={isSavedPopupOpened}
+          setIsOpened={setIsSavedPopupOpened}
+        />
+        <PopupErrorLogin
+          isOpened={isErrorPopupOpened}
+          setIsOpened={setIsErrorPopupOpened}
+        />
       </div>
-      <PopupResetPassword
-        isOpened={isSavedPopupOpened}
-        setIsOpened={setIsSavedPopupOpened}
-      />
-      <PopupErrorLogin
-        isOpened={isErrorPopupOpened}
-        setIsOpened={setIsErrorPopupOpened}
-      />
-    </section>
+    </>
   );
 };
 

@@ -9,6 +9,7 @@ import {
 } from "../../services/redux/slices/order/order";
 import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
 import { useRouter } from "next/router";
+import { Head } from "next/document";
 
 const InfoPaymentPageSucess = () => {
   const dispatch = useAppDispatch();
@@ -89,16 +90,29 @@ const InfoPaymentPageSucess = () => {
   ]);
 
   return (
-    <section className={styles.infoPayment}>
-      <div className={styles.infoPayment__container}>
-        <h1 className={styles.infoPayment__title}>
-          Оплата прошла успешно
-        </h1>
-        <p className={styles.infoPayment__text}>
-          В ближайшее время с вами свяжется менеджер и уточнит детали заказа
-        </p>
+    <>
+      <Head>
+        <title>Оптовая форма - Beancode</title>
+        <meta name="description" content="Кофе в зернах с бесплатной доставкой до двери" />
+        <meta name="keywords" content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://beancode.ru" />
+        <meta property="og:title" content="Кофе в зернах с бесплатной доставкой" />
+        <meta property="og:description"
+          content="В Набережных Челнах открылось производство кофейного зерна. Прямые поставки сырья из Бразилии, Колумбии, Африки, Азии. Голландская линия обжарки. Международные стандарты качества" />
+        <meta property="og:image" content="https://beancode.ru/images/open_graph.jpeg" />
+      </Head>
+      <div className={styles.infoPayment}>
+        <div className={styles.infoPayment__container}>
+          <h1 className={styles.infoPayment__title}>
+            Оплата прошла успешно
+          </h1>
+          <p className={styles.infoPayment__text}>
+            В ближайшее время с вами свяжется менеджер и уточнит детали заказа
+          </p>
+        </div>
       </div>
-    </section>
+    </>
   );
 };
 

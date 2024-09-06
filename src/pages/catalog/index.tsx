@@ -9,6 +9,7 @@ import {
 } from "@/services/redux/slices/cart/cart";
 import { selectUser } from "@/services/redux/slices/user/user";
 import styles from "./style.module.scss"; // Импорт стилей
+import { Head } from "next/document";
 
 export const CatalogPage = () => {
   const dispatch = useAppDispatch();
@@ -68,36 +69,49 @@ export const CatalogPage = () => {
   };
 
   return (
-    <section className={styles.catalog}>
-      <div className={styles.catalog__container}>
-        <h1 className={styles.catalog__title}>Интернет-магазин</h1>
-        <form className={styles.catalog__form}>
-          <select
-            id="sortDropdown"
-            className={styles.catalog__dropdown}
-            name="sortOption"
-            value={sortOption}
-            onChange={handleSortChange}
-          >
-            <option value="">Выберите опцию сортировки</option>
-            <option value="name">Названию (в алфавитном порядке)</option>
-            <option value="maxPrice">Макс. Цене (по убыванию)</option>
-            <option value="minPrice">Мин. Цене (по возрастанию)</option>
-            <option value="acidity">Кислотности</option>
-            <option value="density">Плотности</option>
-          </select>
-        </form>
-        <h1 className={styles.catalog__subtitle}>Кофе для эспрессо</h1>
-        <h2 className={styles.catalog__description}>Бразилия</h2>
-        <ProductList data={filterProductsByCountry("Бразилия")} />
-        <h2 className={styles.catalog__description}>Америка</h2>
-        <ProductList data={filterProductsByCountry("Америка")} />
-        <h2 className={styles.catalog__description}>Африка</h2>
-        <ProductList data={filterProductsByCountry("Африка")} />
-        <h2 className={styles.catalog__description}>Наборы</h2>
-        <ProductList data={filterProductsByCountry("Набор")} />
+    <>
+      <Head>
+        <title>Оптовая форма - Beancode</title>
+        <meta name="description" content="Кофе в зернах с бесплатной доставкой до двери" />
+        <meta name="keywords" content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://beancode.ru" />
+        <meta property="og:title" content="Кофе в зернах с бесплатной доставкой" />
+        <meta property="og:description"
+          content="В Набережных Челнах открылось производство кофейного зерна. Прямые поставки сырья из Бразилии, Колумбии, Африки, Азии. Голландская линия обжарки. Международные стандарты качества" />
+        <meta property="og:image" content="https://beancode.ru/images/open_graph.jpeg" />
+      </Head>
+      <div className={styles.catalog}>
+        <div className={styles.catalog__container}>
+          <h1 className={styles.catalog__title}>Интернет-магазин</h1>
+          <form className={styles.catalog__form}>
+            <select
+              id="sortDropdown"
+              className={styles.catalog__dropdown}
+              name="sortOption"
+              value={sortOption}
+              onChange={handleSortChange}
+            >
+              <option value="">Выберите опцию сортировки</option>
+              <option value="name">Названию (в алфавитном порядке)</option>
+              <option value="maxPrice">Макс. Цене (по убыванию)</option>
+              <option value="minPrice">Мин. Цене (по возрастанию)</option>
+              <option value="acidity">Кислотности</option>
+              <option value="density">Плотности</option>
+            </select>
+          </form>
+          <h1 className={styles.catalog__subtitle}>Кофе для эспрессо</h1>
+          <h2 className={styles.catalog__description}>Бразилия</h2>
+          <ProductList data={filterProductsByCountry("Бразилия")} />
+          <h2 className={styles.catalog__description}>Америка</h2>
+          <ProductList data={filterProductsByCountry("Америка")} />
+          <h2 className={styles.catalog__description}>Африка</h2>
+          <ProductList data={filterProductsByCountry("Африка")} />
+          <h2 className={styles.catalog__description}>Наборы</h2>
+          <ProductList data={filterProductsByCountry("Набор")} />
+        </div>
       </div>
-    </section>
+    </>
   );
 };
 

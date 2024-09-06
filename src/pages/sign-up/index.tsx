@@ -23,6 +23,7 @@ import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { useEffect, useState } from "react";
 import { PopupRegister } from "../../components/Popups/PopupRegister";
 import { PopupErrorRegister } from "../../components/Popups/PopupErrorRegister";
+import { Head } from "next/document";
 
 const SignUpPage = () => {
   const dispatch = useAppDispatch();
@@ -79,94 +80,106 @@ const SignUpPage = () => {
   }, []);
 
   return (
-    <section className={styles.signup}>
-      <div className={styles.signup__container}>
-        <h1 className={styles.signup__title}>Регистрация</h1>
-        <form
-          className={styles.signup__form}
-          onSubmit={handleSubmit(onSubmit)}
-          noValidate
-        >
-          <CustomInput
-            inputType={CustomInputTypes.name}
-            labelText={"Имя"}
-            validation={{
-              ...register("name", NAME_VALIDATION_CONFIG),
-            }}
-            placeholder="Иван"
-            error={errors?.name?.message}
-          />
-          <CustomInput
-            inputType={CustomInputTypes.surname}
-            labelText={"Фамилия"}
-            validation={{
-              ...register("surname", SURNAME_VALIDATION_CONFIG),
-            }}
-            placeholder="Иванов"
-            error={errors?.surname?.message}
-          />
-          <CustomInput
-            inputType={CustomInputTypes.phone}
-            labelText={"Номер телефона"}
-            validation={{
-              ...register("phone", PHONE_VALIDATION_CONFIG),
-            }}
-            placeholder="+7-909-90-90-35"
-            error={errors?.phone?.message}
-          />
-          <CustomInput
-            inputType={CustomInputTypes.email}
-            labelText={"Электронная почта"}
-            validation={{
-              ...register("email", EMAIL_VALIDATION_CONFIG),
-            }}
-            placeholder="email@example.com"
-            error={errors?.email?.message}
-          />
-          <CustomInput
-            inputType={CustomInputTypes.address}
-            labelText={"Адрес"}
-            validation={{
-              ...register("address", ADDRESS_VALIDATION_CONFIG),
-            }}
-            placeholder="ул. Пушкина, д. 9, кв. 192"
-            error={errors?.address?.message}
-          />
-          <CustomInput
-            inputType={CustomInputTypes.city}
-            labelText={"Город"}
-            validation={{
-              ...register("city", CITY_VALIDATION_CONFIG),
-            }}
-            placeholder="Москва"
-            error={errors?.city?.message}
-          />
-          {data.city === "Челны" && (
+    <>
+      <Head>
+        <title>Оптовая форма - Beancode</title>
+        <meta name="description" content="Кофе в зернах с бесплатной доставкой до двери" />
+        <meta name="keywords" content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://beancode.ru" />
+        <meta property="og:title" content="Кофе в зернах с бесплатной доставкой" />
+        <meta property="og:description"
+          content="В Набережных Челнах открылось производство кофейного зерна. Прямые поставки сырья из Бразилии, Колумбии, Африки, Азии. Голландская линия обжарки. Международные стандарты качества" />
+        <meta property="og:image" content="https://beancode.ru/images/open_graph.jpeg" />
+      </Head>
+      <div className={styles.signup}>
+        <div className={styles.signup__container}>
+          <h1 className={styles.signup__title}>Регистрация</h1>
+          <form
+            className={styles.signup__form}
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
+          >
             <CustomInput
-              inputType={CustomInputTypes.area}
-              labelText={"Район"}
+              inputType={CustomInputTypes.name}
+              labelText={"Имя"}
               validation={{
-                ...register("area", AREA_VALIDATION_CONFIG),
+                ...register("name", NAME_VALIDATION_CONFIG),
               }}
-              placeholder="Новый город"
-              error={errors?.area?.message}
+              placeholder="Иван"
+              error={errors?.name?.message}
             />
-          )}
-          <div>
             <CustomInput
-              inputType={CustomInputTypes.password}
-              labelText={"Пароль"}
-              showPasswordButton={true}
+              inputType={CustomInputTypes.surname}
+              labelText={"Фамилия"}
               validation={{
-                ...register("password", PASSWORD_VALIDATION_CONFIG),
+                ...register("surname", SURNAME_VALIDATION_CONFIG),
               }}
-              error={errors?.password?.message}
+              placeholder="Иванов"
+              error={errors?.surname?.message}
             />
-            {/* <span className="input__span input__span_type_password">
+            <CustomInput
+              inputType={CustomInputTypes.phone}
+              labelText={"Номер телефона"}
+              validation={{
+                ...register("phone", PHONE_VALIDATION_CONFIG),
+              }}
+              placeholder="+7-909-90-90-35"
+              error={errors?.phone?.message}
+            />
+            <CustomInput
+              inputType={CustomInputTypes.email}
+              labelText={"Электронная почта"}
+              validation={{
+                ...register("email", EMAIL_VALIDATION_CONFIG),
+              }}
+              placeholder="email@example.com"
+              error={errors?.email?.message}
+            />
+            <CustomInput
+              inputType={CustomInputTypes.address}
+              labelText={"Адрес"}
+              validation={{
+                ...register("address", ADDRESS_VALIDATION_CONFIG),
+              }}
+              placeholder="ул. Пушкина, д. 9, кв. 192"
+              error={errors?.address?.message}
+            />
+            <CustomInput
+              inputType={CustomInputTypes.city}
+              labelText={"Город"}
+              validation={{
+                ...register("city", CITY_VALIDATION_CONFIG),
+              }}
+              placeholder="Москва"
+              error={errors?.city?.message}
+            />
+            {data.city === "Челны" && (
+              <CustomInput
+                inputType={CustomInputTypes.area}
+                labelText={"Район"}
+                validation={{
+                  ...register("area", AREA_VALIDATION_CONFIG),
+                }}
+                placeholder="Новый город"
+                error={errors?.area?.message}
+              />
+            )}
+            <div>
+              <CustomInput
+                inputType={CustomInputTypes.password}
+                labelText={"Пароль"}
+                showPasswordButton={true}
+                validation={{
+                  ...register("password", PASSWORD_VALIDATION_CONFIG),
+                }}
+                error={errors?.password?.message}
+              />
+              {/* <span className="input__span input__span_type_password">
               Минимум 8 символов (заглавные и строчные латинские буквы и цифры)
             </span> */}
-          </div>
-          {/* <CustomInput
+            </div>
+            {/* <CustomInput
                         inputType={CustomInputTypes.repeatPassword}
                         labelText={'Повторите пароль'}
                         validation={{
@@ -178,28 +191,29 @@ const SignUpPage = () => {
                         }}
                         error={errors?.repeatPassword?.message}
                     /> */}
-          {/* {authError ? (
+            {/* {authError ? (
                                 <p className="auth__form-error auth__form-error_type_login">
                                     Почта уже зарегистрирована.
                                 </p>
                             ) : null} */}
-          <CustomButton
-            buttonText={"Зарегистрироваться"}
-            handleButtonClick={handleSubmit(onSubmit)}
-            disabled={!isDirty || !isValid}
-            type="button"
-          />
-        </form>
+            <CustomButton
+              buttonText={"Зарегистрироваться"}
+              handleButtonClick={handleSubmit(onSubmit)}
+              disabled={!isDirty || !isValid}
+              type="button"
+            />
+          </form>
+        </div>
+        <PopupRegister
+          isOpened={isSavedPopupOpened}
+          setIsOpened={setIsSavedPopupOpened}
+        />
+        <PopupErrorRegister
+          isOpened={isErrorPopupOpened}
+          setIsOpened={setIsErrorPopupOpened}
+        />
       </div>
-      <PopupRegister
-        isOpened={isSavedPopupOpened}
-        setIsOpened={setIsSavedPopupOpened}
-      />
-      <PopupErrorRegister
-        isOpened={isErrorPopupOpened}
-        setIsOpened={setIsErrorPopupOpened}
-      />
-    </section>
+    </>
   );
 };
 
