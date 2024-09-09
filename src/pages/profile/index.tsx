@@ -17,7 +17,7 @@ import {
 import { useResize } from "../../hooks/useResize";
 import Link from "next/link";
 import Image from "next/image";
-import { Head } from "next/document";
+import Head from 'next/head';
 
 const ProfilePage = () => {
   const dispatch = useAppDispatch();
@@ -48,15 +48,14 @@ const ProfilePage = () => {
   return (
     <>
       <Head>
-        <title>Оптовая форма - Beancode</title>
-        <meta name="description" content="Кофе в зернах с бесплатной доставкой до двери" />
-        <meta name="keywords" content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://beancode.ru" />
-        <meta property="og:title" content="Кофе в зернах с бесплатной доставкой" />
-        <meta property="og:description"
-          content="В Набережных Челнах открылось производство кофейного зерна. Прямые поставки сырья из Бразилии, Колумбии, Африки, Азии. Голландская линия обжарки. Международные стандарты качества" />
-        <meta property="og:image" content="https://beancode.ru/images/open_graph.jpeg" />
+        <title>Профиль пользователя - Beancode</title>
+        <meta name="description" content="Просмотр и редактирование личных данных пользователя, управление заказами и настройка профиля на Beancode." />
+        <meta name="keywords" content="профиль пользователя, личные данные, заказы, Beancode, настройки аккаунта" />
+        <meta property="og:type" content="profile" />
+        <meta property="og:url" content="https://beancode.ru/profile" />
+        <meta property="og:title" content="Профиль пользователя - Beancode" />
+        <meta property="og:description" content="Управление личными данными и заказами на Beancode. Просматривайте историю заказов и обновляйте настройки аккаунта." />
+        <meta property="og:image" content="https://beancode.ru/images/profile_open_graph.jpeg" />
       </Head>
       <div className={styles.profile}>
         <div className={styles.profile__container}>

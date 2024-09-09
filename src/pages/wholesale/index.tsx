@@ -67,13 +67,12 @@ const WholesalePage = () => {
     <>
       <Head>
         <title>Оптовая форма - Beancode</title>
-        <meta name="description" content="Кофе в зернах с бесплатной доставкой до двери" />
-        <meta name="keywords" content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах" />
+        <meta name="description" content="Заполните оптовую форму для получения информации о покупке кофе на больших объемах. Оставьте ваши контактные данные и получите предложение." />
+        <meta name="keywords" content="оптовая форма, кофе в зернах, покупка кофе, оптовые закупки" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://beancode.ru" />
-        <meta property="og:title" content="Кофе в зернах с бесплатной доставкой" />
-        <meta property="og:description"
-          content="В Набережных Челнах открылось производство кофейного зерна. Прямые поставки сырья из Бразилии, Колумбии, Африки, Азии. Голландская линия обжарки. Международные стандарты качества" />
+        <meta property="og:url" content="https://beancode.ru/wholesale" />
+        <meta property="og:title" content="Оптовая форма - Beancode" />
+        <meta property="og:description" content="Заполните оптовую форму для получения информации о покупке кофе на больших объемах. Оставьте ваши контактные данные и получите предложение." />
         <meta property="og:image" content="https://beancode.ru/images/open_graph.jpeg" />
       </Head>
       <div className={styles.signup}>

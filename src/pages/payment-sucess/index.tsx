@@ -9,7 +9,7 @@ import {
 } from "../../services/redux/slices/order/order";
 import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
 import { useRouter } from "next/router";
-import { Head } from "next/document";
+import Head from 'next/head';
 
 const InfoPaymentPageSucess = () => {
   const dispatch = useAppDispatch();
@@ -92,15 +92,14 @@ const InfoPaymentPageSucess = () => {
   return (
     <>
       <Head>
-        <title>Оптовая форма - Beancode</title>
-        <meta name="description" content="Кофе в зернах с бесплатной доставкой до двери" />
-        <meta name="keywords" content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах" />
+        <title>Оплата прошла успешно - Beancode</title>
+        <meta name="description" content="Ваш заказ успешно оплачен. Наш менеджер свяжется с вами для уточнения деталей." />
+        <meta name="keywords" content="успешная оплата, подтверждение заказа, Beancode" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://beancode.ru" />
-        <meta property="og:title" content="Кофе в зернах с бесплатной доставкой" />
-        <meta property="og:description"
-          content="В Набережных Челнах открылось производство кофейного зерна. Прямые поставки сырья из Бразилии, Колумбии, Африки, Азии. Голландская линия обжарки. Международные стандарты качества" />
-        <meta property="og:image" content="https://beancode.ru/images/open_graph.jpeg" />
+        <meta property="og:url" content="https://beancode.ru/payment-success" />
+        <meta property="og:title" content="Оплата прошла успешно - Beancode" />
+        <meta property="og:description" content="Ваш заказ был успешно оплачен. Мы свяжемся с вами для уточнения всех деталей." />
+        <meta property="og:image" content="https://beancode.ru/images/payment_success_og.jpeg" />
       </Head>
       <div className={styles.infoPayment}>
         <div className={styles.infoPayment__container}>

@@ -9,7 +9,7 @@ import {
 } from "@/services/redux/slices/cart/cart";
 import { selectUser } from "@/services/redux/slices/user/user";
 import styles from "./style.module.scss"; // Импорт стилей
-import { Head } from "next/document";
+import Head from "next/head";
 
 export const CatalogPage = () => {
   const dispatch = useAppDispatch();
@@ -71,15 +71,29 @@ export const CatalogPage = () => {
   return (
     <>
       <Head>
-        <title>Оптовая форма - Beancode</title>
-        <meta name="description" content="Кофе в зернах с бесплатной доставкой до двери" />
-        <meta name="keywords" content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах" />
+        <title>Интернет-магазин кофе - Beancode | Кофе в зернах</title>
+        <meta
+          name="description"
+          content="Купите кофе в зернах в интернет-магазине Beancode с доставкой по Набережным Челнам. Широкий ассортимент кофе для эспрессо из Бразилии, Америки, Африки и специальных наборов."
+        />
+        <meta
+          name="keywords"
+          content="интернет-магазин кофе, кофе в зернах, кофе купить челны, кофе для эспрессо, бразильский кофе, африканский кофе, американский кофе, наборы кофе"
+        />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://beancode.ru" />
-        <meta property="og:title" content="Кофе в зернах с бесплатной доставкой" />
-        <meta property="og:description"
-          content="В Набережных Челнах открылось производство кофейного зерна. Прямые поставки сырья из Бразилии, Колумбии, Африки, Азии. Голландская линия обжарки. Международные стандарты качества" />
-        <meta property="og:image" content="https://beancode.ru/images/open_graph.jpeg" />
+        <meta property="og:url" content="https://beancode.ru/catalog" />
+        <meta
+          property="og:title"
+          content="Интернет-магазин кофе - Beancode | Кофе в зернах"
+        />
+        <meta
+          property="og:description"
+          content="Откройте для себя интернет-магазин кофе Beancode! В нашем каталоге широкий выбор кофе для эспрессо из Бразилии, Америки, Африки и уникальных наборов."
+        />
+        <meta
+          property="og:image"
+          content="https://beancode.ru/images/open_graph.jpeg"
+        />
       </Head>
       <div className={styles.catalog}>
         <div className={styles.catalog__container}>

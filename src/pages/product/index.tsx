@@ -10,7 +10,7 @@ import Loader from "../../components/Loader/Loader";
 import { API_BASE_URL } from "../../utils/constants";
 import { ProductImagesSlider } from "../../components/ProductImagesSlider/ProductImagesSlider";
 import Image from "next/image";
-import { Head } from "next/document";
+import Head from 'next/head';
 
 const ProductPage = () => {
   const product = useAppSelector((state) => state.productbyid.product);
@@ -40,15 +40,23 @@ const ProductPage = () => {
   return (
     <>
       <Head>
-        <title>Оптовая форма - Beancode</title>
-        <meta name="description" content="Кофе в зернах с бесплатной доставкой до двери" />
-        <meta name="keywords" content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://beancode.ru" />
-        <meta property="og:title" content="Кофе в зернах с бесплатной доставкой" />
-        <meta property="og:description"
-          content="В Набережных Челнах открылось производство кофейного зерна. Прямые поставки сырья из Бразилии, Колумбии, Африки, Азии. Голландская линия обжарки. Международные стандарты качества" />
-        <meta property="og:image" content="https://beancode.ru/images/open_graph.jpeg" />
+        <title>{`Купить кофе ${product.title} - Beancode`}</title>
+        <meta
+          name="description"
+          content={`Купить кофе ${product.title} с доставкой по всей России. Прямые поставки, высокое качество, разные степени обжарки и помола. Заказывайте сейчас!`}
+        />
+        <meta
+          name="keywords"
+          content={`купить кофе ${product.title}, кофе ${product.title}, зерновой кофе, кофе на заказ, кофе оптом`}
+        />
+        <meta property="og:type" content="product" />
+        <meta property="og:url" content={`https://beancode.ru/products/${product.id}`} />
+        <meta property="og:title" content={`Купить ${product.title} - Beancode`} />
+        <meta
+          property="og:description"
+          content={`Кофе ${product.title} с насыщенным вкусом и ароматом. Прямые поставки из лучших регионов. Успейте заказать!`}
+        />
+        <meta property="og:image" content={`https://beancode.ru/images/products/${product.v_picture}`} />
       </Head>
       <>
         {loading === "loading" ? (
@@ -85,8 +93,8 @@ const ProductPage = () => {
                       {product.price !== "0" && (
                         <div
                           className={`${styles.products__price__container} ${selectedPrice === product.price
-                              ? styles.product_selected
-                              : styles.product_not_selected
+                            ? styles.product_selected
+                            : styles.product_not_selected
                             }`}
                           onClick={() =>
                             handleChange(product.price, product.weight)
@@ -100,8 +108,8 @@ const ProductPage = () => {
                       )}
                       <div
                         className={`${styles.products__price__container} ${selectedPrice === product.low_price
-                            ? styles.product_selected
-                            : styles.product_not_selected
+                          ? styles.product_selected
+                          : styles.product_not_selected
                           }`}
                         onClick={() =>
                           handleChange(product.low_price, product.low_weight)
@@ -194,8 +202,8 @@ const ProductPage = () => {
                       <div className={styles.product__big_weight__container}>
                         <div
                           className={`${styles.products__price__container} ${selectedPrice === product.price
-                              ? styles.product_selected
-                              : styles.product_not_selected
+                            ? styles.product_selected
+                            : styles.product_not_selected
                             }`}
                           onClick={() =>
                             handleChange(product.price, product.weight)
@@ -208,8 +216,8 @@ const ProductPage = () => {
                         </div>
                         <div
                           className={`${styles.products__price__container} ${selectedPrice === product.low_price
-                              ? styles.product_selected
-                              : styles.product_not_selected
+                            ? styles.product_selected
+                            : styles.product_not_selected
                             }`}
                           onClick={() =>
                             handleChange(product.low_price, product.low_weight)

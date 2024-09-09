@@ -23,7 +23,7 @@ import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { useEffect, useState } from "react";
 import { PopupRegister } from "../../components/Popups/PopupRegister";
 import { PopupErrorRegister } from "../../components/Popups/PopupErrorRegister";
-import { Head } from "next/document";
+import Head from 'next/head';
 
 const SignUpPage = () => {
   const dispatch = useAppDispatch();
@@ -82,15 +82,14 @@ const SignUpPage = () => {
   return (
     <>
       <Head>
-        <title>Оптовая форма - Beancode</title>
-        <meta name="description" content="Кофе в зернах с бесплатной доставкой до двери" />
-        <meta name="keywords" content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах" />
+        <title>Регистрация - Beancode</title>
+        <meta name="description" content="Зарегистрируйтесь на Beancode, чтобы получить доступ к личному кабинету и эксклюзивным функциям. Заполните форму регистрации и начните пользоваться всеми преимуществами нашего сервиса." />
+        <meta name="keywords" content="регистрация, личный кабинет, Beancode, создать аккаунт, регистрация на сайте" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://beancode.ru" />
-        <meta property="og:title" content="Кофе в зернах с бесплатной доставкой" />
-        <meta property="og:description"
-          content="В Набережных Челнах открылось производство кофейного зерна. Прямые поставки сырья из Бразилии, Колумбии, Африки, Азии. Голландская линия обжарки. Международные стандарты качества" />
-        <meta property="og:image" content="https://beancode.ru/images/open_graph.jpeg" />
+        <meta property="og:url" content="https://beancode.ru/sign-up" />
+        <meta property="og:title" content="Регистрация - Beancode" />
+        <meta property="og:description" content="Присоединяйтесь к Beancode! Заполните форму регистрации, чтобы получить доступ к вашему личному кабинету и использовать все наши возможности." />
+        <meta property="og:image" content="https://beancode.ru/images/logo.png" />
       </Head>
       <div className={styles.signup}>
         <div className={styles.signup__container}>

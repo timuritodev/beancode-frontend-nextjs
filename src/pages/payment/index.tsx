@@ -1,19 +1,18 @@
-import { Head } from "next/document";
+import Head from 'next/head';
 import styles from "./style.module.scss";
 
 const PaymentPage = () => {
   return (
     <>
       <Head>
-        <title>Оптовая форма - Beancode</title>
-        <meta name="description" content="Кофе в зернах с бесплатной доставкой до двери" />
-        <meta name="keywords" content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах" />
+        <title>Оплата заказа - Beancode</title>
+        <meta name="description" content="Узнайте об условиях оплаты заказа на кофе в зернах. Оплата онлайн или при получении, возможность оплаты для юридических лиц." />
+        <meta name="keywords" content="оплата заказа, кофе в зернах, оплата онлайн, Beancode" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://beancode.ru" />
-        <meta property="og:title" content="Кофе в зернах с бесплатной доставкой" />
-        <meta property="og:description"
-          content="В Набережных Челнах открылось производство кофейного зерна. Прямые поставки сырья из Бразилии, Колумбии, Африки, Азии. Голландская линия обжарки. Международные стандарты качества" />
-        <meta property="og:image" content="https://beancode.ru/images/open_graph.jpeg" />
+        <meta property="og:url" content="https://beancode.ru/payment" />
+        <meta property="og:title" content="Оплата заказа - Beancode" />
+        <meta property="og:description" content="Оплатить заказ можно онлайн на сайте или при получении. Для юридических лиц доступна оплата по счёту." />
+        <meta property="og:image" content="https://beancode.ru/images/payment_og.jpeg" />
       </Head>
       <div className={styles.payment}>
         <div className={styles.payment__container}>

@@ -6,14 +6,12 @@ import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
 import { PASSWORD_VALIDATION_CONFIG } from "../../utils/constants";
 import { changePassword } from "../../services/redux/slices/user/user";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
-import { PopupLogin } from "../../components/Popups/PopupLogin";
-import { PopupErrorLogin } from "../../components/Popups/PopupErrorLogin";
-import { IChangePassword } from "../../types/Auth.types";
-import { selectUser } from "../../services/redux/slices/user/user";
 import { PopupChangePassword } from "../../components/Popups/PopupChangePassword";
 import { PopupErrorChangePassword } from "../../components/Popups/PopupErrorChangePassword";
+import { IChangePassword } from "../../types/Auth.types";
+import { selectUser } from "../../services/redux/slices/user/user";
 import styles from "./style.module.scss";
-import { Head } from "next/document";
+import Head from 'next/head';
 
 const ChangePasswordPage = () => {
   const dispatch = useAppDispatch();
@@ -29,7 +27,6 @@ const ChangePasswordPage = () => {
     setValue,
     formState: { errors, isDirty, isValid },
   } = useForm<IChangePassword>({ mode: "onChange" });
-
 
   const onSubmit: SubmitHandler<IChangePassword> = (formData) => {
     dispatch(
@@ -48,31 +45,26 @@ const ChangePasswordPage = () => {
       })
       .catch((err) => {
         setIsErrorPopupOpened(true);
-        console.log("dispatch signInUser err:", err);
+        console.log("dispatch changePassword err:", err);
       });
   };
 
   useEffect(() => {
-    const resetForm = async () => {
-      await reset();
-      setIsSavedPopupOpened(false);
-    };
-
-    resetForm();
+    reset();
+    setIsSavedPopupOpened(false);
   }, [reset]);
 
   return (
     <>
       <Head>
-        <title>Оптовая форма - Beancode</title>
-        <meta name="description" content="Кофе в зернах с бесплатной доставкой до двери" />
-        <meta name="keywords" content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах" />
+        <title>Смена пароля - Beancode</title>
+        <meta name="description" content="Измените свой пароль для безопасного доступа к вашей учетной записи Beancode." />
+        <meta name="keywords" content="смена пароля, безопасность, учетная запись, Beancode" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://beancode.ru" />
-        <meta property="og:title" content="Кофе в зернах с бесплатной доставкой" />
-        <meta property="og:description"
-          content="В Набережных Челнах открылось производство кофейного зерна. Прямые поставки сырья из Бразилии, Колумбии, Африки, Азии. Голландская линия обжарки. Международные стандарты качества" />
-        <meta property="og:image" content="https://beancode.ru/images/open_graph.jpeg" />
+        <meta property="og:url" content="https://beancode.ru/change-password" />
+        <meta property="og:title" content="Смена пароля - Beancode" />
+        <meta property="og:description" content="Измените свой пароль для безопасного доступа к вашей учетной записи Beancode." />
+        <meta property="og:image" content="https://beancode.ru/images/change_password_og.jpeg" />
       </Head>
       <div className={styles.signup}>
         <div className={styles.signup__container}>
@@ -109,7 +101,6 @@ const ChangePasswordPage = () => {
             <CustomButton
               buttonText={"Сменить пароль"}
               handleButtonClick={handleSubmit(onSubmit)}
-              // disabled={!isDirty || !isValid}
               type="button"
             />
           </form>

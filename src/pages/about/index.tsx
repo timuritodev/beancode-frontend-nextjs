@@ -1,19 +1,33 @@
-import { Head } from "next/document";
+import Head from "next/head";
 import styles from "./style.module.scss";
 
 const AboutPage = () => {
   return (
     <>
       <Head>
-        <title>О компании - Beancode</title>
-        <meta name="description" content="Кофе в зернах с бесплатной доставкой до двери" />
-        <meta name="keywords" content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах" />
+        <title>О компании - Beancode | Кофе в Набережных Челнах</title>
+        <meta
+          name="description"
+          content="Beancode - это производство кофе в зернах с доставкой по Набережным Челнам. Узнайте больше о компании и качестве нашей продукции."
+        />
+        <meta
+          name="keywords"
+          content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах, обжарка кофе, производство кофе"
+        />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://beancode.ru" />
-        <meta property="og:title" content="Кофе в зернах с бесплатной доставкой" />
-        <meta property="og:description"
-          content="В Набережных Челнах открылось производство кофейного зерна. Прямые поставки сырья из Бразилии, Колумбии, Африки, Азии. Голландская линия обжарки. Международные стандарты качества" />
-        <meta property="og:image" content="https://beancode.ru/images/open_graph.jpeg" />
+        <meta property="og:url" content="https://beancode.ru/about" />
+        <meta
+          property="og:title"
+          content="О компании Beancode - Кофе в Набережных Челнах"
+        />
+        <meta
+          property="og:description"
+          content="В Набережных Челнах открылось производство кофейного зерна Beancode. Прямые поставки сырья из Бразилии, Колумбии, Африки и Азии с международными стандартами качества."
+        />
+        <meta
+          property="og:image"
+          content="https://beancode.ru/images/open_graph.jpeg"
+        />
       </Head>
       <div className={styles.about}>
         <div className={styles.about__container}>
@@ -21,10 +35,6 @@ const AboutPage = () => {
           <p className={styles.about__text}>
             Наименование организации - ИП Мугерман Роман Борисович
           </p>
-          {/* <p className="about__text">
-          Юридический адрес - 423826, Республика Татарстан, г. Набережные Челны,
-          ул. З.Яруллина, д. 32
-        </p> */}
           <p className={styles.about__text}>
             Адрес - 423826, Республика Татарстан, г. Набережные Челны,
             проспект Казанский, 226 ст2

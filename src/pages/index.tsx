@@ -31,7 +31,7 @@ const MainPage = () => {
       <Head>
         <title>Кофе в зернах - Beancode</title>
         <meta name="description" content="Кофе в зернах с бесплатной доставкой до двери" />
-        <meta name="keywords" content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах" />
+        <meta name="keywords" content="кофе челны, кофе купить набережные челны, кофе купить челны, кофе в зернах, кофе на заказ, кофе доставка, кофе в Набережных Челнах" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://beancode.ru" />
         <meta property="og:title" content="Кофе в зернах с бесплатной доставкой" />
