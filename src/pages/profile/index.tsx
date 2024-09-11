@@ -55,7 +55,7 @@ const ProfilePage = () => {
         <meta property="og:url" content="https://beancode.ru/profile" />
         <meta property="og:title" content="Профиль пользователя - Beancode" />
         <meta property="og:description" content="Управление личными данными и заказами на Beancode. Просматривайте историю заказов и обновляйте настройки аккаунта." />
-        <meta property="og:image" content="https://beancode.ru/images/profile_open_graph.jpeg" />
+        <meta property="og:image" content="https://beancode.ru/api/images/open_graph.jpeg" />
       </Head>
       <div className={styles.profile}>
         <div className={styles.profile__container}>
@@ -67,7 +67,7 @@ const ProfilePage = () => {
               <Image
                 className={styles.button__profile__img}
                 src={isAccountVisible ? person_active : person}
-                alt="icon profile"
+                alt="Иконка профиля"
               />
               <span
                 className={`${styles.button__profile__text
@@ -80,7 +80,7 @@ const ProfilePage = () => {
               <Image
                 className={styles.button__profile__img}
                 src={isOrderVisible ? cart_active : cart}
-                alt="icon cart"
+                alt="Иконка корзины"
               />
               <span
                 className={`${styles.button__profile__text
@@ -98,7 +98,7 @@ const ProfilePage = () => {
                   dispatch(resetOrders());
                 }}
               >
-                <Image className={styles.button__profile__img} src={exit_button} alt="icon exit" />
+                <Image className={styles.button__profile__img} src={exit_button} alt="Кнопка выхода из учетной записи" />
                 <span className={styles.button__profile__text}>Выйти</span>
               </button>
             )}
@@ -134,7 +134,7 @@ const ProfilePage = () => {
                 dispatch(resetOrders());
               }}
             >
-              <Image className={styles.button__profile__img} src={exit_button} alt="icon exit" />
+              <Image className={styles.button__profile__img} src={exit_button} alt="Кнопка выхода из учетной записи" />
               <span className={styles.button__profile__text}>Выйти</span>
             </button>
           )}

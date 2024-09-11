@@ -5,7 +5,7 @@ const AboutPage = () => {
   return (
     <>
       <Head>
-        <title>О компании - Beancode | Кофе в Набережных Челнах</title>
+        <title>О компании - Beancode</title>
         <meta
           name="description"
           content="Beancode - это производство кофе в зернах с доставкой по Набережным Челнам. Узнайте больше о компании и качестве нашей продукции."
@@ -18,7 +18,7 @@ const AboutPage = () => {
         <meta property="og:url" content="https://beancode.ru/about" />
         <meta
           property="og:title"
-          content="О компании Beancode - Кофе в Набережных Челнах"
+          content="О компании - Beancode - Кофе в Набережных Челнах"
         />
         <meta
           property="og:description"
@@ -26,7 +26,7 @@ const AboutPage = () => {
         />
         <meta
           property="og:image"
-          content="https://beancode.ru/images/open_graph.jpeg"
+          content="https://beancode.ru/api/images/open_graph.jpeg"
         />
       </Head>
       <div className={styles.about}>

@@ -38,7 +38,7 @@ const OrderPage = () => {
         <meta property="og:url" content="https://beancode.ru/order" />
         <meta property="og:title" content="Оформление заказа - Beancode" />
         <meta property="og:description" content="Оформите заказ на кофе с бесплатной доставкой. Простое оформление и надежная доставка от Beancode." />
-        <meta property="og:image" content="https://beancode.ru/images/order_og.jpeg" />
+        <meta property="og:image" content="https://beancode.ru/api/images/open_graph.jpeg" />
       </Head>
       <div className={styles.orderPage}>
         <div className={styles.orderPage__container}>

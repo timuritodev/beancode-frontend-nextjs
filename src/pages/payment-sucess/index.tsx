@@ -99,7 +99,7 @@ const InfoPaymentPageSucess = () => {
         <meta property="og:url" content="https://beancode.ru/payment-success" />
         <meta property="og:title" content="Оплата прошла успешно - Beancode" />
         <meta property="og:description" content="Ваш заказ был успешно оплачен. Мы свяжемся с вами для уточнения всех деталей." />
-        <meta property="og:image" content="https://beancode.ru/images/payment_success_og.jpeg" />
+        <meta property="og:image" content="https://beancode.ru/api/images/open_graph.jpeg" />
       </Head>
       <div className={styles.infoPayment}>
         <div className={styles.infoPayment__container}>

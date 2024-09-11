@@ -73,7 +73,7 @@ const WholesalePage = () => {
         <meta property="og:url" content="https://beancode.ru/wholesale" />
         <meta property="og:title" content="Оптовая форма - Beancode" />
         <meta property="og:description" content="Заполните оптовую форму для получения информации о покупке кофе на больших объемах. Оставьте ваши контактные данные и получите предложение." />
-        <meta property="og:image" content="https://beancode.ru/images/open_graph.jpeg" />
+        <meta property="og:image" content="https://beancode.ru/api/images/open_graph.jpeg" />
       </Head>
       <div className={styles.signup}>
         <div className={styles.signup__container}>

@@ -61,7 +61,7 @@ const RecoverPasswordPage = () => {
         <meta property="og:url" content="https://beancode.ru/recover-password" />
         <meta property="og:title" content="Восстановление пароля - Beancode" />
         <meta property="og:description" content="Получите инструкции по восстановлению пароля для вашего аккаунта на Beancode. Введите ваш email, чтобы начать процесс восстановления." />
-        <meta property="og:image" content="https://beancode.ru/images/password_recovery_open_graph.jpeg" />
+        <meta property="og:image" content="https://beancode.ru/api/images/open_graph.jpeg" />
       </Head>
       <div className={styles.signup}>
         <div className={styles.signup__container}>

@@ -33,7 +33,7 @@ const ReadyBlock = () => {
               <Image
                 className={styles.ready__img}
                 src={ready_block}
-                alt="image of beans"
+                alt="Изображение кофейных зерен"
                 layout="responsive"
                 width={600}
                 height={400}
@@ -46,7 +46,7 @@ const ReadyBlock = () => {
             <Image
               className={styles.ready__img}
               src={ready_block}
-              alt="image of beans"
+              alt="Изображение кофейных зерен"
               width={393}
               height={281}
             />

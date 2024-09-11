@@ -72,7 +72,7 @@ export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
       <Image
         className={styles.productCard__img}
         src={imageUrl}
-        alt={data.title}
+        alt={`Изображение товара ${data.title}`}
         onClick={handleClickImage}
         width={100} height={100}
       />
@@ -84,11 +84,11 @@ export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
         <>
           <div className={styles.productCard__countContainer}>
             <button className={styles.productCard__button} onClick={handleClickMinus}>
-              <Image className={styles.productCard__button__imgMinus} src={minus} alt="icon minus" width={24} height={32}/>
+              <Image className={styles.productCard__button__imgMinus} src={minus} alt="Иконка минуса" width={24} height={32}/>
             </button>
             <p className={styles.productCard__count}>{count}</p>
             <button className={styles.productCard__button} onClick={handleClickPlus}>
-              <Image className={styles.productCard__button__imgPlus} src={plus} alt="icon plus" width={24} height={32}/>
+              <Image className={styles.productCard__button__imgPlus} src={plus} alt="Иконка плюса" width={24} height={32}/>
             </button>
           </div>
           <p className={styles.productCard__price}>{data.price} ₽</p>
@@ -98,11 +98,11 @@ export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
           <p className={styles.productCard__price}>{data.price} ₽</p>
           <div className={styles.productCard__countContainer}>
             <button className={styles.productCard__button} onClick={handleClickMinus}>
-              <Image className={styles.productCard__button__imgMinus} src={minus} alt="icon minus" width={24} height={32}/>
+              <Image className={styles.productCard__button__imgMinus} src={minus} alt="Иконка минуса" width={24} height={32}/>
             </button>
             <p className={styles.productCard__count}>{count}</p>
             <button className={styles.productCard__button} onClick={handleClickPlus}>
-              <Image className={styles.productCard__button__imgPlus} src={plus} alt="icon plus" width={24} height={32}/>
+              <Image className={styles.productCard__button__imgPlus} src={plus} alt="Иконка плюса" width={24} height={32}/>
             </button>
           </div>
         </>

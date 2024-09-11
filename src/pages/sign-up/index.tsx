@@ -89,7 +89,7 @@ const SignUpPage = () => {
         <meta property="og:url" content="https://beancode.ru/sign-up" />
         <meta property="og:title" content="Регистрация - Beancode" />
         <meta property="og:description" content="Присоединяйтесь к Beancode! Заполните форму регистрации, чтобы получить доступ к вашему личному кабинету и использовать все наши возможности." />
-        <meta property="og:image" content="https://beancode.ru/images/logo.png" />
+        <meta property="og:image" content="https://beancode.ru/api/images/open_graph.jpeg" />
       </Head>
       <div className={styles.signup}>
         <div className={styles.signup__container}>

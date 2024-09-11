@@ -12,7 +12,7 @@ const DeliveryPage = () => {
         <meta property="og:url" content="https://beancode.ru/delivery" />
         <meta property="og:title" content="Условия доставки кофе - Beancode" />
         <meta property="og:description" content="Мы сотрудничаем с крупными транспортными компаниями и доставляем заказы до двери, пунктов выдачи и постаматов. Доставка за наш счёт." />
-        <meta property="og:image" content="https://beancode.ru/images/delivery_og.jpeg" />
+        <meta property="og:image" content="https://beancode.ru/api/images/open_graph.jpeg" />
       </Head>
       <div className={styles.delivery}>
         <div className={styles.delivery__container}>

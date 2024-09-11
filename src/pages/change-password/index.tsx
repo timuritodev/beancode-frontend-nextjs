@@ -64,7 +64,7 @@ const ChangePasswordPage = () => {
         <meta property="og:url" content="https://beancode.ru/change-password" />
         <meta property="og:title" content="Смена пароля - Beancode" />
         <meta property="og:description" content="Измените свой пароль для безопасного доступа к вашей учетной записи Beancode." />
-        <meta property="og:image" content="https://beancode.ru/images/change_password_og.jpeg" />
+        <meta property="og:image" content="https://beancode.ru/api/images/open_graph.jpeg" />
       </Head>
       <div className={styles.signup}>
         <div className={styles.signup__container}>

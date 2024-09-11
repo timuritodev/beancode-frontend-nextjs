@@ -18,7 +18,7 @@ const BonusPage = () => {
         <meta property="og:url" content="https://beancode.ru/bonus" />
         <meta
           property="og:title"
-          content="Бонусная программа - Beancode | Оптовая форма"
+          content="Бонусная программа - Beancode"
         />
         <meta
           property="og:description"
@@ -26,7 +26,7 @@ const BonusPage = () => {
         />
         <meta
           property="og:image"
-          content="https://beancode.ru/images/open_graph.jpeg"
+          content="https://beancode.ru/api/images/open_graph.jpeg"
         />
       </Head>
       <div className={styles.bonus}>

@@ -22,7 +22,7 @@ const CartButton = () => {
             {cart.length !== 0 && router.pathname !== '/order' ? <div className={styles.cartButton}>
                 <button className={styles.cartButtonBtn} onClick={switchPopupTrailer}>
                     <p className={styles.cartButtonText}>{cart.length}</p>
-                    <Image className={styles.cartButtonImg} src={cart__img} alt="image of product" width={32} height={32} />
+                    <Image className={styles.cartButtonImg} src={cart__img} alt="Корзина с товарами" width={32} height={32} />
                 </button>
             </div> : ''
             }

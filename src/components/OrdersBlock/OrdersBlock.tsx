@@ -344,7 +344,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         <button className={styles.orderBlock__button}>
           <Image
             className={styles.subscribe__button_img}
-            alt="subscribe button image"
+            alt="Иконка плюса"
             src={button}
             onClick={handleSubmit(onSubmit)}
           />
@@ -382,7 +382,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         <span className={styles.span__checkbox}>
           Получать новости и спецпредложения
         </span>
-        <Image className={styles.checkbox__img} src={ic_info} alt="checkbox" />
+        <Image className={styles.checkbox__img} src={ic_info} alt="Подписка на рассылку" />
       </label>
       <PopupPromo
         isOpened={isPromoPopupOpened}

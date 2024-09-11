@@ -57,7 +57,7 @@ const Header: FC = () => {
           <BurgerButton isPopupOpen={isPopupOpen} switchPopup={switchPopup} />
         )}
         <Link href="/">
-          <Image className={styles.header__logo} alt="logo" src={logo} />
+          <Image className={styles.header__logo} alt="Логотип Beancode" src={logo} />
         </Link>
         <div className={styles.header__links}>
           {/* {user.token && (
@@ -118,7 +118,7 @@ const Header: FC = () => {
             </form>
           )}
           <Link href="/profile">
-            <Image className={styles.header__profile_icon} alt="icon" src={icon} />
+            <Image className={styles.header__profile_icon} alt="Иконка профиля" src={icon} />
           </Link>
         </div>
       </div>

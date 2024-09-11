@@ -71,7 +71,7 @@ export const CatalogPage = () => {
   return (
     <>
       <Head>
-        <title>Интернет-магазин кофе - Beancode | Кофе в зернах</title>
+        <title>Интернет-магазин кофе - Beancode</title>
         <meta
           name="description"
           content="Купите кофе в зернах в интернет-магазине Beancode с доставкой по Набережным Челнам. Широкий ассортимент кофе для эспрессо из Бразилии, Америки, Африки и специальных наборов."
@@ -92,7 +92,7 @@ export const CatalogPage = () => {
         />
         <meta
           property="og:image"
-          content="https://beancode.ru/images/open_graph.jpeg"
+          content="https://beancode.ru/api/images/open_graph.jpeg"
         />
       </Head>
       <div className={styles.catalog}>

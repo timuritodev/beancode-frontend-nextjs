@@ -78,7 +78,7 @@ const ResetPasswordPage = () => {
         <meta property="og:url" content="https://beancode.ru/reset-password" />
         <meta property="og:title" content="Сброс пароля - Beancode" />
         <meta property="og:description" content="Введите новый пароль для восстановления доступа к вашему аккаунту на Beancode. Быстро и просто восстановите доступ." />
-        <meta property="og:image" content="https://beancode.ru/images/password_reset_open_graph.jpeg" />
+        <meta property="og:image" content="https://beancode.ru/api/images/open_graph.jpeg" />
       </Head>
       <div className={styles.signup}>
         <div className={styles.signup__container}>

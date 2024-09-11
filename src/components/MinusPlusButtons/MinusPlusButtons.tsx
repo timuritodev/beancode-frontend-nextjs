@@ -104,7 +104,7 @@ export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({
             <Image
               className={styles.minusplus__button__img_minus}
               src={minus}
-              alt="icon minus"
+              alt="Иконка минуса"
             />
           </button>
           <p className={styles.minusplus__count}>{productCountInCart}</p>
@@ -115,7 +115,7 @@ export const MinusPlusButtons: FC<MinusPlusButtonsProps> = ({
             <Image
               className={styles.minusplus__button__img_plus}
               src={plus}
-              alt="icon plus"
+              alt="Иконка плюса"
             />
           </button>
         </div>

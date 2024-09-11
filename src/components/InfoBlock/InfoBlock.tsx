@@ -24,7 +24,7 @@ const InfoBlock = () => {
               </p>
               <Image
                 className={styles.info__img}
-                alt="image of coffee beans"
+                alt="Изображение кофейных зерен"
                 src={info_block} // TODO
               />
             </div>
@@ -35,7 +35,7 @@ const InfoBlock = () => {
             <Image
               className={styles.info__img}
               src={info_block}
-              alt="image of coffee beans"
+              alt="Изображение кофейных зерен"
             />
             <div className={styles.info__text__container}>
               <h2 className={styles.info__title}>

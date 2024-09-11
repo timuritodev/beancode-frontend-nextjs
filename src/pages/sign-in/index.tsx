@@ -72,7 +72,7 @@ const SignInPage = () => {
         <meta property="og:url" content="https://beancode.ru/sign-in" />
         <meta property="og:title" content="Вход в личный кабинет - Beancode" />
         <meta property="og:description" content="Введите свои данные для доступа в личный кабинет. Если у вас нет аккаунта, вы можете зарегистрироваться здесь." />
-        <meta property="og:image" content="https://beancode.ru/images/logo.png" />
+        <meta property="og:image" content="https://beancode.ru/api/images/open_graph.jpeg" />
       </Head>
       <div className={styles.signup}>
         <div className={styles.signup__container}>

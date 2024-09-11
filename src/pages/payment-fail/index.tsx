@@ -12,7 +12,7 @@ const InfoPaymentPageFail = () => {
         <meta property="og:url" content="https://beancode.ru/payment-fail" />
         <meta property="og:title" content="Ошибка оплаты - Beancode" />
         <meta property="og:description" content="Произошла ошибка при оплате заказа. Свяжитесь с нами, чтобы мы помогли вам решить эту проблему." />
-        <meta property="og:image" content="https://beancode.ru/images/payment_fail_og.jpeg" />
+        <meta property="og:image" content="https://beancode.ru/api/images/open_graph.jpeg" />
       </Head>
       <div className={styles.infoPayment}>
         <div className={styles.infoPayment__container}>

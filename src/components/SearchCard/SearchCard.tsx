@@ -36,7 +36,7 @@ export const SearchCard: FC<SearchCardProps> = ({ data, isClose, switchPopup }) 
       }}
       className={styles.search__card}
     >
-      <Image className={styles.search__card_poster} src={imageUrl} alt={data.title} width={85} height={80}/>
+      <Image className={styles.search__card_poster} src={imageUrl} alt={`Изображение товара ${data.title}`} width={85} height={80}/>
       <article className={styles.search__card_desc}>
         <p className={styles.search__card_name}>{data.title}</p>
         <div className={styles.search__card_info}>

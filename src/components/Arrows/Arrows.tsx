@@ -1,7 +1,7 @@
 import { FC } from "react";
 import arrow_next_2 from "../../images/arrow_next_2.svg";
 import arrow_prev_2 from "../../images/arrow_prev_2.svg";
-import styles from "./styles.module.scss"; // Import CSS Module
+import styles from "./styles.module.scss";
 
 interface IArrowProps {
   currentSlide: number;
@@ -9,11 +9,11 @@ interface IArrowProps {
 }
 
 export const CustomPrevArrow = () => (
-  <img className={styles.slickPrev} src={arrow_prev_2} alt="Previous" />
+  <img className={styles.slickPrev} src={arrow_prev_2} alt="Предыдущий слайд" />
 );
 
 export const CustomNextArrow = () => (
-  <img className={styles.slickNext} src={arrow_next_2} alt="Next" />
+  <img className={styles.slickNext} src={arrow_next_2} alt="Следующий слайд" />
 );
 
 export const SlickArrowLeft: FC<IArrowProps> = ({
@@ -27,7 +27,7 @@ export const SlickArrowLeft: FC<IArrowProps> = ({
     aria-hidden="true"
     aria-disabled={currentSlide === 0}
     src={arrow_next_2}
-    alt="Next"
+    alt="Следующий слайд"
   />
 );
 
@@ -42,6 +42,6 @@ export const SlickArrowRight: FC<IArrowProps> = ({
     aria-hidden="true"
     aria-disabled={currentSlide === slideCount - 1}
     src={arrow_prev_2}
-    alt="Previous"
+    alt="Предыдущий слайд"
   />
 );

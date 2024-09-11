@@ -33,7 +33,7 @@ export const ProductImagesSlider: FC<IProductImagesSliderProps> = ({ images }) =
       <Slider {...settings}>
         {images?.map((image, index) => (
           <div key={index} className={styles.wrapper}>
-            <Image src={image} alt={`Product Image ${index + 1}`} className={styles.image} width={85} height={80}/>
+            <Image src={image} alt="Изображение товара" className={styles.image} width={85} height={80}/>
           </div>
         ))}
       </Slider>

@@ -56,7 +56,7 @@ const ProductPage = () => {
           property="og:description"
           content={`Кофе ${product.title} с насыщенным вкусом и ароматом. Прямые поставки из лучших регионов. Успейте заказать!`}
         />
-        <meta property="og:image" content={`https://beancode.ru/images/products/${product.v_picture}`} />
+        <meta property="og:image" content={`https://beancode.ru/api${product.v_picture}`} />
       </Head>
       <>
         {loading === "loading" ? (
@@ -126,7 +126,7 @@ const ProductPage = () => {
                     <Image
                       className={styles.products__image}
                       src={imageUrl}
-                      alt={product.title}
+                      alt={`Изображение товара ${product.title}`}
                       width={85} height={80}
                     />
                     {/* <ProductImagesSlider images={product.additional_pictures} /> */}
@@ -181,7 +181,7 @@ const ProductPage = () => {
                     <Image
                       className={styles.products__image}
                       src={imageUrl}
-                      alt={product.title}
+                      alt={`Изображение товара ${product.title}`}
                       width={85} height={80}
                     />
                     {/* <ProductImagesSlider images={product.additional_pictures} /> */}

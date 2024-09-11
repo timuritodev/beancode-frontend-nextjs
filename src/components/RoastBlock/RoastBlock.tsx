@@ -1,5 +1,4 @@
 import styles from "./style.module.scss";
-import coffee_machine from "../../images/coffe_machine.jpg";
 import roast_photo from "../../images/roast_block.jpeg";
 import Image from "next/image";
 
@@ -9,8 +8,8 @@ const RoastBlock = () => {
       <Image
         className={styles.roast__img}
         src={roast_photo}
-        alt="roast machine"
-        // layout="responsive" // Выберите подходящий layout
+        alt="Изображение оборудования для обжарки кофе"
+        // layout="responsive" 
       />
       <div className={styles.roast__overlay}></div>
       <div className={styles.roast__block__container}>

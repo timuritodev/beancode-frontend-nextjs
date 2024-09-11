@@ -12,7 +12,7 @@ const PaymentPage = () => {
         <meta property="og:url" content="https://beancode.ru/payment" />
         <meta property="og:title" content="Оплата заказа - Beancode" />
         <meta property="og:description" content="Оплатить заказ можно онлайн на сайте или при получении. Для юридических лиц доступна оплата по счёту." />
-        <meta property="og:image" content="https://beancode.ru/images/payment_og.jpeg" />
+        <meta property="og:image" content="https://beancode.ru/api/images/open_graph.jpeg" />
       </Head>
       <div className={styles.payment}>
         <div className={styles.payment__container}>

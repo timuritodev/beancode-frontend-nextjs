@@ -56,7 +56,7 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
             <Link href="/">
               <Image
                 className={styles.header__logo}
-                alt="logo"
+                alt="Логотип"
                 src={logo}
                 onClick={switchPopup}
               />
@@ -71,7 +71,7 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
               <Link href="/profile">
                 <Image
                   className={styles.header__profile_icon}
-                  alt="icon"
+                  alt="Иконка с профилем"
                   src={icon}
                   onClick={switchPopup}
                 />

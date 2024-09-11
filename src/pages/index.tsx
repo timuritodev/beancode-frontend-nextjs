@@ -37,7 +37,7 @@ const MainPage = () => {
         <meta property="og:title" content="Кофе в зернах с бесплатной доставкой" />
         <meta property="og:description"
           content="В Набережных Челнах открылось производство кофейного зерна. Прямые поставки сырья из Бразилии, Колумбии, Африки, Азии. Голландская линия обжарки. Международные стандарты качества" />
-        <meta property="og:image" content="https://bean-code.ru/images/open_graph.jpeg" />
+        <meta property="og:image" content="https://beancode.ru/api/images/open_graph.jpeg" />
       </Head>
       <div className={styles.main}>
         <div className={styles.main__container}>
