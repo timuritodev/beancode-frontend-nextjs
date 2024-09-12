@@ -36,7 +36,7 @@ export const Product = ({ data }: { data: IProduct }) => {
           src={imageUrl}
           alt={`Изображение товара ${data.title}`}
           onClick={handleClickImage}
-          width={85} height={80}
+          width={348} height={348}
         />
         <h2 className={styles.product__title}>{data.title}</h2>
         <p className={styles.product__description}>{data.description}</p>

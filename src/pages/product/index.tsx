@@ -127,7 +127,7 @@ const ProductPage = () => {
                       className={styles.products__image}
                       src={imageUrl}
                       alt={`Изображение товара ${product.title}`}
-                      width={85} height={80}
+                      width={513} height={489}
                     />
                     {/* <ProductImagesSlider images={product.additional_pictures} /> */}
                     <div className={styles.products__wrapper_2}>
@@ -182,7 +182,7 @@ const ProductPage = () => {
                       className={styles.products__image}
                       src={imageUrl}
                       alt={`Изображение товара ${product.title}`}
-                      width={85} height={80}
+                      width={513} height={489}
                     />
                     {/* <ProductImagesSlider images={product.additional_pictures} /> */}
                     <div>
