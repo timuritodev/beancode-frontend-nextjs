@@ -57,7 +57,7 @@ const Header: FC = () => {
           <BurgerButton isPopupOpen={isPopupOpen} switchPopup={switchPopup} />
         )}
         <Link href="/">
-          <Image className={styles.header__logo} alt="Логотип Beancode" src={logo} />
+          <Image className={styles.header__logo} alt="Логотип Beancode" src={logo} width={208} height={30}/>
         </Link>
         <div className={styles.header__links}>
           {/* {user.token && (

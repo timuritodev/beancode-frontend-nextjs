@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import "./DeliveryBlock.css"; // TODO Импортируйте CSS Module
 import {
   editUserInfo,
   getUserInfo,
@@ -14,6 +13,7 @@ import { CustomInputTypes } from "../../types/CustomInput.types";
 import { CITY_VALIDATION_CONFIG } from "../../utils/constants";
 import { CustomButton } from "../CustomButton/CustomButton";
 import { Helmet } from "react-helmet";
+import styles from "./style.module.scss";
 
 declare global {
   interface Window {
@@ -99,7 +99,7 @@ export const DeliveryBlock = () => {
   // }, []);
 
   return (
-    <div className="delivery-block__container">
+    <div className={styles.delivery_block__container}>
       <Helmet>
         <script
           type="text/javascript"
@@ -123,31 +123,27 @@ export const DeliveryBlock = () => {
         disabled={!isDirty || !isValid}
         type="button"
       />
-      <div className="delivery-block__buttons_container">
+      <div className={styles.delivery_block__buttons_container}>
         <button
-          className={`delivery-block__button ${
-            isDeliveryPointVisible ? "" : "delivery-block__button_add"
-          }`}
+          className={`${styles.delivery_block__button} ${
+            isDeliveryPointVisible ? "" : styles.delivery_block__button_add}`}
           onClick={handleCourierButtonClick}
         >
           <span
-            className={`delivery-block__button__text ${
-              isDeliveryPointVisible ? "" : "delivery-block__button__text_add"
-            }`}
+            className={`${styles.delivery_block__button__text} ${
+              isDeliveryPointVisible ? "" : styles.delivery_block__button__text_add}`}
           >
             Пункты выдачи
           </span>
         </button>
         <button
-          className={`delivery-block__button ${
-            isCourierVisible ? "" : "delivery-block__button_add"
-          }`}
+          className={`${styles.delivery_block__button} ${
+            isCourierVisible ? "" : styles.delivery_block__button_add}`}
           onClick={handleDeliveryButtonClick}
         >
           <span
-            className={`delivery-block__button__text ${
-              isCourierVisible ? "" : "delivery-block__button__text_add"
-            }`}
+            className={`${styles.delivery_block__button__text} ${
+              isCourierVisible ? "" : styles.delivery_block__button__text_add}`}
           >
             Курьером
           </span>

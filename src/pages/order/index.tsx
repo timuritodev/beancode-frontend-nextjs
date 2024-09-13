@@ -53,11 +53,11 @@ const OrderPage = () => {
                   <SessionOrderInputs handleDataSaved={handleDataSaved} />
                 )}
               </div>
-              {/* <div>
+              <div>
               <h2 className={styles.orderPage__subtitle}>Способы доставки</h2>
-              <DeliveryBlock />   
+              {/* <DeliveryBlock />    */}
               <Widget />
-            </div> */}
+            </div>
               {/*
             <div>
               <h2 className={styles.orderPage__subtitle}>Способы оплаты</h2>

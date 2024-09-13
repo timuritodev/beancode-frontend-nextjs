@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { OrderCardList } from "../OrderCard/OrderCardList";
 import styles from "./style.module.scss";
-import { FC, useEffect, useState } from "react";
+import { FC, use, useEffect, useState } from "react";
 import button from "../../images/promo_button.svg";
 import ic_info from "../../images/ic_info.svg";
 import { useAppSelector, useAppDispatch } from "../../services/typeHooks";
@@ -197,6 +197,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         await dispatch(deleteAllSessionApi());
       }
       dispatch(resetCart());
+      // await handleDeliverOrder();
       setRedirecting(true);
     } catch (error) {
       console.error("Error in payApi call:", error);
@@ -205,6 +206,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   };
 
   const handleDeliverOrder = async () => {
+    const address_cdek = localStorage.getItem('Данные доставки')
     try {
       const authResponse = await dispatch(
         authDeliverApi({
@@ -220,62 +222,38 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         deliverApi({
           data: {
             number: randomOrderNumber.toString(),
-            comment: products_info,
-            delivery_recipient_cost: {
-              value: 50,
+            type: 1, 
+            tariff_code: 137, 
+            recipient: {
+              name: `${userData.surname} ${userData.name}`, 
+              phones: [
+                {
+                  number: userData.phone, 
+                },
+              ],
             },
-            delivery_recipient_cost_adv: [
-              {
-                sum: 3000,
-                threshold: 200,
-              },
-            ],
             shipment_point: "NCHL46",
-            delivery_point: "KZN34",
+            delivery_point: address_cdek ? address_cdek : userData.address,
             packages: cartproducts.map((product, index) => ({
               number: `bar-00${index + 1}`,
               comment: "Упаковка",
-              height: 10,
+              // height: 10,
+              // length: 10,
+              weight: parseFloat(product.weight) || 0,
+              // width: 10,
               items: [
                 {
+                  name: product.title,
                   ware_key: product.id.toString(),
                   payment: {
-                    value: parseInt(product.price, 10), // вроде бы тут должен быть 0
+                    value: 0, // Тут должен быть 0, если нет оплаты за товар
                   },
-                  name: product.title,
                   cost: parseInt(product.price, 10),
                   amount: 1,
                   weight: parseFloat(product.weight) || 0,
-                  url: "https://beancode.ru/catalog", // ну это надо будет переделать на id в пути и тд
                 },
               ],
-              length: 10,
-              weight: parseFloat(product.weight) || 0,
-              width: 10,
             })),
-            recipient: {
-              name: `${userData.name} ${userData.surname}`,
-              phones: [
-                {
-                  number: userData.phone,
-                },
-              ],
-              email: userData.email,
-            },
-            sender: {
-              name: "Петров Петр",
-              phones: [
-                {
-                  number: "+79134637228", // Телефон отправителя
-                },
-              ],
-            },
-            services: [
-              {
-                code: "SECURE_PACKAGE_A2",
-              },
-            ],
-            tariff_code: 139,
           },
           token: token,
         })
@@ -287,7 +265,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
 
   useEffect(() => {
     if (redirecting && formUrl) {
-      router.push(formUrl); // TODO: redirect to payment page
+      router.push(formUrl);
       setRedirecting(false);
     }
   }, [redirecting, formUrl, dispatch, user.id]);
@@ -357,13 +335,13 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         type="submit"
         className={styles.orderBlock__pay_button}
       />
-      {/* <CustomButton
+      <CustomButton
         buttonText={"Доставка"}
         handleButtonClick={handleDeliverOrder}
         disabled={!dataSaved}
         type="submit"
         className={styles.orderBlock__pay_button}
-      /> */}
+      />
       <p className={styles.orderBlock__disclaimer}>
         Нажимая на кнопку, я соглашаюсь на обработку моих персональных данных и
         ознакомлен(а) с условиями обработки персональных данных и регистрацией в
