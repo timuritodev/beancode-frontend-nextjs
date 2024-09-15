@@ -55,8 +55,8 @@ const OrderPage = () => {
               </div>
               <div>
               <h2 className={styles.orderPage__subtitle}>Способы доставки</h2>
-              {/* <DeliveryBlock />    */}
-              <Widget />
+              <DeliveryBlock />   
+              {/* <Widget /> */}
             </div>
               {/*
             <div>

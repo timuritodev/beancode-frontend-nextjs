@@ -14,6 +14,9 @@ import { CITY_VALIDATION_CONFIG } from "../../utils/constants";
 import { CustomButton } from "../CustomButton/CustomButton";
 import { Helmet } from "react-helmet";
 import styles from "./style.module.scss";
+import { calculateDeliverApi } from "@/services/redux/slices/deliveryPrice/deliveryPrice";
+import { DeliveryCard } from "../DeliveryCard/DeliveryCard";
+import cdek_logo from '../../images/cdek_logo.svg';
 
 declare global {
   interface Window {
@@ -24,42 +27,8 @@ declare global {
 export const DeliveryBlock = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+  const deliveryPrice = useAppSelector((state) => state.deliverPrice.data);
 
-  const token = user.token;
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid, isDirty },
-    getValues,
-  } = useForm<ISignUpData>({ mode: "onChange" });
-
-  const data = {
-    name: getValues("name"),
-    surname: getValues("surname"),
-    phone: getValues("phone"),
-    email: getValues("email"),
-    address: getValues("address"),
-    city: getValues("city"),
-    area: getValues("area") === undefined ? "" : getValues("area"),
-    password: getValues("password"),
-  };
-
-  const onSubmit: SubmitHandler<ISignUpData> = () => {
-    dispatch(
-      editUserInfo({
-        data: {
-          name: getValues("name"),
-          surname: getValues("surname"),
-          phone: getValues("phone"),
-          email: getValues("email"),
-          address: getValues("address"),
-          city: getValues("city"),
-          area: getValues("area") === undefined ? "" : getValues("area"),
-        },
-        token: token,
-      })
-    ).unwrap();
-  };
 
   useEffect(() => {
     if (user.token) {
@@ -104,10 +73,10 @@ export const DeliveryBlock = () => {
         <script
           type="text/javascript"
           src="https://cdn.jsdelivr.net/npm/@cdek-it/widget@3"
-          // charset="utf-8"
+        // charset="utf-8"
         ></script>
       </Helmet>
-      <CustomInput
+      {/* <CustomInput
         inputType={CustomInputTypes.city}
         labelText={"Город"}
         validation={{
@@ -122,38 +91,34 @@ export const DeliveryBlock = () => {
         handleButtonClick={handleSubmit(onSubmit)}
         disabled={!isDirty || !isValid}
         type="button"
-      />
+      /> */}
       <div className={styles.delivery_block__buttons_container}>
         <button
-          className={`${styles.delivery_block__button} ${
-            isDeliveryPointVisible ? "" : styles.delivery_block__button_add}`}
+          className={`${styles.delivery_block__button} ${isDeliveryPointVisible ? "" : styles.delivery_block__button_add}`}
           onClick={handleCourierButtonClick}
         >
           <span
-            className={`${styles.delivery_block__button__text} ${
-              isDeliveryPointVisible ? "" : styles.delivery_block__button__text_add}`}
+            className={`${styles.delivery_block__button__text} ${isDeliveryPointVisible ? "" : styles.delivery_block__button__text_add}`}
           >
             Пункты выдачи
           </span>
         </button>
         <button
-          className={`${styles.delivery_block__button} ${
-            isCourierVisible ? "" : styles.delivery_block__button_add}`}
+          className={`${styles.delivery_block__button} ${isCourierVisible ? "" : styles.delivery_block__button_add}`}
           onClick={handleDeliveryButtonClick}
         >
           <span
-            className={`${styles.delivery_block__button__text} ${
-              isCourierVisible ? "" : styles.delivery_block__button__text_add}`}
+            className={`${styles.delivery_block__button__text} ${isCourierVisible ? "" : styles.delivery_block__button__text_add}`}
           >
             Курьером
           </span>
         </button>
       </div>
-      {/* {isCourierVisible && <h2>СДЕК, 5POST</h2>} */}
+      {isCourierVisible && <h2>СДЕК, 5POST</h2>}
+      {isDeliveryPointVisible && <DeliveryCard data={deliveryPrice} image={cdek_logo} />}
       {/* {isCourierVisible && (
         <div id="cdek-map" style={{ width: "800px", height: "600px" }}></div>
       )} */}
-      {isDeliveryPointVisible && <h2>Курьер</h2>}
     </div>
   );
 };

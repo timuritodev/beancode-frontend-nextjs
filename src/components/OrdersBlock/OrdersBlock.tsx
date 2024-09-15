@@ -34,6 +34,7 @@ import {
 } from "../../services/redux/slices/delivery/delivery";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { calculateDeliverApi } from "@/services/redux/slices/deliveryPrice/deliveryPrice";
 
 interface UserData {
   userId: number;
@@ -222,17 +223,17 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         deliverApi({
           data: {
             number: randomOrderNumber.toString(),
-            type: 1, 
-            tariff_code: 137, 
+            type: 1,
+            tariff_code: 137,
             recipient: {
-              name: `${userData.surname} ${userData.name}`, 
+              name: `${userData.surname} ${userData.name}`,
               phones: [
                 {
-                  number: userData.phone, 
+                  number: userData.phone,
                 },
               ],
             },
-            shipment_point: "NCHL46",
+            shipment_point: "NCHL46", // TODO либо from_location1
             delivery_point: address_cdek ? address_cdek : userData.address,
             packages: cartproducts.map((product, index) => ({
               number: `bar-00${index + 1}`,
@@ -262,6 +263,54 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       console.error("Error during order registration:", error);
     }
   };
+
+  useEffect(() => {
+    const fetchTokenAndCalculateDelivery = async () => {
+      if (user) {
+        try {
+          // Получаем токен
+          const authResponse = await dispatch(
+            authDeliverApi({
+              grant_type: "client_credentials",
+              client_id: "j8DuMgCvPlZ44wrKirinlIk2qIyWRv6X",
+              client_secret: "dOb3lthS9H9KvZLc9IlUWd1yneFNlw3F",
+            })
+          ).unwrap(); // Используем unwrap для получения данных из результата action
+
+          const token = authResponse.access_token;
+
+          // Делаем запрос на расчет доставки
+          await dispatch(
+            calculateDeliverApi({
+              data: {
+                tariff_code: 137,
+                from_location: {
+                  // postal_code: 'NCHL46',
+                  code: 433,
+                  // city: 'Набережные Челны',
+                  // address: 'проспект Казанский, 226 ст2',
+                },
+                to_location: {
+                  // postal_code: 'NCHL11',
+                  code: 424,
+                  // city: 'Казань',
+                  // address: 'улица Разведчика Ахмерова 7',
+                },
+                packages: cartproducts.map((product) => ({
+                  weight: parseFloat(product.weight),
+                })),
+              },
+              token: token,
+            })
+          );
+        } catch (error) {
+          console.error("Ошибка при запросе:", error);
+        }
+      }
+    };
+
+    fetchTokenAndCalculateDelivery();
+  }, [dispatch, user]);
 
   useEffect(() => {
     if (redirecting && formUrl) {

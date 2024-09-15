@@ -91,7 +91,7 @@ const Footer: FC = () => {
           </div>
         </div>
         <div className={styles.logo__block}>
-          <Image className={styles.footer__logo} src={logo} alt="Логотип подвала"/>
+          <Image className={styles.footer__logo} src={logo} alt="Логотип подвала" width={208} height={30}/>
           {width > 767 && <h2 className={styles.footer__email}>coffee@beancode.ru</h2>}
         </div>
         <div className={styles.copyright__block}>
