@@ -32,6 +32,7 @@ import {
   authDeliverApi,
   calculateDeliverApi,
   deliverApi,
+  getCountriesApi,
 } from "../../services/redux/slices/delivery/delivery";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -57,6 +58,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   const user = useAppSelector(selectUser);
   const formUrl = useAppSelector((state) => state.pay.response.formUrl);
   const deliver = useAppSelector((state) => state.deliver.deliveryData);
+  const countries = useAppSelector((state) => state.deliver.deliveryCountries);
 
   const randomOrderNumber = Math.floor(Math.random() * 900000) + 100000;
 
@@ -237,14 +239,12 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
             ...(address_cdek
               ? { delivery_point: address_cdek } // Если есть address_cdek, используем его
               : {
-                  to_location: {
-                    city: user.city, 
-                    address: userData.address, // Здесь строка адреса
-                  },
-                }
+                to_location: {
+                  city: user.city,
+                  address: userData.address, // Здесь строка адреса
+                },
+              }
             ),
-            // delivery_point: 'KZN14',
-            // delivery_point: address_cdek ? address_cdek : userData.address,
             packages: cartproducts.map((product, index) => ({
               number: `bar-00${index + 1}`,
               comment: "Упаковка",
@@ -275,6 +275,30 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   };
 
   useEffect(() => {
+    const fetchT = async () => {
+      if (user) {
+        try {
+          // Получаем токен
+          const authResponse = await dispatch(
+            authDeliverApi({
+              grant_type: "client_credentials",
+              client_id: "j8DuMgCvPlZ44wrKirinlIk2qIyWRv6X",
+              client_secret: "dOb3lthS9H9KvZLc9IlUWd1yneFNlw3F",
+            })
+          ).unwrap(); // Используем unwrap для получения данных из результата action
+
+          const token = authResponse.access_token;
+          await dispatch(getCountriesApi({ data: { city: userData.city }, token: token }));
+
+        } catch (error) {
+          console.error("Error during order registration:", error);
+        }
+      }
+    }
+    fetchT();
+  },[user])
+
+  useEffect(() => {
     const fetchTokenAndCalculateDelivery = async () => {
       if (user) {
         try {
@@ -289,22 +313,21 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
 
           const token = authResponse.access_token;
 
+          // await dispatch(getCountriesApi({ data: { city: userData.city }, token: token }));
           // Делаем запрос на расчет доставки
           await dispatch(
             calculateDeliverApi({
               data: {
                 tariff_code: 137,
                 from_location: {
-                  // postal_code: 'NCHL46',
                   // code: 433,
                   city: 'Набережные Челны',
                   address: 'проспект Казанский, 226 ст2',
                 },
                 to_location: {
-                  // postal_code: 'NCHL11',
-                  // code: 424,
-                  city: 'Казань',
-                  address: 'улица Разведчика Ахмерова 7',
+                  code: countries.code,
+                  // city: 'Казань',
+                  // address: 'улица Разведчика Ахмерова 7',
                 },
                 packages: cartproducts.map((product) => ({
                   weight: parseFloat(product.weight),

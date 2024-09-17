@@ -1,10 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchCalculateDelivery, fetchAuthDelivery, fetchDeliver2 } from "./deliveryAPI";
+import { fetchCalculateDelivery, fetchAuthDelivery, fetchDeliver2, fetchCountries } from "./deliveryAPI";
 import {
   DeliveryCalculateRequest,
   DeliveryCalculateResponse,
   IAuthDelivery,
   IDeliverDataRes,
+  IDeliveryCountries,
+  IDeliveryCountriesResponse,
   OrderRegistrationRequest,
 } from "../../../../types/Deliver.types";
 
@@ -61,11 +63,32 @@ export const calculateDeliverApi = createAsyncThunk(
   }
 );
 
+export const getCountriesApi = createAsyncThunk(
+  "@@deliver/countries",
+  async (
+    arg: {
+      data: IDeliveryCountries;
+      token: string;
+    },
+    { fulfillWithValue, rejectWithValue }
+  ) => {
+    const { data, token } = arg;
+    try {
+      const response = await fetchCountries(data, token);
+      const json = await response.json();
+      return fulfillWithValue(json);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export interface IUnifiedState {
   status: "idle" | "success" | "loading" | "failed";
   error: unknown;
   deliveryPriceData: DeliveryCalculateResponse;
   deliveryData: IDeliverDataRes;
+  deliveryCountries: IDeliveryCountriesResponse;
 }
 
 const initialState: IUnifiedState = {
@@ -109,6 +132,26 @@ const initialState: IUnifiedState = {
       },
     ],
   },
+  deliveryCountries: {
+    code: 0,
+    city: '',
+    fias_guid: '',
+    city_uuid: '',
+    kladr_code: '',
+    country_code: '',
+    country: '',
+    region: '',
+    region_code: 0,
+    fias_region_guid: '',
+    kladr_region_code: '',
+    sub_region: '',
+    postal_eodes: [''],
+    longitude: 0,
+    latitude: 0,
+    time_zone: '',
+    payment_limit: 0,
+    errors: [{ code: "", message: "" }],
+  }
 };
 
 const deliverSlice = createSlice({
@@ -129,13 +172,17 @@ const deliverSlice = createSlice({
         state.status = "success";
         state.deliveryPriceData = action.payload;
       })
-      // .addMatcher(
-      //   (action) => action.type.endsWith("/rejected"),
-      //   (state, action) => {
-      //     state.status = "failed";
-      //     state.error = action.payload.statusText;
-      //   }
-      // );
+      .addCase(getCountriesApi.fulfilled, (state, action) => {
+        state.status = "success";
+        state.deliveryCountries = action.payload;
+      })
+      .addMatcher(
+        (action) => action.type.endsWith("/rejected"),
+        (state, action) => {
+          state.status = "failed";
+          state.error = action.payload.statusText;
+        }
+      );
   },
 });
 

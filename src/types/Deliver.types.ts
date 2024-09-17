@@ -191,3 +191,43 @@ export interface DeliveryCalculateResponse {
     message: string; // Сообщение об ошибке
   }[];
 }
+
+export interface IDeliveryCountries {
+  country_codes?: string[];
+  region_code?: number;
+  kladr_region_code?: string;
+  fias_region_guid?: string;
+  kladr_code?: string;
+  fias_guid?: string;
+  postal_code?: string;
+  code?: number;
+  city?: string;
+  size?: number;
+  page?: number;
+  lang?: 'ru' | 'en';
+  payment_limit?: number;
+}
+
+export interface IDeliveryCountriesResponse {
+  code: number;
+  city: string;
+  fias_guid?: string;
+  city_uuid: string;
+  kladr_code: string;
+  country_code: string;
+  country: string;
+  region: string;
+  region_code?: number;
+  fias_region_guid?: string;
+  kladr_region_code?: string;
+  sub_region?: string;
+  postal_eodes: string[];
+  longitude?: number;
+  latitude?: number;
+  time_zone?: string;
+  payment_limit: number;
+  errors?: {
+    code: string;
+    message: string;
+  }[];
+}
