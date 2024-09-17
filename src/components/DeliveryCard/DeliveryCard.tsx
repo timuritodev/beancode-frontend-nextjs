@@ -18,10 +18,10 @@ export const DeliveryCard: FC<DeliveryCardProps> = ({ data, image }) => {
                 width={142} height={51}
             />
             <div className={styles.date__container}>
-                <p className={styles.date}>{data.period_min} - {data.period_max} рабочих дня</p>
+                <p className={styles.date}>{data?.period_min} - {data?.period_max} рабочих дня</p>
                 {/* <p className={styles.date__calendar}>{data.calendar_min} - {data.calendar_max}</p> */}
             </div>
-            <p className={styles.price}>{data.delivery_sum} ₽</p>
+            <p className={styles.price}>{data?.delivery_sum} ₽</p>
         </div>
     );
 };

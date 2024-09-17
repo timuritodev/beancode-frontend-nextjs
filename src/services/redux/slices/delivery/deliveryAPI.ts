@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { API_BASE_URL } from "../../../../utils/constants";
 import {
+  DeliveryCalculateRequest,
   IAuthDelivery,
   OrderRegistrationRequest,
 } from "../../../../types/Deliver.types";
@@ -33,7 +34,7 @@ const checkRes = (res: any) => {
 export const fetchData = (
   url: string,
   method: string,
-  data?: OrderRegistrationRequest,
+  data?: OrderRegistrationRequest | DeliveryCalculateRequest,
   token?: string
 ) => {
   return fetch(url, {
@@ -44,6 +45,15 @@ export const fetchData = (
     },
     ...(!!data && { body: JSON.stringify(data) }),
   }).then((res) => checkRes(res));
+};
+
+export const fetchCalculateDelivery = (
+  data: DeliveryCalculateRequest,
+  token: string
+): Promise<Response> => {
+  return fetchData(`${API_BASE_URL}/api-calculate`, "POST", data, token).then(
+    (res) => checkRes(res)
+  );
 };
 
 const objectToFormData = (obj: Record<string, any>) => {

@@ -14,7 +14,6 @@ import { CITY_VALIDATION_CONFIG } from "../../utils/constants";
 import { CustomButton } from "../CustomButton/CustomButton";
 import { Helmet } from "react-helmet";
 import styles from "./style.module.scss";
-import { calculateDeliverApi } from "@/services/redux/slices/deliveryPrice/deliveryPrice";
 import { DeliveryCard } from "../DeliveryCard/DeliveryCard";
 import cdek_logo from '../../images/cdek_logo.svg';
 
@@ -27,8 +26,7 @@ declare global {
 export const DeliveryBlock = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
-  const deliveryPrice = useAppSelector((state) => state.deliverPrice.data);
-
+  const deliveryPrice = useAppSelector((state) => state.deliver.deliveryPriceData);
 
   useEffect(() => {
     if (user.token) {

@@ -30,11 +30,11 @@ import { PopupErrorPromo } from "../Popups/PopupErrorPromo";
 import { CustomButton } from "../CustomButton/CustomButton";
 import {
   authDeliverApi,
+  calculateDeliverApi,
   deliverApi,
 } from "../../services/redux/slices/delivery/delivery";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { calculateDeliverApi } from "@/services/redux/slices/deliveryPrice/deliveryPrice";
 
 interface UserData {
   userId: number;
@@ -56,7 +56,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   const cartproducts = useAppSelector((state) => state.cart.cart);
   const user = useAppSelector(selectUser);
   const formUrl = useAppSelector((state) => state.pay.response.formUrl);
-  const deliver = useAppSelector((state) => state.deliver.data);
+  const deliver = useAppSelector((state) => state.deliver.deliveryData);
 
   const randomOrderNumber = Math.floor(Math.random() * 900000) + 100000;
 
@@ -234,7 +234,17 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
               ],
             },
             shipment_point: "NCHL46", // TODO либо from_location1
-            delivery_point: address_cdek ? address_cdek : userData.address,
+            ...(address_cdek
+              ? { delivery_point: address_cdek } // Если есть address_cdek, используем его
+              : {
+                  to_location: {
+                    city: user.city, 
+                    address: userData.address, // Здесь строка адреса
+                  },
+                }
+            ),
+            // delivery_point: 'KZN14',
+            // delivery_point: address_cdek ? address_cdek : userData.address,
             packages: cartproducts.map((product, index) => ({
               number: `bar-00${index + 1}`,
               comment: "Упаковка",
@@ -286,15 +296,15 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
                 tariff_code: 137,
                 from_location: {
                   // postal_code: 'NCHL46',
-                  code: 433,
-                  // city: 'Набережные Челны',
-                  // address: 'проспект Казанский, 226 ст2',
+                  // code: 433,
+                  city: 'Набережные Челны',
+                  address: 'проспект Казанский, 226 ст2',
                 },
                 to_location: {
                   // postal_code: 'NCHL11',
-                  code: 424,
-                  // city: 'Казань',
-                  // address: 'улица Разведчика Ахмерова 7',
+                  // code: 424,
+                  city: 'Казань',
+                  address: 'улица Разведчика Ахмерова 7',
                 },
                 packages: cartproducts.map((product) => ({
                   weight: parseFloat(product.weight),

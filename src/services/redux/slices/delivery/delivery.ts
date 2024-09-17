@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchAuthDelivery, fetchDeliver2 } from "./deliveryAPI";
+import { fetchCalculateDelivery, fetchAuthDelivery, fetchDeliver2 } from "./deliveryAPI";
 import {
+  DeliveryCalculateRequest,
+  DeliveryCalculateResponse,
   IAuthDelivery,
   IDeliverDataRes,
   OrderRegistrationRequest,
@@ -39,16 +41,59 @@ export const authDeliverApi = createAsyncThunk(
   }
 );
 
-export interface IDeliveryState {
+export const calculateDeliverApi = createAsyncThunk(
+  "@@deliver/calculate",
+  async (
+    arg: {
+      data: DeliveryCalculateRequest;
+      token: string;
+    },
+    { fulfillWithValue, rejectWithValue }
+  ) => {
+    const { data, token } = arg;
+    try {
+      const response = await fetchCalculateDelivery(data, token);
+      const json = await response.json();
+      return fulfillWithValue(json);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export interface IUnifiedState {
   status: "idle" | "success" | "loading" | "failed";
   error: unknown;
-  data: IDeliverDataRes;
+  deliveryPriceData: DeliveryCalculateResponse;
+  deliveryData: IDeliverDataRes;
 }
 
-const initialState: IDeliveryState = {
+const initialState: IUnifiedState = {
   status: "idle",
   error: null,
-  data: {
+  deliveryPriceData: {
+    delivery_sum: 0,
+    period_min: 0,
+    period_max: 0,
+    weight_calc: 0,
+    calendar_min: 0,
+    calendar_max: 0,
+    services: [
+      {
+        code: "",
+        sum: 0,
+        total_sum: 0,
+        discount_percent: 0,
+        discount_sum: 0,
+        vat_rate: 0,
+        vat_sum: 0,
+      },
+    ],
+    total_sum: 0,
+    currency: "",
+    errors: [{ code: "", message: "" }],
+  },
+  deliveryData: {
     token: "",
     entity: {
       uuid: "",
@@ -74,19 +119,23 @@ const deliverSlice = createSlice({
     builder
       .addCase(deliverApi.fulfilled, (state, action) => {
         state.status = "success";
-        state.data = action.payload;
+        state.deliveryData = action.payload;
       })
       .addCase(authDeliverApi.fulfilled, (state, action) => {
         state.status = "success";
-        state.data.token = action.payload.access_token;
+        state.deliveryData.token = action.payload.access_token;
       })
-      .addMatcher(
-        (action) => action.type.endsWith("/rejected"),
-        (state, action) => {
-          state.status = "failed";
-          state.error = action.payload.statusText;
-        }
-      );
+      .addCase(calculateDeliverApi.fulfilled, (state, action) => {
+        state.status = "success";
+        state.deliveryPriceData = action.payload;
+      })
+      // .addMatcher(
+      //   (action) => action.type.endsWith("/rejected"),
+      //   (state, action) => {
+      //     state.status = "failed";
+      //     state.error = action.payload.statusText;
+      //   }
+      // );
   },
 });
 
