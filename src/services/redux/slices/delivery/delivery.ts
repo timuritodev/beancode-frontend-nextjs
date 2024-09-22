@@ -4,6 +4,7 @@ import {
   DeliveryCalculateRequest,
   DeliveryCalculateResponse,
   IAuthDelivery,
+  IAuthDeliveryResponse,
   IDeliverDataRes,
   IDeliveryCountries,
   IDeliveryCountriesResponse,
@@ -88,7 +89,8 @@ export interface IUnifiedState {
   error: unknown;
   deliveryPriceData: DeliveryCalculateResponse;
   deliveryData: IDeliverDataRes;
-  deliveryCountries: IDeliveryCountriesResponse;
+  deliveryCountries: IDeliveryCountriesResponse[];
+  deliveryToken: IAuthDeliveryResponse;
 }
 
 const initialState: IUnifiedState = {
@@ -132,7 +134,7 @@ const initialState: IUnifiedState = {
       },
     ],
   },
-  deliveryCountries: {
+  deliveryCountries: [{
     code: 0,
     city: '',
     fias_guid: '',
@@ -151,6 +153,13 @@ const initialState: IUnifiedState = {
     time_zone: '',
     payment_limit: 0,
     errors: [{ code: "", message: "" }],
+  }],
+  deliveryToken: {
+    access_token: '',
+    expires_in: 0,
+    token_type: '',
+    scope: '',
+    jti: '',
   }
 };
 
@@ -166,7 +175,8 @@ const deliverSlice = createSlice({
       })
       .addCase(authDeliverApi.fulfilled, (state, action) => {
         state.status = "success";
-        state.deliveryData.token = action.payload.access_token;
+        // state.deliveryData.token = action.payload.access_token;
+        state.deliveryToken = action.payload;
       })
       .addCase(calculateDeliverApi.fulfilled, (state, action) => {
         state.status = "success";

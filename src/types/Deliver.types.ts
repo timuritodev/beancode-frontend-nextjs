@@ -1,12 +1,12 @@
 export interface OrderRegistrationRequest {
-  type?: number; // Optional, default is 1 for "internet-store"
+  type?: number; // Optional, default is 1 for internet-store
   additional_order_types?: number[];
   number?: string; // Max 40 ASCII characters
   tariff_code: number;
   comment?: string; // Max 255 characters
   developer_key?: string;
-  shipment_point?: string; // Required if the tariff is "from warehouse"
-  delivery_point?: string; // Required if the tariff is "to warehouse" or "to parcel terminal"
+  shipment_point?: string; // Required if the tariff is from warehouse
+  delivery_point?: string; // Required if the tariff is to warehouse or to parcel terminal
   date_invoice?: string; // Required for international orders
   shipper_name?: string; // Required for international orders
   shipper_address?: string; // Required for international orders
@@ -134,6 +134,14 @@ export interface IAuthDelivery {
   grant_type: string;
   client_id: string;
   client_secret: string;
+}
+
+export interface IAuthDeliveryResponse {
+  access_token: string,
+  token_type: string,
+  expires_in: number,
+  scope: string,
+  jti: string
 }
 
 export interface DeliveryCalculateRequest {

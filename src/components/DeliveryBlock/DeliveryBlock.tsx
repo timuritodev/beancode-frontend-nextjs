@@ -16,6 +16,8 @@ import { Helmet } from "react-helmet";
 import styles from "./style.module.scss";
 import { DeliveryCard } from "../DeliveryCard/DeliveryCard";
 import cdek_logo from '../../images/cdek_logo.svg';
+import { calculateDeliverApi, getCountriesApi } from "@/services/redux/slices/delivery/delivery";
+import { UserData } from "../OrdersBlock/OrdersBlock";
 
 declare global {
   interface Window {
@@ -27,6 +29,9 @@ export const DeliveryBlock = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const deliveryPrice = useAppSelector((state) => state.deliver.deliveryPriceData);
+  const cartproducts = useAppSelector((state) => state.cart.cart);
+  const countries = useAppSelector((state) => state.deliver.deliveryCountries);
+  const cdekToken = useAppSelector((state) => state.deliver.deliveryToken);
 
   useEffect(() => {
     if (user.token) {
@@ -47,6 +52,23 @@ export const DeliveryBlock = () => {
     setIsDeliveryPointVisible(false);
   };
 
+  let userData: UserData
+  const storedData = localStorage.getItem("orderFormData");
+
+  if (user.token) {
+    userData = {
+      userId: user.id,
+      name: user.name,
+      surname: user.surname,
+      phone: user.phone,
+      email: user.email,
+      address: user.address,
+      city: user.city,
+    };
+  } else if (storedData) {
+    userData = JSON.parse(storedData);
+  }
+
   // useEffect(() => {
   //   document.addEventListener("DOMContentLoaded", function () {
   //     const yandexMapScript = document.createElement("script");
@@ -65,6 +87,57 @@ export const DeliveryBlock = () => {
   //   });
   // }, []);
 
+
+  useEffect(() => {
+    const fetchTokenAndCalculateDelivery = async () => {
+      if (user) {
+        try {
+          await dispatch(getCountriesApi({ data: { city: userData.city }, token: cdekToken.access_token }));
+
+          console.log(countries, "countries");
+          const deliveryData = isCourierVisible
+            ? {
+              to_location: {
+                code: countries[0].code, // Если выбран пункт выдачи, используем код ПВЗ
+              },
+            }
+            : {
+              to_location: {
+                city: userData.city,
+                address: userData.address, // Если выбран курьер, используем адрес пользователя
+              },
+            };
+
+          await dispatch(
+            calculateDeliverApi({
+              data: {
+                tariff_code: 137,
+                from_location: {
+                  // code: 433,
+                  city: 'Набережные Челны',
+                  address: 'проспект Казанский, 226 ст2',
+                },
+                ...deliveryData,
+                // to_location: {
+                //   code: countries.code,
+                //   // city: 'Казань',
+                //   // address: 'улица Разведчика Ахмерова 7',
+                // },
+                packages: cartproducts.map((product) => ({
+                  weight: parseFloat(product.weight),
+                })),
+              },
+              token: cdekToken.access_token,
+            })
+          );
+        } catch (error) {
+          console.error("Ошибка при запросе:", error);
+        }
+      }
+    };
+
+    fetchTokenAndCalculateDelivery();
+  }, [dispatch, user, isCourierVisible, isDeliveryPointVisible]);
   return (
     <div className={styles.delivery_block__container}>
       <Helmet>
@@ -112,7 +185,7 @@ export const DeliveryBlock = () => {
           </span>
         </button>
       </div>
-      {isCourierVisible && <h2>СДЕК, 5POST</h2>}
+      {isCourierVisible && <DeliveryCard data={deliveryPrice} image={cdek_logo} />}
       {isDeliveryPointVisible && <DeliveryCard data={deliveryPrice} image={cdek_logo} />}
       {/* {isCourierVisible && (
         <div id="cdek-map" style={{ width: "800px", height: "600px" }}></div>

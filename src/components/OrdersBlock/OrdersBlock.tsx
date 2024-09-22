@@ -37,7 +37,7 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-interface UserData {
+export interface UserData {
   userId: number;
   name: string;
   surname: string;
@@ -59,6 +59,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   const formUrl = useAppSelector((state) => state.pay.response.formUrl);
   const deliver = useAppSelector((state) => state.deliver.deliveryData);
   const countries = useAppSelector((state) => state.deliver.deliveryCountries);
+  const cdekToken = useAppSelector((state) => state.deliver.deliveryToken);
 
   const randomOrderNumber = Math.floor(Math.random() * 900000) + 100000;
 
@@ -161,6 +162,8 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
     userData = JSON.parse(storedData);
   }
 
+  const address_cdek = localStorage.getItem('Данные доставки')
+
   const handleClickPayButton = async () => {
     try {
       await dispatch(
@@ -176,6 +179,54 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
           clientId: `${userData.userId}`,
           email: userData.email,
           phone: userData.phone,
+        })
+      );
+      await dispatch(
+        deliverApi({
+          data: {
+            number: randomOrderNumber.toString(),
+            type: 1,
+            tariff_code: 137,
+            recipient: {
+              name: `${userData.surname} ${userData.name}`,
+              phones: [
+                {
+                  number: userData.phone,
+                },
+              ],
+            },
+            shipment_point: "NCHL46", // TODO либо from_location1
+            ...(address_cdek
+              ? { delivery_point: address_cdek } // Если есть address_cdek, используем его
+              : {
+                to_location: {
+                  city: user.city,
+                  address: userData.address, // Здесь строка адреса
+                },
+              }
+            ),
+            packages: cartproducts.map((product, index) => ({
+              number: `bar-00${index + 1}`,
+              comment: "Упаковка",
+              // height: 10,
+              // length: 10,
+              weight: parseFloat(product.weight) || 0,
+              // width: 10,
+              items: [
+                {
+                  name: product.title,
+                  ware_key: product.id.toString(),
+                  payment: {
+                    value: 0, // Тут должен быть 0, если нет оплаты за товар
+                  },
+                  cost: parseInt(product.price, 10),
+                  amount: 1,
+                  weight: parseFloat(product.weight) || 0,
+                },
+              ],
+            })),
+          },
+          token: cdekToken.access_token,
         })
       );
       await dispatch(
@@ -275,75 +326,40 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   };
 
   useEffect(() => {
-    const fetchT = async () => {
-      if (user) {
-        try {
-          // Получаем токен
-          const authResponse = await dispatch(
-            authDeliverApi({
-              grant_type: "client_credentials",
-              client_id: "j8DuMgCvPlZ44wrKirinlIk2qIyWRv6X",
-              client_secret: "dOb3lthS9H9KvZLc9IlUWd1yneFNlw3F",
-            })
-          ).unwrap(); // Используем unwrap для получения данных из результата action
+    dispatch(getCountriesApi({ data: { city: userData.city }, token: cdekToken.access_token }));
+  }, [user])
 
-          const token = authResponse.access_token;
-          await dispatch(getCountriesApi({ data: { city: userData.city }, token: token }));
+  //         // await dispatch(getCountriesApi({ data: { city: userData.city }, token: token }));
+  //         // Делаем запрос на расчет доставки
+  //         await dispatch(
+  //           calculateDeliverApi({
+  //             data: {
+  //               tariff_code: 137,
+  //               from_location: {
+  //                 // code: 433,
+  //                 city: 'Набережные Челны',
+  //                 address: 'проспект Казанский, 226 ст2',
+  //               },
+  //               to_location: {
+  //                 code: countries.code,
+  //                 // city: 'Казань',
+  //                 // address: 'улица Разведчика Ахмерова 7',
+  //               },
+  //               packages: cartproducts.map((product) => ({
+  //                 weight: parseFloat(product.weight),
+  //               })),
+  //             },
+  //             token: token,
+  //           })
+  //         );
+  //       } catch (error) {
+  //         console.error("Ошибка при запросе:", error);
+  //       }
+  //     }
+  //   };
 
-        } catch (error) {
-          console.error("Error during order registration:", error);
-        }
-      }
-    }
-    fetchT();
-  },[user])
-
-  useEffect(() => {
-    const fetchTokenAndCalculateDelivery = async () => {
-      if (user) {
-        try {
-          // Получаем токен
-          const authResponse = await dispatch(
-            authDeliverApi({
-              grant_type: "client_credentials",
-              client_id: "j8DuMgCvPlZ44wrKirinlIk2qIyWRv6X",
-              client_secret: "dOb3lthS9H9KvZLc9IlUWd1yneFNlw3F",
-            })
-          ).unwrap(); // Используем unwrap для получения данных из результата action
-
-          const token = authResponse.access_token;
-
-          // await dispatch(getCountriesApi({ data: { city: userData.city }, token: token }));
-          // Делаем запрос на расчет доставки
-          await dispatch(
-            calculateDeliverApi({
-              data: {
-                tariff_code: 137,
-                from_location: {
-                  // code: 433,
-                  city: 'Набережные Челны',
-                  address: 'проспект Казанский, 226 ст2',
-                },
-                to_location: {
-                  code: countries.code,
-                  // city: 'Казань',
-                  // address: 'улица Разведчика Ахмерова 7',
-                },
-                packages: cartproducts.map((product) => ({
-                  weight: parseFloat(product.weight),
-                })),
-              },
-              token: token,
-            })
-          );
-        } catch (error) {
-          console.error("Ошибка при запросе:", error);
-        }
-      }
-    };
-
-    fetchTokenAndCalculateDelivery();
-  }, [dispatch, user]);
+  //   fetchTokenAndCalculateDelivery();
+  // }, [dispatch, user]);
 
   useEffect(() => {
     if (redirecting && formUrl) {
@@ -351,6 +367,20 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       setRedirecting(false);
     }
   }, [redirecting, formUrl, dispatch, user.id]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      dispatch(
+        authDeliverApi({
+          grant_type: "client_credentials",
+          client_id: "j8DuMgCvPlZ44wrKirinlIk2qIyWRv6X",
+          client_secret: "dOb3lthS9H9KvZLc9IlUWd1yneFNlw3F",
+        })
+      )
+    }, 5 * 60 * 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className={styles.orderBlock}>
