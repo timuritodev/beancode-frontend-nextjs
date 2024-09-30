@@ -18,6 +18,7 @@ import { DeliveryCard } from "../DeliveryCard/DeliveryCard";
 import cdek_logo from '../../images/cdek_logo.svg';
 import { calculateDeliverApi, getCountriesApi } from "@/services/redux/slices/delivery/delivery";
 import { UserData } from "../OrdersBlock/OrdersBlock";
+import Loader from "../Loader/Loader";
 
 declare global {
   interface Window {
@@ -32,6 +33,7 @@ export const DeliveryBlock = () => {
   const cartproducts = useAppSelector((state) => state.cart.cart);
   const countries = useAppSelector((state) => state.deliver.deliveryCountries);
   const cdekToken = useAppSelector((state) => state.deliver.deliveryToken);
+  const loading = useAppSelector((state) => state.deliver.status);
 
   useEffect(() => {
     if (user.token) {
@@ -90,7 +92,7 @@ export const DeliveryBlock = () => {
 
   useEffect(() => {
     const fetchTokenAndCalculateDelivery = async () => {
-      if (user) {
+      if (userData && userData.city) {
         try {
           await dispatch(getCountriesApi({ data: { city: userData.city }, token: cdekToken.access_token }));
 
@@ -185,8 +187,14 @@ export const DeliveryBlock = () => {
           </span>
         </button>
       </div>
-      {isCourierVisible && <DeliveryCard data={deliveryPrice} image={cdek_logo} />}
-      {isDeliveryPointVisible && <DeliveryCard data={deliveryPrice} image={cdek_logo} />}
+      {loading === "loading" ? (
+        <Loader />
+      ) : (
+        <>
+          {isCourierVisible && <DeliveryCard data={deliveryPrice} image={cdek_logo} />}
+          {isDeliveryPointVisible && <DeliveryCard data={deliveryPrice} image={cdek_logo} />}
+        </>
+      )}
       {/* {isCourierVisible && (
         <div id="cdek-map" style={{ width: "800px", height: "600px" }}></div>
       )} */}

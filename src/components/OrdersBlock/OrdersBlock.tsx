@@ -325,9 +325,9 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
     }
   };
 
-  useEffect(() => {
-    dispatch(getCountriesApi({ data: { city: userData.city }, token: cdekToken.access_token }));
-  }, [user])
+  // useEffect(() => {
+  //   dispatch(getCountriesApi({ data: { city: userData.city }, token: cdekToken.access_token }));
+  // }, [user])
 
   //         // await dispatch(getCountriesApi({ data: { city: userData.city }, token: token }));
   //         // Делаем запрос на расчет доставки

@@ -186,6 +186,12 @@ const deliverSlice = createSlice({
         state.status = "success";
         state.deliveryCountries = action.payload;
       })
+      .addCase(calculateDeliverApi.pending, (state) => {
+				state.status = 'loading';
+			})
+      .addCase(getCountriesApi.pending, (state) => {
+				state.status = 'loading';
+			})
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),
         (state, action) => {
