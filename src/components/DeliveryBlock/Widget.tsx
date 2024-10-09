@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useResize } from "../../hooks/useResize";
+import styles from './Widget.module.scss';
 
 interface Tariff {
   tariff_code: number;
@@ -32,13 +33,15 @@ interface OfficeAddress {
 
 export const Widget = () => {
   const [scriptLoaded, setScriptLoaded] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Стейт для модального окна
 
   const { width } = useResize();
-  
+
   const widthValue = width > 1279 ? 756 : width;
   const heightValue = width > 1279 ? 600 : 400;
 
   useEffect(() => {
+    // Загружаем скрипт виджета CDEK
     const script = document.createElement("script");
     script.src = "https://cdn.jsdelivr.net/npm/@cdek-it/widget@3";
     script.async = true;
@@ -53,12 +56,12 @@ export const Widget = () => {
   }, []);
 
   useEffect(() => {
-    if (scriptLoaded) {
+    if (scriptLoaded && isModalOpen) {
       initWidget();
     }
-  }, [scriptLoaded]);
-  
-  type DeliveryMode = 'office';
+  }, [scriptLoaded, isModalOpen]);
+
+  type DeliveryMode = "office";
 
   const initWidget = () => {
     if (window.CDEKWidget) {
@@ -74,13 +77,15 @@ export const Widget = () => {
         },
         onChoose: (deliveryMode: DeliveryMode, tariff: Tariff, address: OfficeAddress) => {
           console.log(`Выбранный режим доставки: ${deliveryMode}`);
-          // console.log('Выбранный тариф:', tariff);
           console.log('Адрес:', address);
           localStorage.setItem("Данные доставки", address.code);
         }
       });
     }
   };
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div>
@@ -90,7 +95,22 @@ export const Widget = () => {
           src="https://cdn.jsdelivr.net/npm/@cdek-it/widget@3"
         ></script>
       </Helmet>
-      <div id="cdek-map" style={{ width: widthValue, height: heightValue }}></div>
+
+      {/* Кнопка для открытия модального окна */}
+      <button onClick={openModal}>Выбрать пункт выдачи</button>
+
+      {/* Модальное окно с виджетом */}
+      {isModalOpen && (
+        <div className={styles.modal}>
+          <div className={styles["modal-content"]}>
+            <span className={styles.close} onClick={closeModal}>
+              &times;
+            </span>
+            <div id="cdek-map" style={{ width: widthValue, height: heightValue }}></div>
+          </div>
+        </div>
+
+      )}
     </div>
   );
 };

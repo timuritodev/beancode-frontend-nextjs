@@ -19,6 +19,7 @@ import cdek_logo from '../../images/cdek_logo.svg';
 import { calculateDeliverApi, getCountriesApi } from "@/services/redux/slices/delivery/delivery";
 import { UserData } from "../OrdersBlock/OrdersBlock";
 import Loader from "../Loader/Loader";
+import { Widget } from "./Widget";
 
 declare global {
   interface Window {
@@ -192,7 +193,12 @@ export const DeliveryBlock = () => {
       ) : (
         <>
           {isCourierVisible && <DeliveryCard data={deliveryPrice} image={cdek_logo} />}
-          {isDeliveryPointVisible && <DeliveryCard data={deliveryPrice} image={cdek_logo} />}
+          {isDeliveryPointVisible &&
+            <>
+              <Widget />
+              <DeliveryCard data={deliveryPrice} image={cdek_logo} />
+            </>
+          }
         </>
       )}
       {/* {isCourierVisible && (

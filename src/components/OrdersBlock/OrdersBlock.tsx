@@ -369,18 +369,30 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   }, [redirecting, formUrl, dispatch, user.id]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    // Функция для запроса токена
+    const requestToken = () => {
       dispatch(
         authDeliverApi({
           grant_type: "client_credentials",
           client_id: "j8DuMgCvPlZ44wrKirinlIk2qIyWRv6X",
           client_secret: "dOb3lthS9H9KvZLc9IlUWd1yneFNlw3F",
         })
-      )
+      );
+    };
+  
+    // Если токен пустой, запросить новый
+    if (!cdekToken?.access_token) {
+      requestToken();
+    }
+  
+    // Установить интервал для обновления токена каждые 5 минут
+    const interval = setInterval(() => {
+      requestToken();
     }, 5 * 60 * 1000);
-
+  
     return () => clearInterval(interval);
-  }, []);
+  }, [cdekToken, dispatch]);
+  
 
   return (
     <div className={styles.orderBlock}>
