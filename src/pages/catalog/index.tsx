@@ -115,6 +115,8 @@ export const CatalogPage = () => {
             </select>
           </form>
           <h1 className={styles.catalog__subtitle}>Кофе для эспрессо</h1>
+          <h2 className={styles.catalog__description}>Новинки</h2>
+          <ProductList data={filterProductsByCountry("Новинка")} />
           <h2 className={styles.catalog__description}>Бразилия</h2>
           <ProductList data={filterProductsByCountry("Бразилия")} />
           <h2 className={styles.catalog__description}>Америка</h2>
