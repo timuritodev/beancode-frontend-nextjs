@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { DeliveryBlock } from "../../components/DeliveryBlock/DeliveryBlock";
-import { Widget } from "../../components/DeliveryBlock/Widget";
+import { Widget } from "../../components/Widget/Widget";
 import { OrderInputs } from "../../components/OrderInputs/OrderInputs";
 import { OrderBlock } from "../../components/OrdersBlock/OrdersBlock";
 import { PaymentBlock } from "../../components/PaymentBlock/PaymentBlock";

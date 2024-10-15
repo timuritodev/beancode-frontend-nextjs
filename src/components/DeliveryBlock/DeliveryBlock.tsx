@@ -19,7 +19,7 @@ import cdek_logo from '../../images/cdek_logo.svg';
 import { calculateDeliverApi, getCountriesApi } from "@/services/redux/slices/delivery/delivery";
 import { UserData } from "../OrdersBlock/OrdersBlock";
 import Loader from "../Loader/Loader";
-import { Widget } from "./Widget";
+import { Widget } from "../Widget/Widget";
 
 declare global {
   interface Window {
@@ -41,9 +41,18 @@ export const DeliveryBlock = () => {
       dispatch(getUserInfo(user.token));
     }
   }, [dispatch, user]);
-  const [deliveryType, setDeliveryType] = useState<'courier' | 'pickup'>('courier');
+  const [deliveryType, setDeliveryType] = useState<'courier' | 'pickup'>('pickup');
 
-  let userData: UserData
+  // let userData: UserData
+  let userData: UserData = {
+    userId: 0,
+    name: '',
+    surname: '',
+    phone: '',
+    email: '',
+    address: '',
+    city: ''
+  };
   const storedData = localStorage.getItem("orderFormData");
 
   if (user.token) {
@@ -65,8 +74,6 @@ export const DeliveryBlock = () => {
       if (userData && userData.city) {
         try {
           await dispatch(getCountriesApi({ data: { city: userData.city }, token: cdekToken.access_token }));
-
-          console.log(countries, "countries");
 
           const tariffCode = deliveryType === 'courier' ? 137 : 136;
 
@@ -108,8 +115,6 @@ export const DeliveryBlock = () => {
     fetchTokenAndCalculateDelivery();
   }, [dispatch, user, deliveryType]);
 
-  console.log(deliveryType, 'delv')
-
   return (
     <div className={styles.delivery_block__container}>
       <Helmet>
@@ -150,7 +155,7 @@ export const DeliveryBlock = () => {
             <DeliveryCard data={deliveryPrice} image={cdek_logo} />
           ) : (
             <>
-              <Widget />
+              <Widget city={userData ? userData.city : 'Москва'} />
               <DeliveryCard data={deliveryPrice} image={cdek_logo} />
             </>
           )}

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useResize } from "../../hooks/useResize";
 import styles from './Widget.module.scss';
@@ -31,7 +31,12 @@ interface OfficeAddress {
   location: number[];
 }
 
-export const Widget = () => {
+interface WidgetProps {
+  city?: string
+}
+
+export const Widget: FC<WidgetProps> = ({ city }) => {
+
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); // Стейт для модального окна
 
@@ -66,11 +71,11 @@ export const Widget = () => {
   const initWidget = () => {
     if (window.CDEKWidget) {
       new window.CDEKWidget({
-        from: "Москва",
+        from: city,
         root: "cdek-map",
         apiKey: "c71385a4-e8d4-4e71-8c0d-f0d16956e3ba",
         servicePath: "https://beancode.ru/service.php",
-        defaultLocation: "Москва",
+        defaultLocation: city,
         hideDeliveryOptions: {
           office: false,
           door: true,
@@ -78,7 +83,7 @@ export const Widget = () => {
         onChoose: (deliveryMode: DeliveryMode, tariff: Tariff, address: OfficeAddress) => {
           console.log(`Выбранный режим доставки: ${deliveryMode}`);
           console.log('Адрес:', address);
-          localStorage.setItem("Данные доставки", address.code);
+          localStorage.setItem("pvz_code", address.code);
         }
       });
     }

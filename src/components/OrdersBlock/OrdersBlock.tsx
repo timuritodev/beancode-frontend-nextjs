@@ -162,7 +162,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
     userData = JSON.parse(storedData);
   }
 
-  const address_cdek = localStorage.getItem('Данные доставки')
+  const address_cdek = localStorage.getItem('pvz_code')
 
   const handleClickPayButton = async () => {
     try {
@@ -260,7 +260,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   };
 
   const handleDeliverOrder = async () => {
-    const address_cdek = localStorage.getItem('Данные доставки')
+    const address_cdek = localStorage.getItem('pvz_code')
     try {
       const authResponse = await dispatch(
         authDeliverApi({
@@ -324,42 +324,6 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       console.error("Error during order registration:", error);
     }
   };
-
-  // useEffect(() => {
-  //   dispatch(getCountriesApi({ data: { city: userData.city }, token: cdekToken.access_token }));
-  // }, [user])
-
-  //         // await dispatch(getCountriesApi({ data: { city: userData.city }, token: token }));
-  //         // Делаем запрос на расчет доставки
-  //         await dispatch(
-  //           calculateDeliverApi({
-  //             data: {
-  //               tariff_code: 137,
-  //               from_location: {
-  //                 // code: 433,
-  //                 city: 'Набережные Челны',
-  //                 address: 'проспект Казанский, 226 ст2',
-  //               },
-  //               to_location: {
-  //                 code: countries.code,
-  //                 // city: 'Казань',
-  //                 // address: 'улица Разведчика Ахмерова 7',
-  //               },
-  //               packages: cartproducts.map((product) => ({
-  //                 weight: parseFloat(product.weight),
-  //               })),
-  //             },
-  //             token: token,
-  //           })
-  //         );
-  //       } catch (error) {
-  //         console.error("Ошибка при запросе:", error);
-  //       }
-  //     }
-  //   };
-
-  //   fetchTokenAndCalculateDelivery();
-  // }, [dispatch, user]);
 
   useEffect(() => {
     if (redirecting && formUrl) {
