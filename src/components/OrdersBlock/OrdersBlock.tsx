@@ -60,6 +60,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   const deliver = useAppSelector((state) => state.deliver.deliveryData);
   const countries = useAppSelector((state) => state.deliver.deliveryCountries);
   const cdekToken = useAppSelector((state) => state.deliver.deliveryToken);
+  const deliveryPrice = useAppSelector((state) => state.deliver.deliveryPriceData);
 
   const randomOrderNumber = Math.floor(Math.random() * 900000) + 100000;
 
@@ -118,6 +119,8 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   if (discount > 0) {
     discountedSum = sum * (1 - discount / 100);
   }
+
+  discountedSum = sum + deliveryPrice.total_sum;
 
   // if (totalWeight < 1000) {
   //   discountedSum += deliveryCost;
@@ -332,31 +335,31 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
     }
   }, [redirecting, formUrl, dispatch, user.id]);
 
-  useEffect(() => {
-    // Функция для запроса токена
-    const requestToken = () => {
-      dispatch(
-        authDeliverApi({
-          grant_type: "client_credentials",
-          client_id: "j8DuMgCvPlZ44wrKirinlIk2qIyWRv6X",
-          client_secret: "dOb3lthS9H9KvZLc9IlUWd1yneFNlw3F",
-        })
-      );
-    };
-  
-    // Если токен пустой, запросить новый
-    if (!cdekToken?.access_token) {
-      requestToken();
-    }
-  
-    // Установить интервал для обновления токена каждые 5 минут
-    const interval = setInterval(() => {
-      requestToken();
-    }, 5 * 60 * 1000);
-  
-    return () => clearInterval(interval);
-  }, [cdekToken, dispatch]);
-  
+  // useEffect(() => {
+  //   // Функция для запроса токена
+  //   const requestToken = () => {
+  //     dispatch(
+  //       authDeliverApi({
+  //         grant_type: "client_credentials",
+  //         client_id: "j8DuMgCvPlZ44wrKirinlIk2qIyWRv6X",
+  //         client_secret: "dOb3lthS9H9KvZLc9IlUWd1yneFNlw3F",
+  //       })
+  //     );
+  //   };
+
+  //   // Если токен пустой, запросить новый
+  //   if (!cdekToken?.access_token) {
+  //     requestToken();
+  //   }
+
+  //   // Установить интервал для обновления токена каждые 5 минут
+  //   const interval = setInterval(() => {
+  //     requestToken();
+  //   }, 5 * 60 * 1000);
+
+  //   return () => clearInterval(interval);
+  // }, [cdekToken, dispatch]);
+
 
   return (
     <div className={styles.orderBlock}>
@@ -393,6 +396,10 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         При заказе от 1кг доставка бесплатная по набережным челнам
       </p> */}
       {/* </div> */}
+      <p className={styles.orderBlock__text}>
+          Итого - <span className={styles.orderBlock__total}>{discountedSum} ₽</span>,
+          включая стоимость доставки {deliveryPrice.total_sum}
+        </p>
       <form
         className={styles.orderBlock__input_container}
         onSubmit={handleSubmit(onSubmit)}

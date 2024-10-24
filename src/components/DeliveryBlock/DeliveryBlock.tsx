@@ -16,7 +16,7 @@ import { Helmet } from "react-helmet";
 import styles from "./style.module.scss";
 import { DeliveryCard } from "../DeliveryCard/DeliveryCard";
 import cdek_logo from '../../images/cdek_logo.svg';
-import { calculateDeliverApi, getCountriesApi } from "@/services/redux/slices/delivery/delivery";
+import { authDeliverApi, calculateDeliverApi, getCountriesApi } from "@/services/redux/slices/delivery/delivery";
 import { UserData } from "../OrdersBlock/OrdersBlock";
 import Loader from "../Loader/Loader";
 import { Widget } from "../Widget/Widget";
@@ -114,6 +114,31 @@ export const DeliveryBlock = () => {
 
     fetchTokenAndCalculateDelivery();
   }, [dispatch, user, deliveryType]);
+
+  useEffect(() => {
+    // Функция для запроса токена
+    const requestToken = () => {
+      dispatch(
+        authDeliverApi({
+          grant_type: "client_credentials",
+          client_id: "j8DuMgCvPlZ44wrKirinlIk2qIyWRv6X",
+          client_secret: "dOb3lthS9H9KvZLc9IlUWd1yneFNlw3F",
+        })
+      );
+    };
+
+    // Если токен пустой, запросить новый
+    if (!cdekToken?.access_token) {
+      requestToken();
+    }
+
+    // Установить интервал для обновления токена каждые 5 минут
+    const interval = setInterval(() => {
+      requestToken();
+    }, 5 * 60 * 1000);
+
+    return () => clearInterval(interval);
+  }, [cdekToken, dispatch]);
 
   return (
     <div className={styles.delivery_block__container}>
