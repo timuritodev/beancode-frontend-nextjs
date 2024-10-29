@@ -144,6 +144,13 @@ export const Burger: FC<BurgerProps> = ({ isPopupOpen, switchPopup }) => {
             >
               Кофе для бизнеса
             </Link>
+            <Link
+              href="/coffee-machines"
+              className={styles.burger__link}
+              onClick={handleLinkClick}
+            >
+              Кофе машины
+            </Link>
           </div>
         </div>
       </div>

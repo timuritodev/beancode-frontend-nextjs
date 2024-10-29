@@ -81,6 +81,9 @@ const Header: FC = () => {
           <Link href="/wholesale" className={styles.header__link}>
             Кофе для бизнеса
           </Link>
+          <Link href="/coffee-machines" className={styles.header__link}>
+            Кофе машины
+          </Link>
         </div>
 
         <div className={styles.header__search__container}>
