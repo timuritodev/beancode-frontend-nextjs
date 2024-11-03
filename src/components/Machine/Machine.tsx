@@ -13,7 +13,7 @@ import { PopupForm } from "../Popups/PopupForm";
 
 export const Machine = ({ data }: { data: IMachine }) => {
   const dispatch = useAppDispatch();
-  const router = useRouter(); 
+  const router = useRouter();
 
   const handleClickImage = () => {
     // router.push("/product"); 
@@ -41,9 +41,14 @@ export const Machine = ({ data }: { data: IMachine }) => {
         <h2 className={styles.product__title}>{data.title}</h2>
         <p className={styles.product__description}>{data.description}</p>
         <button
-          type="submit"
           className={styles.product__button}
-          onClick={() => {setIsPopupOpened(true)}}
+          onClick={() => {
+            setIsPopupOpened(true);
+            router.push({
+              // pathname: router.pathname,
+              query: { ...router.query, title: data.title }
+            });
+          }}
         >
           Заказать
         </button>

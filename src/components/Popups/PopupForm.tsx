@@ -36,6 +36,8 @@ export const PopupForm: FC<IChangesSavedPopup> = ({
 
   const dispatch = useAppDispatch();
 
+  const { title } = router.query;
+
   const {
     register,
     handleSubmit,
@@ -48,7 +50,7 @@ export const PopupForm: FC<IChangesSavedPopup> = ({
       sendEmailApi({
         email: getValues("email"),
         subject: "Кофе машины",
-        text: `ФИО - ${getValues("fio")} \nАдрес электронной почты - ${getValues("email")} \nНомер телефона - ${getValues("phone")} \n`,
+        text: `Модель - ${title} \nФИО - ${getValues("fio")} \nАдрес электронной почты - ${getValues("email")} \nНомер телефона - ${getValues("phone")} \n`,
         greetings: "",
       })
     )
