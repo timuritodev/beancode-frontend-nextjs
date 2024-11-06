@@ -1,76 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/services/typeHooks";
-import { IProduct } from "@/types/Product.types";
-import { selectUser } from "@/services/redux/slices/user/user";
 import styles from "./style.module.scss"; // Импорт стилей
 import Head from "next/head";
 import { getMachinesApi } from "@/services/redux/slices/machine/machine";
 import { MachineList } from "@/components/Machine/MachineList";
-import { IMachine } from "@/types/Machine.types";
 
 export const MachineCatalogPage = () => {
   const dispatch = useAppDispatch();
-  const user = useAppSelector(selectUser);
 
   const machines = useAppSelector((state) => state.machine.products);
-  const [filteredProducts, setFilteredProducts] = useState<IMachine[]>([]);
-  const [sortOption, setSortOption] = useState("");
+
 
   useEffect(() => {
     dispatch(getMachinesApi());
   }, [dispatch]);
 
-  useEffect(() => {
-    const sortedProducts = [...machines];
-
-    switch (sortOption) {
-      case "name":
-        sortedProducts.sort((a, b) => a.title.localeCompare(b.title));
-        break;
-      case "maxPrice":
-        sortedProducts.sort(
-          (a, b) => parseFloat(b.price) - parseFloat(a.price)
-        );
-        break;
-      case "minPrice":
-        sortedProducts.sort(
-          (a, b) => parseFloat(a.price) - parseFloat(b.price)
-        );
-        break;
-      default:
-        break;
-    }
-
-    setFilteredProducts(sortedProducts);
-  }, [machines, sortOption]);
-
-  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSortOption(e.target.value);
-  };
-
   return (
     <>
+      <Head>
+        <title>Кофе-машины - Каталог - Beancode</title>
+        <meta name="description" content="Каталог кофемашин для дома и офиса. Выберите модель по характеристикам и получите доставку до двери." />
+        <meta name="keywords" content="кофемашины, купить кофемашину, кофемашины для дома, кофемашины для офиса, каталог кофемашин" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://beancode.ru/machines" />
+        <meta property="og:title" content="Кофемашины - Каталог - Beancode" />
+        <meta property="og:description" content="Откройте для себя каталог кофемашин для дома и офиса с доставкой по Набережным Челнам и регионам." />
+        <meta property="og:image" content="https://beancode.ru/api/images/open_graph.jpeg" />
+      </Head>
       <div className={styles.catalog}>
         <div className={styles.catalog__container}>
-          <h1 className={styles.catalog__title}>Каталог Кофе Машин</h1>
-          <form className={styles.catalog__form}>
-            <select
-              id="sortDropdown"
-              className={styles.catalog__dropdown}
-              name="sortOption"
-              value={sortOption}
-              onChange={handleSortChange}
-            >
-              <option value="">Выберите опцию сортировки</option>
-              <option value="name">Названию (в алфавитном порядке)</option>
-              <option value="maxPrice">Макс. Цене (по убыванию)</option>
-              <option value="minPrice">Мин. Цене (по возрастанию)</option>
-              <option value="acidity">Кислотности</option>
-              <option value="density">Плотности</option>
-            </select>
-          </form>
-          <h1 className={styles.catalog__subtitle}>Кофе для эспрессо</h1>
-          <h2 className={styles.catalog__description}>Новинки</h2>
+          <h1 className={styles.catalog__title}>Каталог Кофемашин</h1>
           <MachineList data={machines} />
         </div>
       </div>
