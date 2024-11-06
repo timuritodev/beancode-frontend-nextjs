@@ -67,16 +67,19 @@ const Header: FC = () => {
           )} */}
           {user.token === "" && (
             <>
-              <Link href="/sign-up" className={styles.header__link}>
+              {/* <Link href="/sign-up" className={styles.header__link}>
                 Регистрация
-              </Link>
+              </Link> */}
               <Link href="/sign-in" className={styles.header__link}>
-                Вход в учетную запись
+                Вход 
               </Link>
             </>
           )}
           <Link href="/catalog" className={styles.header__link}>
             Товары
+          </Link>
+          <Link href="/coffee-machines" className={styles.header__link}>
+            Кофемашины
           </Link>
           <Link href="/wholesale" className={styles.header__link}>
             Кофе для бизнеса
