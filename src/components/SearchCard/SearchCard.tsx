@@ -19,7 +19,7 @@ export const SearchCard: FC<SearchCardProps> = ({ data, isClose, switchPopup }) 
   const handleClick = (id: number) => {
     dispatch(getProductbyidApi(id));
     isClose();
-    switchPopup();
+    // switchPopup();
     window.scrollTo(0, 0);
   };
 

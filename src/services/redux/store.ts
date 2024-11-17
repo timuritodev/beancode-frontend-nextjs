@@ -22,6 +22,7 @@ import { orderStatusReducer } from './slices/orderStatus/orderStatus';
 import { wholesaleReducer } from './slices/wholesale/wholesale';
 import { promoReducer } from './slices/promo/promo';
 import { deliverReducer } from './slices/delivery/delivery';
+import { machineReducer } from './slices/machine/machine';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   wholesale: wholesaleReducer,
   promo: promoReducer,
   deliver: deliverReducer,
+  machine: machineReducer,
 });
 
 const persistConfig = {
