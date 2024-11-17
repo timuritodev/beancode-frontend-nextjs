@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import Popup from "./Popup";
 import styles from "./style.module.scss";
 import { useRouter } from "next/router";
@@ -19,24 +19,22 @@ interface IChangesSavedPopup {
   setIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface Form {
-  fio: string,
-  email: string,
-  phone: string,
+  fio: string;
+  email: string;
+  phone: string;
 }
+
 export const PopupForm: FC<IChangesSavedPopup> = ({
   isOpened,
   setIsOpened,
 }) => {
   const router = useRouter();
-
-  const handleClickClose = () => {
-    setIsOpened(false);
-    router.push("/catalog");
-  };
-
   const dispatch = useAppDispatch();
 
   const { title } = router.query;
+
+  const [isLoading, setIsLoading] = useState(false); // Для отслеживания состояния загрузки
+  const [isSent, setIsSent] = useState(false); // Для отслеживания отправки
 
   const {
     register,
@@ -46,6 +44,9 @@ export const PopupForm: FC<IChangesSavedPopup> = ({
   } = useForm<Form>({ mode: "onChange" });
 
   const onSubmit: SubmitHandler<Form> = () => {
+    setIsLoading(true); // Начинаем загрузку
+    setIsSent(false); // Сбрасываем статус отправки
+
     dispatch(
       sendEmailApi({
         email: getValues("email"),
@@ -55,8 +56,14 @@ export const PopupForm: FC<IChangesSavedPopup> = ({
       })
     )
       .unwrap()
+      .then(() => {
+        setIsLoading(false); // Остановить индикатор загрузки
+        setIsSent(true); // Успешно отправлено
+        setTimeout(() => setIsOpened(false), 500); // Закрыть попап через 0.5 секунды
+      })
       .catch((err) => {
-        console.log("dispatch signInUser err:", err);
+        setIsLoading(false); // Остановить индикатор загрузки
+        console.error("dispatch signInUser err:", err);
       });
   };
 
@@ -102,17 +109,13 @@ export const PopupForm: FC<IChangesSavedPopup> = ({
             error={errors?.email?.message}
           />
           <CustomButton
-            buttonText={"Отправить данные"}
+            buttonText={isLoading ? "Отправка..." : isSent ? "Отправлено" : "Отправить данные"}
             handleButtonClick={handleSubmit(onSubmit)}
-            disabled={!isDirty || !isValid}
+            disabled={!isDirty || !isValid || isLoading || isSent}
             type="button"
           />
         </form>
-        {/* <button className={styles.popup__close} onClick={handleClickClose}>
-          Отправить
-        </button> */}
       </div>
     </Popup>
   );
 };
-
