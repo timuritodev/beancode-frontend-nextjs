@@ -1,0 +1,39 @@
+.checkbox {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	cursor: pointer;
+	font-size: 14px;
+	user-select: none;
+
+	input {
+		display: none;
+	}
+
+	.checkmark {
+		width: 18px;
+		height: 18px;
+		border: 2px solid #465244;
+		border-radius: 4px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: background 0.2s, border-color 0.2s;
+
+		&::before {
+			content: '✔';
+			color: white;
+			font-size: 14px;
+			display: none;
+		}
+	}
+
+	input:checked + .checkmark {
+		background: #465244;
+		border-color: #465244;
+
+		&::before {
+			display: block;
+		}
+	}
+}

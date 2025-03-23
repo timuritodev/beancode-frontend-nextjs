@@ -1,9 +1,20 @@
+import CustomCheckbox from '@/components/CustomCheckbox/CustomCheckbox';
+import Head from 'next/head';
+import Link from 'next/link';
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import styles from "./style.module.scss";
+import { CustomButton } from "../../components/CustomButton/CustomButton";
 import CustomInput from "../../components/CustomInput/CustomInput";
-import { CustomInputTypes } from "../../types/CustomInput.types";
+import { PopupErrorRegister } from "../../components/Popups/PopupErrorRegister";
+import { PopupRegister } from "../../components/Popups/PopupRegister";
+import {
+  getUserInfo,
+  setUser,
+  signUpUser,
+} from "../../services/redux/slices/user/user";
 import { useAppDispatch } from "../../services/typeHooks";
 import { ISignUpData } from "../../types/Auth.types";
+import { CustomInputTypes } from "../../types/CustomInput.types";
 import {
   ADDRESS_VALIDATION_CONFIG,
   AREA_VALIDATION_CONFIG,
@@ -14,22 +25,14 @@ import {
   PHONE_VALIDATION_CONFIG,
   SURNAME_VALIDATION_CONFIG,
 } from "../../utils/constants";
-import {
-  signUpUser,
-  setUser,
-  getUserInfo,
-} from "../../services/redux/slices/user/user";
-import { CustomButton } from "../../components/CustomButton/CustomButton";
-import { useEffect, useState } from "react";
-import { PopupRegister } from "../../components/Popups/PopupRegister";
-import { PopupErrorRegister } from "../../components/Popups/PopupErrorRegister";
-import Head from 'next/head';
+import styles from "./style.module.scss";
 
 const SignUpPage = () => {
   const dispatch = useAppDispatch();
 
   const [isSavedPopupOpened, setIsSavedPopupOpened] = useState<boolean>(false);
   const [isErrorPopupOpened, setIsErrorPopupOpened] = useState<boolean>(false);
+  const [isPrivacyAccepted, setIsPrivacyAccepted] = useState<boolean>(false);
 
   const {
     register,
@@ -198,8 +201,20 @@ const SignUpPage = () => {
             <CustomButton
               buttonText={"Зарегистрироваться"}
               handleButtonClick={handleSubmit(onSubmit)}
-              disabled={!isDirty || !isValid}
+              disabled={!isDirty || !isValid || !isPrivacyAccepted}
               type="button"
+            />
+            <CustomCheckbox
+              checked={isPrivacyAccepted}
+              onChange={setIsPrivacyAccepted}
+              label={
+                <p className={styles.text_privacy}>
+                  Я согласен с{" "}
+                  <Link href="/privacy-policy" target="_blank" className={styles.link_privacy}>
+                    политикой конфиденциальности
+                  </Link>
+                </p>
+              }
             />
           </form>
         </div>
