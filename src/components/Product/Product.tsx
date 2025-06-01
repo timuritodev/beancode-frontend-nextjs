@@ -2,7 +2,6 @@ import { useState } from "react";
 import { IProduct } from "../../types/Product.types";
 import styles from "./style.module.scss"; // Import CSS Module
 import { useRouter } from "next/router"; // Use useRouter from next/router
-import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
 import { useAppDispatch } from "../../services/typeHooks";
 import { MinusPlusButtons } from "../MinusPlusButtons/MinusPlusButtons";
 import { API_BASE_URL } from "../../utils/constants";
@@ -10,15 +9,13 @@ import { Grains } from "../Grains/Grains";
 import Image from "next/image";
 
 export const Product = ({ data }: { data: IProduct }) => {
-  const dispatch = useAppDispatch();
   const router = useRouter(); // Initialize router
 
   const [selectedPrice, setSelectedPrice] = useState(data.low_price);
   const [selectedWeight, setSelectedWeight] = useState(data.low_weight);
 
   const handleClickImage = () => {
-    router.push("/product"); // Use router.push for navigation
-    dispatch(getProductbyidApi(data.id));
+    router.push(`/product/${data.id}`); // Use router.push for navigation
   };
 
   const handleChange = (price: string, weight: string) => {

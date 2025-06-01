@@ -12,7 +12,6 @@ import { selectUser } from "../../services/redux/slices/user/user";
 import minus from "../../images/minus.svg";
 import plus from "../../images/plus.svg";
 import { useRouter } from "next/router";
-import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
 import { ICart } from "../../types/Cart.types";
 import { useResize } from "../../hooks/useResize";
 import { API_BASE_URL } from "../../utils/constants";
@@ -30,8 +29,7 @@ export const ProductCard: FC<ProductCardProps> = ({ data, count }) => {
   const { width } = useResize();
 
   const handleClickImage = () => {
-    router.push("/product");
-    dispatch(getProductbyidApi(data.id));
+    router.push(`/product/${data.id}`);
   };
 
   const userId = user.id;

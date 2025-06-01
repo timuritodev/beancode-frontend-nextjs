@@ -19,18 +19,5 @@ export interface IProductState {
   status: "idle" | "success" | "loading" | "failed";
   error: string | undefined;
   products: Array<IProduct>;
-}
-
-export interface IProductbyIdState {
-  status: "idle" | "success" | "loading" | "failed";
-  error: string | undefined;
   product: IProduct;
-}
-
-export interface IProductsProp {
-  data: IProduct[];
-}
-
-export interface IProductProp {
-  data: IProduct;
 }

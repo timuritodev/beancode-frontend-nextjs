@@ -18,7 +18,3 @@ export const fetchData = (url: string, method: string, token?: string) => {
 		},
 	}).then((res) => checkRes(res));
 };
-
-export const getProductbyid = (productId: number): Promise<IProduct> => {
-	return fetchData(`${API_BASE_URL}/products/${productId}`, 'GET');
-};

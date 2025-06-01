@@ -2,8 +2,6 @@ import styles from "./style.module.scss";
 import { FC } from "react";
 import { IProduct } from "../../types/Product.types";
 import { useRouter } from "next/router";
-import { useAppDispatch } from "../../services/typeHooks";
-import { getProductbyidApi } from "../../services/redux/slices/productbyid/productbyid";
 import { API_BASE_URL } from "../../utils/constants";
 import Image from "next/image";
 
@@ -14,10 +12,8 @@ export interface SearchCardProps {
 }
 
 export const SearchCard: FC<SearchCardProps> = ({ data, isClose, switchPopup }) => {
-  const dispatch = useAppDispatch();
 
-  const handleClick = (id: number) => {
-    dispatch(getProductbyidApi(id));
+  const handleClick = () => {
     isClose();
     // switchPopup();
     window.scrollTo(0, 0);
@@ -31,8 +27,8 @@ export const SearchCard: FC<SearchCardProps> = ({ data, isClose, switchPopup }) 
     <div
       key={data.id}
       onClick={() => {
-        router.push("/product");
-        handleClick(data.id);
+        router.push(`/product/${data.id}`);
+        handleClick();
       }}
       className={styles.search__card}
     >
