@@ -14,6 +14,7 @@ import {
 } from "../../utils/constants";
 import { PopupChanges } from "../Popups/PopupChanges";
 import { CustomButton } from "../CustomButton/CustomButton";
+import { useIsClient } from "@/hooks/useIsClient";
 
 interface FormData {
   userId: string;
@@ -34,23 +35,20 @@ export const SessionOrderInputs: FC<SessionOrderInputsProps> = ({
   handleDataSaved,
 }) => {
   const [isSavedPopupOpened, setIsSavedPopupOpened] = useState<boolean>(false);
-  const [dataFromLocalStorage, setDataFromLocalStorage] = useState<FormData>(
-    () => {
-      const storedData = localStorage.getItem("orderFormData");
-      return storedData
-        ? JSON.parse(storedData)
-        : {
-            userId: "",
-            name: "",
-            surname: "",
-            phone: "",
-            email: "",
-            address: "",
-            city: "",
-            area: "",
-          };
-    }
-  );
+  const [dataFromLocalStorage, setDataFromLocalStorage] = useState<FormData>(() => {
+    // На сервере сразу возвращаем пустую структуру, 
+    // в браузере при инициализации всё равно закроется useEffect ниже
+    return {
+      userId: "",
+      name: "",
+      surname: "",
+      phone: "",
+      email: "",
+      address: "",
+      city: "",
+      area: "",
+    };
+  });
 
   const {
     register,
@@ -67,8 +65,11 @@ export const SessionOrderInputs: FC<SessionOrderInputsProps> = ({
   useEffect(() => {
     setIsSavedPopupOpened(false);
   }, []);
+ 
+  const isClient = useIsClient();
 
   useEffect(() => {
+    if (isClient) return;
     const storedData = localStorage.getItem("orderFormData");
     if (storedData) {
       const formData: FormData = JSON.parse(storedData);

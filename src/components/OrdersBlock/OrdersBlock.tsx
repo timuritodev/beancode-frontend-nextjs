@@ -34,6 +34,7 @@ import {
 } from "../../services/redux/slices/delivery/delivery";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useIsClient } from "@/hooks/useIsClient";
 
 interface UserData {
   userId: number;
@@ -139,11 +140,9 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   const currentDate = new Date(currentTimestamp);
   const formattedDate = currentDate.toISOString().split("T")[0];
 
-  let userData: UserData;
+  const isClient = useIsClient();
+  let userData: UserData | undefined;
 
-  const storedData = localStorage.getItem("orderFormData");
-
-  // console.log(storedData, "storedData");
   if (user.token) {
     userData = {
       userId: user.id,
@@ -154,11 +153,16 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       address: user.address,
       city: user.city,
     };
-  } else if (storedData) {
-    userData = JSON.parse(storedData);
+  } else if (isClient) {
+    const storedData = localStorage.getItem("orderFormData");
+    if (storedData) {
+      userData = JSON.parse(storedData);
+    }
   }
 
+
   const handleClickPayButton = async () => {
+    if (!userData) return;
     try {
       await dispatch(
         payApi({
@@ -254,13 +258,13 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
               width: 10,
             })),
             recipient: {
-              name: `${userData.name} ${userData.surname}`,
+              name: `${userData?.name} ${userData?.surname}`,
               phones: [
                 {
-                  number: userData.phone,
+                  number: userData?.phone ?? '',
                 },
               ],
-              email: userData.email,
+              email: userData?.email,
             },
             sender: {
               name: "Петров Петр",
