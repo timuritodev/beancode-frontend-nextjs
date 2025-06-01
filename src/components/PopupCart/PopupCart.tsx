@@ -5,6 +5,7 @@ import { ProductCardList } from "../ProductCard/ProductCardList";
 import { deleteAllApi, deleteAllSessionApi } from "../../services/redux/slices/cart/cart";
 import { selectUser } from "../../services/redux/slices/user/user";
 import { useRouter } from "next/router";
+import { useIsClient } from "@/hooks/useIsClient";
 
 interface PopupCartProps {
   isPopupOpen: boolean;
@@ -19,6 +20,7 @@ export const PopupCart: FC<PopupCartProps> = ({
   const router = useRouter();
   const user = useAppSelector(selectUser);
   const cartproducts = useAppSelector((state) => state.cart.cart);
+  const isClient = useIsClient();
 
   const handleClickOrderButton = () => {
     router.push("/order");
@@ -53,8 +55,9 @@ export const PopupCart: FC<PopupCartProps> = ({
       <div className={styles.popupCart__content}>
         <h1 className={styles.popupCart__title}>Ваша корзина</h1>
         <p className={styles.popupCart__text}>
-          В вашей корзине {cartproducts.length} товаров
+          {isClient ? `В вашей корзине ${cartproducts.length} товаров` : ''}
         </p>
+
         <ProductCardList data={cartproducts} />
         <div className={styles.popupCart__info__container}>
           <button
@@ -67,7 +70,10 @@ export const PopupCart: FC<PopupCartProps> = ({
           >
             Удалить все
           </button>
-          <p className={styles.popupCart__text__sum}>Всего: {sum} ₽</p>
+          <p className={styles.popupCart__text__sum}>
+            {isClient ? `Всего: ${sum} ₽` : ''}
+          </p>
+
         </div>
         <div className={styles.popupCart__button__container}>
           <button
