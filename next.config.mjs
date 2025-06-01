@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-      domains: ['beancode.ru'], 
+      domains: ['localhost'], 
       remotePatterns: [
         {
           protocol: 'https',

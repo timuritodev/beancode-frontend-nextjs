@@ -1,22 +1,28 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// hooks/useResize.ts
 import { useState, useEffect } from 'react';
+
 const SCREENBREAKPOINT = 1320;
 
 export const useResize = () => {
-	const [width, setWidth] = useState(window.innerWidth);
+  // Инициализируем 0, чтобы во время SSR не было window.innerWidth
+  const [width, setWidth] = useState<number>(0);
 
-	useEffect(() => {
-		const handleResize = (event: any) => {
-			setWidth(event.target.innerWidth);
-		};
-		window.addEventListener('resize', handleResize);
-		return () => {
-			window.removeEventListener('resize', handleResize);
-		};
-	}, []);
+  useEffect(() => {
+    // Только в браузере: получаем актуальную ширину
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
 
-	return {
-		width,
-		isBreakpoint: width > SCREENBREAKPOINT,
-	};
+    // Сразу один раз задаём ширину
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  return {
+    width,
+    isBreakpoint: width > SCREENBREAKPOINT,
+  };
 };

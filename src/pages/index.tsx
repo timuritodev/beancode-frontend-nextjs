@@ -12,6 +12,13 @@ import { selectUser } from "@/services/redux/slices/user/user";
 import { useAppDispatch, useAppSelector } from "@/services/typeHooks";
 import { useEffect } from "react";
 import styles from "./index.module.scss";
+import { GetServerSideProps } from "next";
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    props: {}, // никаких данных с сервера не передаём
+  };
+};
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
