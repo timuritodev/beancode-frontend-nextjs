@@ -1,35 +1,55 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import styles from "./style.module.scss";
-import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
-import { ProductsSlider } from "../../components/ProductsSlider/ProductsSlider";
-import { useEffect, useState } from "react";
-import { MinusPlusButtons } from "../../components/MinusPlusButtons/MinusPlusButtons";
-import { Grains } from "../../components/Grains/Grains";
-import { useResize } from "../../hooks/useResize";
-import Loader from "../../components/Loader/Loader";
-import { API_BASE_URL } from "../../utils/constants";
-import { ProductImagesSlider } from "../../components/ProductImagesSlider/ProductImagesSlider";
-import Image from "next/image";
+import { getProductbyid, getProducts } from '@/services/redux/slices/product/productAPI';
+import { IProduct } from '@/types/Product.types';
+import { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
-import { useRouter } from "next/router";
-import { getProductbyidApi } from "@/services/redux/slices/product/product";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { Grains } from "../../components/Grains/Grains";
+import Loader from "../../components/Loader/Loader";
+import { MinusPlusButtons } from "../../components/MinusPlusButtons/MinusPlusButtons";
+import { ProductsSlider } from "../../components/ProductsSlider/ProductsSlider";
+import { useResize } from "../../hooks/useResize";
+import { API_BASE_URL } from "../../utils/constants";
+import styles from "./style.module.scss";
 
-const ProductPage = () => {
-  const product = useAppSelector((state) => state.products.product);
-  const products = useAppSelector((state) => state.products.products);
-  const loading = useAppSelector((state) => state.products.status);
-  const { width } = useResize();
-  const router = useRouter();
-  const { id } = router.query;
-  const [selectedPrice, setSelectedPrice] = useState("");
-  const [selectedWeight, setSelectedWeight] = useState("");
-  const dispatch = useAppDispatch();
+interface ProductPageProps {
+  product: IProduct;
+  products: IProduct[];
+}
 
-  useEffect(() => {
-    if (id) {
-      dispatch(getProductbyidApi((+id)));
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const id = context.params?.id;
+
+  if (!id || Array.isArray(id)) {
+    return { notFound: true };
+  }
+
+  try {
+    const product = await getProductbyid(+id);
+    const products = await getProducts();
+
+    if (!product) {
+      return { notFound: true };
     }
-  }, [id, dispatch]);
+
+    return {
+      props: {
+        product,
+        products,
+      },
+    };
+  } catch (err) {
+    return {
+      notFound: true,
+    };
+  }
+};
+
+const ProductPage: NextPage<ProductPageProps> = ({ product, products }) => {
+  const { width } = useResize();
+  const [selectedPrice, setSelectedPrice] = useState(product.low_price);
+  const [selectedWeight, setSelectedWeight] = useState(product.low_weight);
 
   useEffect(() => {
     if (product) {
@@ -48,7 +68,7 @@ const ProductPage = () => {
 
   const imageUrl = API_BASE_URL + product?.v_picture;
 
-  if (loading === 'loading' || !product?.title) {
+  if (!product?.title) {
     return <Loader />;
   }
 
