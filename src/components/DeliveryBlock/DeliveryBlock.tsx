@@ -116,30 +116,52 @@ export const DeliveryBlock = () => {
   }, [dispatch, user, deliveryType]);
 
   useEffect(() => {
-    // Функция для запроса токена
-    const requestToken = () => {
-      dispatch(
-        authDeliverApi({
-          grant_type: "client_credentials",
-          client_id: "j8DuMgCvPlZ44wrKirinlIk2qIyWRv6X",
-          client_secret: "dOb3lthS9H9KvZLc9IlUWd1yneFNlw3F",
-        })
-      );
+    let tokenExpiryTime = 0; // Время истечения токена в формате UNIX
+  
+    const requestToken = async () => {
+      try {
+        const resultAction = await dispatch(
+          authDeliverApi({
+            grant_type: "client_credentials",
+            client_id: "j8DuMgCvPlZ44wrKirinlIk2qIyWRv6X",
+            client_secret: "dOb3lthS9H9KvZLc9IlUWd1yneFNlw3F",
+          })
+        );
+  
+        if (authDeliverApi.fulfilled.match(resultAction)) {
+          const { access_token, expires_in } = resultAction.payload;
+  
+          // Установить время истечения токена
+          tokenExpiryTime = Math.floor(Date.now() / 1000) + expires_in;
+          console.log("Токен обновлен:", resultAction.payload);
+        } else {
+          console.error("Ошибка при запросе токена:", resultAction.payload);
+        }
+      } catch (error) {
+        console.error("Ошибка при запросе токена:", error);
+      }
     };
-
-    // Если токен пустой, запросить новый
-    if (!cdekToken?.access_token) {
+  
+    const isTokenValid = () => {
+      const currentTime = Math.floor(Date.now() / 1000); // Текущее время в секундах
+      return currentTime < tokenExpiryTime; // Токен валиден, если текущее время меньше времени истечения
+    };
+  
+    // Если токен отсутствует или истек, запросить новый
+    if (!isTokenValid()) {
       requestToken();
     }
-
-    // Установить интервал для обновления токена каждые 5 минут
+  
+    // Установить интервал для проверки токена каждые 5 минут
     const interval = setInterval(() => {
-      requestToken();
-    }, 5 * 60 * 1000);
-
+      if (!isTokenValid()) {
+        requestToken();
+      }
+    }, 5 * 60 * 1000); // Проверка каждые 5 минут
+  
     return () => clearInterval(interval);
-  }, [cdekToken, dispatch]);
-
+  }, [dispatch]);
+  
   return (
     <div className={styles.delivery_block__container}>
       <Helmet>
