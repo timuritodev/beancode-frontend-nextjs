@@ -10,13 +10,35 @@ import {
 import { selectUser } from "@/services/redux/slices/user/user";
 import styles from "./style.module.scss"; // Импорт стилей
 import Head from "next/head";
+import { getProducts } from "@/services/redux/slices/product/productAPI";
+import { GetServerSideProps } from "next";
 
-export const CatalogPage = () => {
+interface CatalogProps {
+  products: IProduct[];
+}
+
+export const getServerSideProps: GetServerSideProps<CatalogProps> = async () => {
+  try {
+    const products: IProduct[] = await getProducts();
+    return {
+      props: {
+        products,
+      },
+    };
+  } catch (error) {
+    console.error("Ошибка при загрузке продуктов в getServerSideProps:", error);
+    return {
+      props: {
+        products: [],
+      },
+    };
+  }
+};
+
+const CatalogPage: React.FC<CatalogProps> = ({ products }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
-
-  const products = useAppSelector((state) => state.products.products);
-  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>(products);
   const [sortOption, setSortOption] = useState("");
 
   useEffect(() => {
