@@ -1,6 +1,12 @@
 import Head from "next/head";
 import styles from "./style.module.scss";
 
+export const getStaticProps = async () => {
+  return {
+    props: {}, // нет данных, но Next создаст статическую HTML
+  };
+};
+
 const AboutPage = () => {
   return (
     <>
