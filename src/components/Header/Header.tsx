@@ -57,7 +57,7 @@ const Header: FC = () => {
           <BurgerButton isPopupOpen={isPopupOpen} switchPopup={switchPopup} />
         )}
         <Link href="/">
-          <Image className={styles.header__logo} alt="Логотип Beancode" src={logo} width={208} height={30}/>
+          <Image className={styles.header__logo} alt="Логотип Beancode" src={logo} width={208} height={30} />
         </Link>
         <div className={styles.header__links}>
           {/* {user.token && (
@@ -71,12 +71,15 @@ const Header: FC = () => {
                 Регистрация
               </Link> */}
               <Link href="/sign-in" className={styles.header__link}>
-                Вход 
+                Вход
               </Link>
             </>
           )}
           <Link href="/catalog" className={styles.header__link}>
             Товары
+          </Link>
+          <Link href="/syrups" className={styles.header__link}>
+            Сиропы
           </Link>
           <Link href="/coffee-machines" className={styles.header__link}>
             Кофемашины
