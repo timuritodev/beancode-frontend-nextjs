@@ -29,9 +29,22 @@ jobs:
           script: |
             set -e 
             cd /home/beancode/beancode-frontend-nextjs
+
+            # Обновляем код
             git fetch origin main
             git reset --hard origin/main
 
+            # Устанавливаем зависимости
             npm ci
+
+            # Создаем папку для логов если не существует
+            mkdir -p logs
+
+            # Собираем проект
             npm run build
-            pm2 restart beancode-frontend-nextjs
+
+            # Перезапускаем PM2 процесс
+            pm2 restart beancode-frontend-nextjs || pm2 start pm2.config.cjs
+
+            # Проверяем статус
+            pm2 status
