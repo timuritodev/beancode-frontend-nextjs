@@ -71,12 +71,15 @@ const Header: FC = () => {
                 Регистрация
               </Link> */}
               <Link href="/sign-in" className={styles.header__link}>
-                Вход 
+                Вход
               </Link>
             </>
           )}
           <Link href="/catalog" className={styles.header__link}>
             Товары
+          </Link>
+          <Link href="/syrups" className={styles.header__link}>
+            Сиропы
           </Link>
           <Link href="/coffee-machines" className={styles.header__link}>
             Кофемашины
