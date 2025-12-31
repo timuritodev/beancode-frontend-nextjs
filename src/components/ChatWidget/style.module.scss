@@ -1,0 +1,49 @@
+.chatWidget {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 10;
+}
+
+.chatWidgetBtn {
+  width: 64px;
+  height: 64px;
+  border: none;
+  border-radius: 50%;
+  background: var(--Accent, #465244);
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.chatWidgetBtn:hover {
+  background-color: #3c443b;
+  transform: scale(1.05);
+}
+
+.chatWidgetIcon {
+  width: 24px;
+  height: 24px;
+  color: var(--White_text, #f6f6f6);
+}
+
+@media screen and (max-width: 767px) {
+  .chatWidget {
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .chatWidgetBtn {
+    width: 56px;
+    height: 56px;
+  }
+
+  .chatWidgetIcon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
