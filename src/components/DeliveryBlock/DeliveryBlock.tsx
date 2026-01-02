@@ -5,7 +5,7 @@ import {
   selectUser,
 } from "../../services/redux/slices/user/user";
 import { useAppDispatch, useAppSelector } from "../../services/typeHooks";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ISignUpData } from "../../types/Auth.types";
 import CustomInput from "../../components/CustomInput/CustomInput";
@@ -34,6 +34,7 @@ export const DeliveryBlock = () => {
   const cartproducts = useAppSelector((state) => state.cart.cart);
   const countries = useAppSelector((state) => state.deliver.deliveryCountries);
   const cdekToken = useAppSelector((state) => state.deliver.deliveryToken);
+  const tokenExpiryTime = useAppSelector((state) => state.deliver.tokenExpiryTime);
   const loading = useAppSelector((state) => state.deliver.status);
 
   useEffect(() => {
@@ -42,6 +43,8 @@ export const DeliveryBlock = () => {
     }
   }, [dispatch, user]);
   const [deliveryType, setDeliveryType] = useState<'courier' | 'pickup'>('pickup');
+  const lastRequestRef = useRef<string>(''); // Для отслеживания последнего запроса
+  const isRequestInProgressRef = useRef<boolean>(false); // Для предотвращения параллельных запросов
 
   // let userData: UserData
   let userData: UserData = {
@@ -69,26 +72,117 @@ export const DeliveryBlock = () => {
     userData = JSON.parse(storedData);
   }
 
+  // Функция для проверки и обновления токена при необходимости
+  const ensureValidToken = useCallback(async (): Promise<string | null> => {
+    const currentTime = Math.floor(Date.now() / 1000);
+    const isTokenValid = tokenExpiryTime > 0 && currentTime < tokenExpiryTime;
+
+    // Если токен валиден, возвращаем его
+    if (isTokenValid && cdekToken.access_token) {
+      return cdekToken.access_token;
+    }
+
+    // Если токен истек или отсутствует, запрашиваем новый
+    try {
+      const resultAction = await dispatch(
+        authDeliverApi({
+          grant_type: "client_credentials",
+          client_id: "j8DuMgCvPlZ44wrKirinlIk2qIyWRv6X",
+          client_secret: "dOb3lthS9H9KvZLc9IlUWd1yneFNlw3F",
+        })
+      );
+
+      if (authDeliverApi.fulfilled.match(resultAction)) {
+        return resultAction.payload.access_token;
+      } else {
+        console.error("Ошибка при запросе токена:", resultAction.payload);
+        return null;
+      }
+    } catch (error) {
+      console.error("Ошибка при запросе токена:", error);
+      return null;
+    }
+  }, [dispatch, tokenExpiryTime, cdekToken.access_token]);
+
   useEffect(() => {
     const fetchTokenAndCalculateDelivery = async () => {
-      if (userData && userData.city) {
+      // Проверяем, не выполняется ли уже запрос
+      if (isRequestInProgressRef.current) {
+        return;
+      }
+
+      // Создаем уникальный ключ для запроса
+      const requestKey = `${deliveryType}-${userData?.city}-${cartproducts.length}-${cartproducts.map(p => p.id).join(',')}`;
+
+      // Если запрос с такими же параметрами уже выполнялся, пропускаем
+      if (lastRequestRef.current === requestKey) {
+        return;
+      }
+
+      if (userData && userData.city && cartproducts.length > 0) {
+        isRequestInProgressRef.current = true;
+        lastRequestRef.current = requestKey;
+
         try {
-          await dispatch(getCountriesApi({ data: { city: userData.city }, token: cdekToken.access_token }));
+          // Убеждаемся, что токен валиден перед запросами
+          const validToken = await ensureValidToken();
+          if (!validToken) {
+            console.error("Не удалось получить валидный токен");
+            isRequestInProgressRef.current = false;
+            return;
+          }
 
           const tariffCode = deliveryType === 'courier' ? 137 : 136;
 
-          const deliveryData = deliveryType === 'courier'
-            ? {
+          let deliveryData;
+
+          if (deliveryType === 'courier') {
+            deliveryData = {
               to_location: {
                 city: userData.city,
                 address: userData.address,
               },
+            };
+          } else {
+            // Для pickup сначала получаем список ПВЗ
+            const countriesResult = await dispatch(getCountriesApi({ data: { city: userData.city }, token: validToken }));
+
+            // Используем результат напрямую из action, если запрос успешен
+            let countriesList: typeof countries = [];
+            if (getCountriesApi.fulfilled.match(countriesResult)) {
+              countriesList = countriesResult.payload;
+            } else {
+              // Если запрос не выполнен, используем данные из Redux state
+              countriesList = countries;
             }
-            : {
+
+            // Используем код ПВЗ из localStorage (если выбран через виджет) или первый из списка
+            const pvzCode = localStorage.getItem("pvz_code");
+            let codeToUse: number | undefined;
+
+            if (pvzCode && countriesList.length > 0) {
+              // Пытаемся найти ПВЗ по коду из localStorage в списке countries
+              const foundPvz = countriesList.find(c => c.code.toString() === pvzCode || c.code === Number(pvzCode));
+              codeToUse = foundPvz?.code;
+            }
+
+            // Если не нашли по коду из localStorage, используем первый из списка
+            if (!codeToUse && countriesList.length > 0) {
+              codeToUse = countriesList[0].code;
+            }
+
+            if (!codeToUse) {
+              console.error("Не удалось определить код ПВЗ");
+              isRequestInProgressRef.current = false;
+              return;
+            }
+
+            deliveryData = {
               to_location: {
-                code: countries[0].code,
+                code: codeToUse,
               },
             };
+          }
 
           await dispatch(
             calculateDeliverApi({
@@ -103,21 +197,22 @@ export const DeliveryBlock = () => {
                   weight: parseFloat(product.weight),
                 })),
               },
-              token: cdekToken.access_token,
+              token: validToken,
             })
           );
         } catch (error) {
           console.error("Ошибка при запросе:", error);
+        } finally {
+          isRequestInProgressRef.current = false;
         }
       }
     };
 
     fetchTokenAndCalculateDelivery();
-  }, [dispatch, user, deliveryType]);
+  }, [dispatch, deliveryType, userData?.city, cartproducts, ensureValidToken]);
 
+  // Инициализация токена при монтировании компонента
   useEffect(() => {
-    let tokenExpiryTime = 0; // Время истечения токена в формате UNIX
-  
     const requestToken = async () => {
       try {
         const resultAction = await dispatch(
@@ -127,12 +222,8 @@ export const DeliveryBlock = () => {
             client_secret: "dOb3lthS9H9KvZLc9IlUWd1yneFNlw3F",
           })
         );
-  
+
         if (authDeliverApi.fulfilled.match(resultAction)) {
-          const { access_token, expires_in } = resultAction.payload;
-  
-          // Установить время истечения токена
-          tokenExpiryTime = Math.floor(Date.now() / 1000) + expires_in;
           console.log("Токен обновлен:", resultAction.payload);
         } else {
           console.error("Ошибка при запросе токена:", resultAction.payload);
@@ -141,27 +232,27 @@ export const DeliveryBlock = () => {
         console.error("Ошибка при запросе токена:", error);
       }
     };
-  
+
     const isTokenValid = () => {
-      const currentTime = Math.floor(Date.now() / 1000); // Текущее время в секундах
-      return currentTime < tokenExpiryTime; // Токен валиден, если текущее время меньше времени истечения
+      const currentTime = Math.floor(Date.now() / 1000);
+      return tokenExpiryTime > 0 && currentTime < tokenExpiryTime;
     };
-  
+
     // Если токен отсутствует или истек, запросить новый
     if (!isTokenValid()) {
       requestToken();
     }
-  
-    // Установить интервал для проверки токена каждые 5 минут
+
+    // Установить интервал для проверки токена каждые 4 минуты (обновляем заранее, до истечения)
     const interval = setInterval(() => {
       if (!isTokenValid()) {
         requestToken();
       }
-    }, 5 * 60 * 1000); // Проверка каждые 5 минут
-  
+    }, 4 * 60 * 1000); // Проверка каждые 4 минуты
+
     return () => clearInterval(interval);
-  }, [dispatch]);
-  
+  }, [dispatch, tokenExpiryTime]);
+
   return (
     <div className={styles.delivery_block__container}>
       <Helmet>

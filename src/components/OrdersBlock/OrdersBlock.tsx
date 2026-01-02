@@ -33,6 +33,7 @@ import {
   calculateDeliverApi,
   deliverApi,
   getCountriesApi,
+  resetDeliveryData,
 } from "../../services/redux/slices/delivery/delivery";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -328,6 +329,11 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
     }
   };
 
+  const handleResetDelivery = () => {
+    dispatch(resetDeliveryData());
+    console.log("Данные доставки сброшены");
+  };
+
   useEffect(() => {
     if (redirecting && formUrl) {
       router.push(formUrl);
@@ -397,9 +403,9 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       </p> */}
       {/* </div> */}
       <p className={styles.orderBlock__text}>
-          Итого - <span className={styles.orderBlock__total}>{discountedSum} ₽</span>,
-          включая стоимость доставки {deliveryPrice.total_sum}
-        </p>
+        Итого - <span className={styles.orderBlock__total}>{discountedSum} ₽</span>,
+        включая стоимость доставки {deliveryPrice.total_sum}
+      </p>
       <form
         className={styles.orderBlock__input_container}
         onSubmit={handleSubmit(onSubmit)}
@@ -435,6 +441,12 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         handleButtonClick={handleDeliverOrder}
         disabled={!dataSaved}
         type="submit"
+        className={styles.orderBlock__pay_button}
+      />
+      <CustomButton
+        buttonText={"Сбросить доставку"}
+        handleButtonClick={handleResetDelivery}
+        type="button"
         className={styles.orderBlock__pay_button}
       />
       <p className={styles.orderBlock__disclaimer}>

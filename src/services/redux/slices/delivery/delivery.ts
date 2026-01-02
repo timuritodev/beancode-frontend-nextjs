@@ -91,6 +91,7 @@ export interface IUnifiedState {
   deliveryData: IDeliverDataRes;
   deliveryCountries: IDeliveryCountriesResponse[];
   deliveryToken: IAuthDeliveryResponse;
+  tokenExpiryTime: number; // Время истечения токена в формате UNIX timestamp
 }
 
 const initialState: IUnifiedState = {
@@ -160,13 +161,19 @@ const initialState: IUnifiedState = {
     token_type: '',
     scope: '',
     jti: '',
-  }
+  },
+  tokenExpiryTime: 0, // Время истечения токена (0 означает, что токен не установлен)
 };
 
 const deliverSlice = createSlice({
   name: "@@deliver",
   initialState,
-  reducers: {},
+  reducers: {
+    resetDeliveryData: (state) => {
+      state.deliveryData = initialState.deliveryData;
+      state.status = "idle";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(deliverApi.fulfilled, (state, action) => {
@@ -177,6 +184,8 @@ const deliverSlice = createSlice({
         state.status = "success";
         // state.deliveryData.token = action.payload.access_token;
         state.deliveryToken = action.payload;
+        // Сохраняем время истечения токена (текущее время + expires_in в секундах)
+        state.tokenExpiryTime = Math.floor(Date.now() / 1000) + action.payload.expires_in;
       })
       .addCase(calculateDeliverApi.fulfilled, (state, action) => {
         state.status = "success";
@@ -202,4 +211,5 @@ const deliverSlice = createSlice({
   },
 });
 
+export const { resetDeliveryData } = deliverSlice.actions;
 export const deliverReducer = deliverSlice.reducer;
