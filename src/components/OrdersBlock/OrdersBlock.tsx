@@ -175,20 +175,20 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
           phone: userData.phone,
         })
       );
-      await dispatch(
-        createOrderBackupApi({
-          userId: userData.userId,
-          phone: userData.phone,
-          email: userData.email,
-          address: userData.address,
-          city: userData.city,
-          sum: sum,
-          product_quantity: cartproducts.length,
-          products_info: products_info,
-          orderNumber: `${randomOrderNumber}`,
-          date_order: formattedDate,
-        })
-      );
+      // await dispatch(
+      //   createOrderBackupApi({
+      //     userId: userData.userId,
+      //     phone: userData.phone,
+      //     email: userData.email,
+      //     address: userData.address,
+      //     city: userData.city,
+      //     sum: sum,
+      //     product_quantity: cartproducts.length,
+      //     products_info: products_info,
+      //     orderNumber: `${randomOrderNumber}`,
+      //     date_order: formattedDate,
+      //   })
+      // );
       localStorage.removeItem("discount");
       // localStorage.removeItem("orderFormData");
       if (user.token) {
