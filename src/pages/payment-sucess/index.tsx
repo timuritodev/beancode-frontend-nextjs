@@ -43,51 +43,51 @@ const InfoPaymentPageSucess = () => {
   const currentDate = new Date(currentTimestamp);
   const formattedDate = currentDate.toISOString().split("T")[0];
 
-  useEffect(() => {
-    if (!isOrderProcessed) {
-      dispatch(
-        createOrderApi({
-          userId: user.id,
-          phone: user.phone,
-          email: user.email,
-          address: user.address,
-          city: user.city,
-          sum: parseInt(sum || "0", 10),
-          product_quantity: parseInt(product_quantity || "0", 10),
-          products_info: products_info || "",
-          orderNumber: orderId || "",
-          date_order: formattedDate,
-        })
-      );
-      // dispatch(
-      //   sendEmailApi({
-      //     email: user.email,
-      //     subject: "Заказ",
-      //     text: `Номер заказа - ${orderId} \nАдрес электронной почты - ${user.email} \nФИО - ${user.name} ${user.surname} \nНомер телефона - ${user.phone} \nАдрес - ${user.address} \nГород - ${user.city} \nСумма заказа - ${sum} руб.\nКол-во товаров - ${product_quantity} \nИнформация о товарах(id, Название, вес) - ${products_info}`,
-      //     greetings: `Спасибо за ваш заказ.\n${products_info}`,
-      //   })
-      // );
-    }
-  }, [
-    dispatch,
-    orderRes.orderId,
-    payApiPassword,
-    payApiUsername,
-    user.id,
-    user.email,
-    user.phone,
-    user.address,
-    user.city,
-    orderStatus.OrderStatus,
-    user.name,
-    user.surname,
-    orderId,
-    sum,
-    product_quantity,
-    products_info,
-    formattedDate,
-    isOrderProcessed,
-  ]);
+  // useEffect(() => {
+  //   if (!isOrderProcessed) {
+  //     dispatch(
+  //       createOrderApi({
+  //         userId: user.id,
+  //         phone: user.phone,
+  //         email: user.email,
+  //         address: user.address,
+  //         city: user.city,
+  //         sum: parseInt(sum || "0", 10),
+  //         product_quantity: parseInt(product_quantity || "0", 10),
+  //         products_info: products_info || "",
+  //         orderNumber: orderId || "",
+  //         date_order: formattedDate,
+  //       })
+  //     );
+  //     // dispatch(
+  //     //   sendEmailApi({
+  //     //     email: user.email,
+  //     //     subject: "Заказ",
+  //     //     text: `Номер заказа - ${orderId} \nАдрес электронной почты - ${user.email} \nФИО - ${user.name} ${user.surname} \nНомер телефона - ${user.phone} \nАдрес - ${user.address} \nГород - ${user.city} \nСумма заказа - ${sum} руб.\nКол-во товаров - ${product_quantity} \nИнформация о товарах(id, Название, вес) - ${products_info}`,
+  //     //     greetings: `Спасибо за ваш заказ.\n${products_info}`,
+  //     //   })
+  //     // );
+  //   }
+  // }, [
+  //   dispatch,
+  //   orderRes.orderId,
+  //   payApiPassword,
+  //   payApiUsername,
+  //   user.id,
+  //   user.email,
+  //   user.phone,
+  //   user.address,
+  //   user.city,
+  //   orderStatus.OrderStatus,
+  //   user.name,
+  //   user.surname,
+  //   orderId,
+  //   sum,
+  //   product_quantity,
+  //   products_info,
+  //   formattedDate,
+  //   isOrderProcessed,
+  // ]);
 
   return (
     <>

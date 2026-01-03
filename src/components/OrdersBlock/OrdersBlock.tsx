@@ -232,20 +232,20 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
           token: cdekToken.access_token,
         })
       );
-      await dispatch(
-        createOrderBackupApi({
-          userId: userData.userId,
-          phone: userData.phone,
-          email: userData.email,
-          address: userData.address,
-          city: userData.city,
-          sum: sum,
-          product_quantity: cartproducts.length,
-          products_info: products_info,
-          orderNumber: `${randomOrderNumber}`,
-          date_order: formattedDate,
-        })
-      );
+      // await dispatch(
+      //   createOrderBackupApi({
+      //     userId: userData.userId,
+      //     phone: userData.phone,
+      //     email: userData.email,
+      //     address: userData.address,
+      //     city: userData.city,
+      //     sum: sum,
+      //     product_quantity: cartproducts.length,
+      //     products_info: products_info,
+      //     orderNumber: `${randomOrderNumber}`,
+      //     date_order: formattedDate,
+      //   })
+      // );
       localStorage.removeItem("discount");
       // localStorage.removeItem("orderFormData");
       if (user.token) {
@@ -397,9 +397,9 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       </p> */}
       {/* </div> */}
       <p className={styles.orderBlock__text}>
-          Итого - <span className={styles.orderBlock__total}>{discountedSum} ₽</span>,
-          включая стоимость доставки {deliveryPrice.total_sum}
-        </p>
+        Итого - <span className={styles.orderBlock__total}>{discountedSum} ₽</span>,
+        включая стоимость доставки {deliveryPrice.total_sum}
+      </p>
       <form
         className={styles.orderBlock__input_container}
         onSubmit={handleSubmit(onSubmit)}
