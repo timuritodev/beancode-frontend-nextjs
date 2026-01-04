@@ -4,9 +4,7 @@
 
 // export const API_BASE_URL = window.location.origin + currentURL.substring(0, currentURL.lastIndexOf('/')) + apiSuffix;
 
-export const API_BASE_URL = "http://localhost:3001/api";
-
-// export const API_BASE_URL = "https://beancode.ru/api";
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const hashString = (s: string): number => {
   let h = 0;
