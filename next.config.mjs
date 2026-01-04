@@ -1,11 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-      domains: ['beancode.ru'], 
+      domains: ['beancode.ru', 'localhost'], 
       remotePatterns: [
         {
           protocol: 'https',
           hostname: 'beancode.ru',
+          pathname: '/api/images/**', 
+        },
+        {
+          protocol: 'http',
+          hostname: 'localhost',
+          port: '3001',
           pathname: '/api/images/**', 
         },
       ],

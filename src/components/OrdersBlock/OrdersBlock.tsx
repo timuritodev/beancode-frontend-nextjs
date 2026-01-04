@@ -62,8 +62,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   const [redirecting, setRedirecting] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
-  const payApiUsername = process.env.NEXT_PUBLIC_PAY_API_USERNAME;
-  const payApiPassword = process.env.NEXT_PUBLIC_PAY_API_PASSWORD;
+  // Секретные данные больше не нужны - они на бэкенде
 
   const [isPromoPopupOpened, setIsPromoPopupOpened] = useState<boolean>(false);
   const [isErrorPopupOpened, setIsErrorPopupOpened] = useState<boolean>(false);
@@ -162,8 +161,6 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
     try {
       await dispatch(
         payApi({
-          userName: payApiUsername,
-          password: payApiPassword,
           orderNumber: `${randomOrderNumber}`,
           amount: `${discountedSum * 100}`,
           returnUrl: `https://beancode.ru/payment-sucess?orderId=${randomOrderNumber}&userId=${userData.userId}&email=${userData.email}&phone=${userData.phone}&sum=${discountedSum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,

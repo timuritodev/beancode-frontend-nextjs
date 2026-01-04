@@ -19,6 +19,7 @@ const objectToFormData = (obj: Record<string, any>) => {
 };
 
 export const fetchPay = (data: IPayData): Promise<Response> => {
+  // Отправляем form-data, прокси добавит userName и password на бэкенде
   const formData = objectToFormData(data);
 
   return fetch(`${API_BASE_URL}/api-pay`, {

@@ -1,6 +1,5 @@
 export interface IPayData {
-  userName?: string;
-  password?: string;
+  // userName и password больше не нужны - они на бэкенде
   token?: string;
   orderNumber: string;
   amount: string;

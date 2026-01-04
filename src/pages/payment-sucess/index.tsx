@@ -18,8 +18,7 @@ const InfoPaymentPageSucess = () => {
   const orderStatus = useAppSelector((state) => state.orderStatus.response);
   const user = useAppSelector(selectUser);
 
-  const payApiUsername = process.env.NEXT_PUBLIC_PAY_API_USERNAME;
-  const payApiPassword = process.env.NEXT_PUBLIC_PAY_API_PASSWORD;
+  // Секретные данные больше не нужны - они на бэкенде
 
   const { query } = useRouter();
 
