@@ -23,24 +23,43 @@ jobs:
           timeout: 600s
           command_timeout: 600s
           script: |
-            set -e 
+            set -e
+            set -x
+
+            echo "=== Начало деплоя: $(date) ==="
+
             cd /home/beancode/beancode-frontend-nextjs
+            echo "=== Переход в директорию завершен: $(date) ==="
 
             # Обновляем код
+            echo "=== Начало git fetch: $(date) ==="
             git fetch origin main
-            git reset --hard origin/main
+            echo "=== Git fetch завершен: $(date) ==="
 
-            # Устанавливаем зависимости (с флагом для ускорения)
-            npm ci --prefer-offline --no-audit
+            echo "=== Начало git reset: $(date) ==="
+            git reset --hard origin/main
+            echo "=== Git reset завершен: $(date) ==="
+
+            # Устанавливаем зависимости
+            echo "=== Начало npm ci: $(date) ==="
+            npm ci --prefer-offline --no-audit --loglevel=error
+            echo "=== npm ci завершен: $(date) ==="
 
             # Создаем папку для логов если не существует
             mkdir -p logs
+            echo "=== Создание папки logs завершено: $(date) ==="
 
             # Собираем проект
+            echo "=== Начало npm run build: $(date) ==="
             npm run build
+            echo "=== npm run build завершен: $(date) ==="
 
             # Перезапускаем PM2 процесс
+            echo "=== Начало pm2 restart: $(date) ==="
             pm2 restart beancode-frontend-nextjs || pm2 start pm2.config.cjs
+            echo "=== pm2 restart завершен: $(date) ==="
 
             # Проверяем статус
+            echo "=== Проверка pm2 status: $(date) ==="
             pm2 status
+            echo "=== Деплой завершен: $(date) ==="
