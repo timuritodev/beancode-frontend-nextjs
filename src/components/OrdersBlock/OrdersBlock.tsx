@@ -170,6 +170,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
           clientId: `${userData.userId}`,
           email: userData.email,
           phone: userData.phone,
+          dynamicCallbackUrl: "https://beancode.ru/api/payment/callback",
         })
       );
       // await dispatch(
