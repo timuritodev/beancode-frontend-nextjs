@@ -9,6 +9,7 @@ import {
   fetchDeleteSessionAll,
   fetchGetCart,
   fetchGetSessionCart,
+  fetchGetSessionId,
 } from "./cartAPI";
 import { ICartData, ICartState, ISessionCartData } from "../../../../types/Cart.types";
 
@@ -120,6 +121,18 @@ export const getSessionCartApi = createAsyncThunk(
   async (_, { fulfillWithValue, rejectWithValue }) => {
     try {
       const response = await fetchGetSessionCart();
+      return fulfillWithValue(response);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const getSessionIdApi = createAsyncThunk(
+  "@@cart/getSessionId",
+  async (_, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const response = await fetchGetSessionId();
       return fulfillWithValue(response);
     } catch (error: unknown) {
       return rejectWithValue(error);

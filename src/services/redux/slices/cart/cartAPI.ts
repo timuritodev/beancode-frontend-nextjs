@@ -34,7 +34,7 @@ export const fetchData = (
       "Content-Type": "application/json",
       ...(!!token && { Authorization: `Bearer ${token}` }),
     },
-    credentials: 'include', 
+    credentials: 'include',
     ...(!!data && { body: JSON.stringify(data) }),
   }).then((res) => checkRes(res));
 };
@@ -89,6 +89,16 @@ export const fetchGetSessionCart = (): Promise<Array<ICart>> => {
   return fetchData(`${API_BASE_URL}/session-cart`, "GET").then((res) =>
     checkRes2(res)
   );
+};
+
+export const fetchGetSessionId = (): Promise<{ sessionId: string }> => {
+  return fetch(`${API_BASE_URL}/session-id`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: 'include',
+  }).then((res) => checkRes2(res));
 };
 
 // export const fetchGetUserInfo = (

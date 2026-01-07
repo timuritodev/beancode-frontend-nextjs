@@ -14,6 +14,7 @@ import {
   deleteAllApi,
   deleteAllSessionApi,
   resetCart,
+  getSessionIdApi,
 } from "../../services/redux/slices/cart/cart";
 import { generateOrderNumberApi } from "../../services/redux/slices/order/order";
 import CustomInput from "../CustomInput/CustomInput";
@@ -88,6 +89,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   } = useForm<IPromo>({ mode: "onChange" });
 
   const [discount, setDiscount] = useState(0);
+  const [promoCode, setPromoCode] = useState<string | null>(null);
 
   const trimPromoCode = (promoCode: string) => promoCode.trim();
 
@@ -98,6 +100,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       .then((response) => {
         const discountValue = parseFloat(response.discount);
         setDiscount(discountValue);
+        setPromoCode(trimmedPromoCode);
         setIsPromoPopupOpened(true);
       })
       .catch((error) => {
@@ -155,12 +158,29 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
     userData = JSON.parse(storedData);
   }
 
+  const sessionResult = dispatch(getSessionIdApi()).unwrap();
+  console.log(sessionResult, 'sessionResult');
+
   const handleClickPayButton = async () => {
     try {
       // Генерируем номер заказа прямо перед оплатой
       const result = await dispatch(generateOrderNumberApi()).unwrap();
       const orderNumber = result.orderNumber;
 
+      // Получаем sessionId для неавторизованных пользователей
+      let sessionId = null;
+      if (!user.token) {
+        try {
+          const sessionResult = await dispatch(getSessionIdApi()).unwrap();
+          sessionId = sessionResult.sessionId;
+        } catch (error) {
+          console.error("Error getting session ID:", error);
+        }
+      }
+
+      // Формируем description с промокодом и sessionId (если есть)
+      const promoText = promoCode ? `, Промокод - ${promoCode}` : '';
+      const sessionText = sessionId ? `, SessionId - ${sessionId}` : '';
       await dispatch(
         payApi({
           orderNumber: `${orderNumber}`,
@@ -168,35 +188,14 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
           returnUrl: `https://beancode.ru/payment-sucess?orderId=${orderNumber}&userId=${userData.userId}&email=${userData.email}&phone=${userData.phone}&sum=${discountedSum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
           // returnUrl: `http://localhost:5173/payment-sucess?orderId=${orderNumber}&userId=${userData.userId}&email=${userData.email}&phone=${userData.phone}&sum=${discountedSum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
           failUrl: "https://beancode.ru/payment-fail",
-          description: `Номер заказа - ${orderNumber}, Информация о заказе(id, название, вес) - ${products_info}, Кол-во товаров - ${cartproducts.length}, Город - ${userData.city}, Адрес - ${userData.address}, Email - ${userData.email}, Телефон - ${userData.phone}, ФИО - ${userData.name} ${userData.surname}`,
+          description: `Номер заказа - ${orderNumber}, Информация о заказе(id, название, вес) - ${products_info}, Кол-во товаров - ${cartproducts.length}, Город - ${userData.city}, Адрес - ${userData.address}, Email - ${userData.email}, Телефон - ${userData.phone}, ФИО - ${userData.name} ${userData.surname}${promoText}${sessionText}`,
           clientId: `${userData.userId}`,
           email: userData.email,
           phone: userData.phone,
           dynamicCallbackUrl: "https://beancode.ru/api/payment/callback",
         })
       );
-      // await dispatch(
-      //   createOrderBackupApi({
-      //     userId: userData.userId,
-      //     phone: userData.phone,
-      //     email: userData.email,
-      //     address: userData.address,
-      //     city: userData.city,
-      //     sum: sum,
-      //     product_quantity: cartproducts.length,
-      //     products_info: products_info,
-      //     orderNumber: `${orderNumber}`,
-      //     date_order: formattedDate,
-      //   })
-      // );
-      localStorage.removeItem("discount");
-      // localStorage.removeItem("orderFormData");
-      if (user.token) {
-        await dispatch(deleteAllApi(user.id));
-      } else {
-        await dispatch(deleteAllSessionApi());
-      }
-      dispatch(resetCart());
+      // Корзина и промокод будут обработаны в webhook после успешной оплаты
       setRedirecting(true);
     } catch (error) {
       console.error("Error in payApi call:", error);
