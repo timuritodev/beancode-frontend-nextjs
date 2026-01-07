@@ -7,7 +7,7 @@ import button from "../../images/promo_button.svg";
 import ic_info from "../../images/ic_info.svg";
 import { useAppSelector, useAppDispatch } from "../../services/typeHooks";
 // import { createOrderApi } from "../../services/redux/slices/order/order";
-import { selectUser } from "../../services/redux/slices/user/user";
+import { selectUser, getUserInfo } from "../../services/redux/slices/user/user";
 // import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
 import { payApi } from "../../services/redux/slices/pay/pay";
 import {
@@ -15,6 +15,7 @@ import {
   deleteAllSessionApi,
   resetCart,
   getSessionIdApi,
+  getAppliedPromoCodeApi,
 } from "../../services/redux/slices/cart/cart";
 import { generateOrderNumberApi } from "../../services/redux/slices/order/order";
 import CustomInput from "../CustomInput/CustomInput";
@@ -90,10 +91,18 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
 
   const [discount, setDiscount] = useState(0);
   const [promoCode, setPromoCode] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
 
   const trimPromoCode = (promoCode: string) => promoCode.trim();
 
   const onSubmit: SubmitHandler<IPromo> = () => {
+    // Проверка: промокоды доступны только для авторизованных пользователей
+    if (!user.token || !user.id) {
+      setErrorMessage("Для использования промокодов необходимо зарегистрироваться");
+      setIsErrorPopupOpened(true);
+      return;
+    }
+
     const trimmedPromoCode = trimPromoCode(getValues("promo"));
     dispatch(promoApi({ promo: trimmedPromoCode, userId: user.id }))
       .unwrap()
@@ -103,41 +112,53 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         setPromoCode(trimmedPromoCode);
         setIsPromoPopupOpened(true);
       })
-      .catch((error) => {
+      .catch(async (error) => {
+        // Извлекаем сообщение об ошибке из ответа API
+        let message = "Промокод введен неверно, либо его не существует";
+
+        // error может быть Response объектом из fetchPromo
+        if (error instanceof Response) {
+          try {
+            const errorData = await error.json();
+            if (errorData?.message) {
+              message = errorData.message;
+            }
+          } catch (e) {
+            // Если не удалось распарсить JSON, используем стандартное сообщение
+          }
+        } else if (error?.message) {
+          message = error.message;
+        }
+
+        setErrorMessage(message);
         setIsErrorPopupOpened(true);
         console.error("Error applying promo code:", error);
       });
   };
+
+  // Загружаем примененный промокод из БД при монтировании компонента
+  useEffect(() => {
+    if (user.token && user.id) {
+      // Для авторизованных пользователей - из БД
+      dispatch(getAppliedPromoCodeApi(user.id))
+        .unwrap()
+        .then((data) => {
+          if (data.promoCode && data.discount) {
+            setDiscount(data.discount);
+            setPromoCode(data.promoCode);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching applied promo code:", error);
+        });
+    }
+  }, [dispatch, user.token, user.id]);
 
   let discountedSum = sum;
 
   if (discount > 0) {
     discountedSum = sum * (1 - discount / 100);
   }
-
-  // if (totalWeight < 1000) {
-  //   discountedSum += deliveryCost;
-  // }
-
-  useEffect(() => {
-    const discountFromStorage = localStorage.getItem("discount");
-    if (discountFromStorage) {
-      setDiscount(parseFloat(discountFromStorage));
-    }
-  }, []);
-
-  // Обновление localStorage при изменении значения скидки
-  useEffect(() => {
-    localStorage.setItem("discount", discount.toString());
-  }, [discount]);
-
-  // Удаляем промокод из localStorage и сбрасываем discount, если корзина пустая
-  useEffect(() => {
-    if (cartproducts.length === 0 && discount > 0) {
-      setDiscount(0);
-      localStorage.removeItem("discount");
-    }
-  }, [cartproducts.length, discount]);
 
   const products_info = cartproducts
     .map((item) => `${item.id} ${item.title} ${item.weight}`)
@@ -400,6 +421,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       <PopupErrorPromo
         isOpened={isErrorPopupOpened}
         setIsOpened={setIsErrorPopupOpened}
+        errorMessage={errorMessage}
       />
     </div>
   );

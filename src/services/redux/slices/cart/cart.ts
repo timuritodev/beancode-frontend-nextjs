@@ -10,6 +10,8 @@ import {
   fetchGetCart,
   fetchGetSessionCart,
   fetchGetSessionId,
+  fetchGetAppliedPromoCode,
+  fetchClearAppliedPromoCode,
 } from "./cartAPI";
 import { ICartData, ICartState, ISessionCartData } from "../../../../types/Cart.types";
 
@@ -140,6 +142,30 @@ export const getSessionIdApi = createAsyncThunk(
   }
 );
 
+export const getAppliedPromoCodeApi = createAsyncThunk(
+  "@@cart/getAppliedPromoCode",
+  async (userId: number | undefined, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const response = await fetchGetAppliedPromoCode(userId);
+      return fulfillWithValue(response);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const clearAppliedPromoCodeApi = createAsyncThunk(
+  "@@cart/clearAppliedPromoCode",
+  async (userId: number | undefined, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const response = await fetchClearAppliedPromoCode(userId);
+      return fulfillWithValue(response);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const initialState: ICartState = {
   status: "idle",
   error: null,
@@ -193,22 +219,10 @@ const cartSlice = createSlice({
       .addCase(getCartApi.fulfilled, (state, action) => {
         state.status = "success";
         state.cart = action.payload;
-        // Если корзина пустая, удаляем промокод из localStorage
-        if (action.payload.length === 0) {
-          if (typeof window !== 'undefined') {
-            localStorage.removeItem("discount");
-          }
-        }
       })
       .addCase(getSessionCartApi.fulfilled, (state, action) => {
         state.status = "success";
         state.cart = action.payload;
-        // Если корзина пустая, удаляем промокод из localStorage
-        if (action.payload.length === 0) {
-          if (typeof window !== 'undefined') {
-            localStorage.removeItem("discount");
-          }
-        }
       })
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),

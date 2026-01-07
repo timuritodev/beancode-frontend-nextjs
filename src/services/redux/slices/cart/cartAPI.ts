@@ -101,6 +101,34 @@ export const fetchGetSessionId = (): Promise<{ sessionId: string }> => {
   }).then((res) => checkRes2(res));
 };
 
+export const fetchGetAppliedPromoCode = (userId?: number): Promise<{ promoCode: string | null; discount: number | null }> => {
+  const url = userId
+    ? `${API_BASE_URL}/applied-promo-code?userId=${userId}`
+    : `${API_BASE_URL}/applied-promo-code`;
+
+  return fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: 'include',
+  }).then((res) => checkRes2(res));
+};
+
+export const fetchClearAppliedPromoCode = (userId?: number): Promise<{ message: string }> => {
+  const url = userId
+    ? `${API_BASE_URL}/applied-promo-code?userId=${userId}`
+    : `${API_BASE_URL}/applied-promo-code`;
+
+  return fetch(url, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: 'include',
+  }).then((res) => checkRes2(res));
+};
+
 // export const fetchGetUserInfo = (
 //   token: string | { token: string }
 // ): Promise<Response> => {

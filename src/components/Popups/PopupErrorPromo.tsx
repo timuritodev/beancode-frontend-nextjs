@@ -5,16 +5,21 @@ import styles from "./style.module.scss";
 interface IChangesSavedPopup {
   isOpened: boolean;
   setIsOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  errorMessage?: string;
 }
 
 export const PopupErrorPromo: FC<IChangesSavedPopup> = ({
   isOpened,
   setIsOpened,
+  errorMessage,
 }) => {
 
   const handleClickClose = () => {
     setIsOpened(false);
   };
+
+  const defaultMessage = "Промокод введен неверно, либо его не существует";
+  const message = errorMessage || defaultMessage;
 
   return (
     <Popup isOpened={isOpened} setIsOpened={setIsOpened}>
@@ -28,7 +33,7 @@ export const PopupErrorPromo: FC<IChangesSavedPopup> = ({
           Ошибка применения промокода
         </h4>
         <p className={styles.popup__text}>
-          Промокод введен неверено, либо его не существует
+          {message}
         </p>
         <button
           className={styles.popup__close}
