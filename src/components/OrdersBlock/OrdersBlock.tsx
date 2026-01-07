@@ -15,7 +15,7 @@ import {
   deleteAllSessionApi,
   resetCart,
 } from "../../services/redux/slices/cart/cart";
-import { createOrderBackupApi } from "../../services/redux/slices/order/order";
+import { generateOrderNumberApi } from "../../services/redux/slices/order/order";
 import CustomInput from "../CustomInput/CustomInput";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IPromo } from "../../types/Promo.types";
@@ -56,8 +56,6 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   const user = useAppSelector(selectUser);
   const formUrl = useAppSelector((state) => state.pay.response.formUrl);
   const deliver = useAppSelector((state) => state.deliver.data);
-
-  const randomOrderNumber = Math.floor(Math.random() * 900000) + 100000;
 
   const [redirecting, setRedirecting] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -159,14 +157,18 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
 
   const handleClickPayButton = async () => {
     try {
+      // Генерируем номер заказа прямо перед оплатой
+      const result = await dispatch(generateOrderNumberApi()).unwrap();
+      const orderNumber = result.orderNumber;
+
       await dispatch(
         payApi({
-          orderNumber: `${randomOrderNumber}`,
+          orderNumber: `${orderNumber}`,
           amount: `${discountedSum * 100}`,
-          returnUrl: `https://beancode.ru/payment-sucess?orderId=${randomOrderNumber}&userId=${userData.userId}&email=${userData.email}&phone=${userData.phone}&sum=${discountedSum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
-          // returnUrl: `http://localhost:5173/payment-sucess?orderId=${randomOrderNumber}&userId=${userData.userId}&email=${userData.email}&phone=${userData.phone}&sum=${discountedSum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
+          returnUrl: `https://beancode.ru/payment-sucess?orderId=${orderNumber}&userId=${userData.userId}&email=${userData.email}&phone=${userData.phone}&sum=${discountedSum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
+          // returnUrl: `http://localhost:5173/payment-sucess?orderId=${orderNumber}&userId=${userData.userId}&email=${userData.email}&phone=${userData.phone}&sum=${discountedSum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
           failUrl: "https://beancode.ru/payment-fail",
-          description: `Номер заказа - ${randomOrderNumber}, Информация о заказе(id, название, вес) - ${products_info}, Кол-во товаров - ${cartproducts.length}, Город - ${userData.city}, Адрес - ${userData.address}, Email - ${userData.email}, Телефон - ${userData.phone}, ФИО - ${userData.name} ${userData.surname}`,
+          description: `Номер заказа - ${orderNumber}, Информация о заказе(id, название, вес) - ${products_info}, Кол-во товаров - ${cartproducts.length}, Город - ${userData.city}, Адрес - ${userData.address}, Email - ${userData.email}, Телефон - ${userData.phone}, ФИО - ${userData.name} ${userData.surname}`,
           clientId: `${userData.userId}`,
           email: userData.email,
           phone: userData.phone,
@@ -183,7 +185,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       //     sum: sum,
       //     product_quantity: cartproducts.length,
       //     products_info: products_info,
-      //     orderNumber: `${randomOrderNumber}`,
+      //     orderNumber: `${orderNumber}`,
       //     date_order: formattedDate,
       //   })
       // );
@@ -204,6 +206,10 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
 
   const handleDeliverOrder = async () => {
     try {
+      // Генерируем номер заказа
+      const result = await dispatch(generateOrderNumberApi()).unwrap();
+      const orderNumber = result.orderNumber;
+
       const authResponse = await dispatch(
         authDeliverApi({
           grant_type: "client_credentials",
@@ -217,7 +223,7 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
       await dispatch(
         deliverApi({
           data: {
-            number: randomOrderNumber.toString(),
+            number: orderNumber.toString(),
             comment: products_info,
             delivery_recipient_cost: {
               value: 50,

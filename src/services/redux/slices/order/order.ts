@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchCreateOrder, fetchCreateOrderBackup, fetchGetOrders } from "./orderAPI";
+import { fetchCreateOrder, fetchCreateOrderBackup, fetchGetOrders, fetchGenerateOrderNumber } from "./orderAPI";
 import {
   IOrderDetails,
   IOrderDetailsState,
@@ -44,6 +44,18 @@ export const getOrdersApi = createAsyncThunk(
       }
     }
   );
+
+export const generateOrderNumberApi = createAsyncThunk(
+  "@@order/generateOrderNumber",
+  async (_, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const response = await fetchGenerateOrderNumber();
+      return fulfillWithValue(response);
+    } catch (error: unknown) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 const initialState: IOrderDetailsState = {
   status: "idle",

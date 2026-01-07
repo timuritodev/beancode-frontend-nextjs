@@ -3,20 +3,20 @@ import { API_BASE_URL } from "../../../../utils/constants";
 import { IOrderDetails } from "../../../../types/Order.types";
 
 const checkRes = (res: any) => {
-    if (res.ok) {
-      return res;
-    } else {
-      return Promise.reject(res);
-    }
-  };
-  
-  const checkRes2 = (res: any) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return Promise.reject(res);
-    }
-  };
+  if (res.ok) {
+    return res;
+  } else {
+    return Promise.reject(res);
+  }
+};
+
+const checkRes2 = (res: any) => {
+  if (res.ok) {
+    return res.json();
+  } else {
+    return Promise.reject(res);
+  }
+};
 
 export const fetchData = (
   url: string,
@@ -47,8 +47,16 @@ export const fetchCreateOrderBackup = (data: IOrderDetails): Promise<Response> =
 };
 
 export const fetchGetOrders = (userId: number): Promise<IOrderDetails[]> => {
-    return fetchData(`${API_BASE_URL}/order/${userId}`, "GET").then((res) =>
-      checkRes2(res)
-    );
-  };
-  
+  return fetchData(`${API_BASE_URL}/order/${userId}`, "GET").then((res) =>
+    checkRes2(res)
+  );
+};
+
+export const fetchGenerateOrderNumber = (): Promise<{ orderNumber: string }> => {
+  return fetch(`${API_BASE_URL}/order/generate-number`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => checkRes2(res));
+};
