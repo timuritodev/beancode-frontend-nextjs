@@ -193,10 +193,22 @@ const cartSlice = createSlice({
       .addCase(getCartApi.fulfilled, (state, action) => {
         state.status = "success";
         state.cart = action.payload;
+        // Если корзина пустая, удаляем промокод из localStorage
+        if (action.payload.length === 0) {
+          if (typeof window !== 'undefined') {
+            localStorage.removeItem("discount");
+          }
+        }
       })
       .addCase(getSessionCartApi.fulfilled, (state, action) => {
         state.status = "success";
         state.cart = action.payload;
+        // Если корзина пустая, удаляем промокод из localStorage
+        if (action.payload.length === 0) {
+          if (typeof window !== 'undefined') {
+            localStorage.removeItem("discount");
+          }
+        }
       })
       .addMatcher(
         (action) => action.type.endsWith("/rejected"),

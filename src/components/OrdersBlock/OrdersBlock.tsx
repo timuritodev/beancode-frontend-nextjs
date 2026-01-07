@@ -131,6 +131,14 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
     localStorage.setItem("discount", discount.toString());
   }, [discount]);
 
+  // Удаляем промокод из localStorage и сбрасываем discount, если корзина пустая
+  useEffect(() => {
+    if (cartproducts.length === 0 && discount > 0) {
+      setDiscount(0);
+      localStorage.removeItem("discount");
+    }
+  }, [cartproducts.length, discount]);
+
   const products_info = cartproducts
     .map((item) => `${item.id} ${item.title} ${item.weight}`)
     .join(", ");
