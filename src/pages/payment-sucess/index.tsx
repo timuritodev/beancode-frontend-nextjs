@@ -8,6 +8,7 @@ import {
   getOrdersApi,
 } from "../../services/redux/slices/order/order";
 import { sendEmailApi } from "../../services/redux/slices/mailer/mailer";
+import { getCartApi, getSessionCartApi } from "../../services/redux/slices/cart/cart";
 import { useRouter } from "next/router";
 import Head from 'next/head';
 
@@ -35,8 +36,18 @@ const InfoPaymentPageSucess = () => {
   );
 
   useEffect(() => {
-    dispatch(getOrdersApi(user.id));
-  }, [dispatch, user.id]);
+    // Обновляем список заказов
+    if (user.id) {
+      dispatch(getOrdersApi(user.id));
+    }
+
+    // Обновляем корзину после успешной оплаты (она должна быть пустой после удаления в webhook)
+    if (user.token && user.id) {
+      dispatch(getCartApi(user.id));
+    } else {
+      dispatch(getSessionCartApi());
+    }
+  }, [dispatch, user.id, user.token]);
 
   const currentTimestamp = Date.now();
   const currentDate = new Date(currentTimestamp);

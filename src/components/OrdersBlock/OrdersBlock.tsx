@@ -158,9 +158,6 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
     userData = JSON.parse(storedData);
   }
 
-  const sessionResult = dispatch(getSessionIdApi()).unwrap();
-  console.log(sessionResult, 'sessionResult');
-
   const handleClickPayButton = async () => {
     try {
       // Генерируем номер заказа прямо перед оплатой
