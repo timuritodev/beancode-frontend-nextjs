@@ -74,12 +74,14 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
   };
 
   let sum = 0;
-  // let totalWeight = 0;
-  // const deliveryCost = 250;
+  let totalWeight = 0;
+  const deliveryCost = 200;
+
+  const freeDeliveryCities = ["набережные челны", "елабуга", "нижнекамск", "челны"];
 
   cartproducts.forEach((product) => {
     sum += parseInt(product.price, 10);
-    // totalWeight += parseFloat(product.weight) || 0;
+    totalWeight += parseFloat(product.weight) || 0;
   });
 
   const {
@@ -187,6 +189,17 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
     userData = JSON.parse(storedData);
   }
 
+  // Определяем город клиента и финальную сумму с учетом доставки
+  const storedDataForCity = localStorage.getItem("orderFormData");
+  const clientCity = user.token && user.city
+    ? user.city.toLowerCase().trim()
+    : storedDataForCity
+      ? JSON.parse(storedDataForCity)?.city?.toLowerCase().trim()
+      : null;
+  const isFreeDeliveryCity = clientCity && freeDeliveryCities.includes(clientCity);
+  const shouldAddDeliveryCost = totalWeight < 1000 && isFreeDeliveryCity;
+  const finalSum = shouldAddDeliveryCost ? discountedSum + deliveryCost : discountedSum;
+
   const handleClickPayButton = async () => {
     try {
       // Генерируем номер заказа прямо перед оплатой
@@ -204,15 +217,17 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         }
       }
 
+      // Используем уже вычисленную finalSum
+
       // Формируем description с промокодом и sessionId (если есть)
       const promoText = promoCode ? `, Промокод - ${promoCode}` : '';
       const sessionText = sessionId ? `, SessionId - ${sessionId}` : '';
       await dispatch(
         payApi({
           orderNumber: `${orderNumber}`,
-          amount: `${discountedSum * 100}`,
-          returnUrl: `https://beancode.ru/payment-sucess?orderId=${orderNumber}&userId=${userData.userId}&email=${userData.email}&phone=${userData.phone}&sum=${discountedSum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
-          // returnUrl: `http://localhost:5173/payment-sucess?orderId=${orderNumber}&userId=${userData.userId}&email=${userData.email}&phone=${userData.phone}&sum=${discountedSum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
+          amount: `${finalSum * 100}`,
+          returnUrl: `https://beancode.ru/payment-sucess?orderId=${orderNumber}&userId=${userData.userId}&email=${userData.email}&phone=${userData.phone}&sum=${finalSum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
+          // returnUrl: `http://localhost:5173/payment-sucess?orderId=${orderNumber}&userId=${userData.userId}&email=${userData.email}&phone=${userData.phone}&sum=${finalSum}&product_info=${products_info}&product_quantity=${cartproducts.length}`,
           failUrl: "https://beancode.ru/payment-fail",
           description: `Номер заказа - ${orderNumber}, Информация о заказе(id, название, вес) - ${products_info}, Кол-во товаров - ${cartproducts.length}, Город - ${userData.city}, Адрес - ${userData.address}, Email - ${userData.email}, Телефон - ${userData.phone}, ФИО - ${userData.name} ${userData.surname}${promoText}${sessionText}`,
           clientId: `${userData.userId}`,
@@ -342,19 +357,31 @@ export const OrderBlock: FC<OrderBlockProps> = ({ dataSaved }) => {
         <p className={styles.orderBlock__text}>{sum} ₽</p>
       </div> */}
       {/* <div className={styles.orderBlock__details}> */}
-      {/* {totalWeight < 1000 ? (
+      {shouldAddDeliveryCost ? (
         <p className={styles.orderBlock__text}>
-          Итого - <span className={styles.orderBlock__total}>{discountedSum} ₽</span>,
-          включая стоимость доставки 250 ₽
+          Итого - <span className={styles.orderBlock__total}>{finalSum} ₽</span>,
+          включая стоимость доставки {deliveryCost} ₽
+        </p>
+      ) : totalWeight < 1000 ? (
+        <p className={styles.orderBlock__text}>
+          Итого - <span className={styles.orderBlock__total}>{finalSum} ₽</span>,
+          не включая стоимость доставки
         </p>
       ) : (
         <p className={styles.orderBlock__text}>
-          Итого - <span className={styles.orderBlock__total}>{discountedSum} ₽</span>
+          Итого - <span className={styles.orderBlock__total}>{finalSum} ₽</span>
         </p>
       )}
-      <p className={styles.orderBlock__text}>
-        При заказе от 1кг доставка бесплатная по набережным челнам
-      </p> */}
+      {shouldAddDeliveryCost ? null : (
+        <>
+          <p className={styles.orderBlock__text}>
+            При заказе от 1кг доставка бесплатная по Набережным Челнам, Нижнекамску и Елабуге
+          </p>
+          <p className={styles.orderBlock__text}>
+            Доставка в другие города будет согласована с менеджером и оплачивается покупателем отдельно
+          </p>
+        </>
+      )}
       {/* </div> */}
       <form
         className={styles.orderBlock__input_container}
