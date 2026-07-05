@@ -4,6 +4,8 @@
 
 // export const API_BASE_URL = window.location.origin + currentURL.substring(0, currentURL.lastIndexOf('/')) + apiSuffix;
 
+import { isRuEmailDomain, RU_EMAIL_ERROR_MESSAGE } from "./ruEmailDomain";
+
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://beancode.ru/api";
 
 export const hashString = (s: string): number => {
@@ -201,6 +203,14 @@ export const EMAIL_VALIDATION_CONFIG = {
     value: VALIDATION_SETTINGS.email.maxLength,
     message: VALIDATION_SETTINGS.email.messages.tooLong,
   },
+};
+
+// То же, что EMAIL_VALIDATION_CONFIG, но дополнительно требует российский домен
+// (.ru/.su/.рф) — для регистрации и смены почты по закону.
+export const EMAIL_RU_VALIDATION_CONFIG = {
+  ...EMAIL_VALIDATION_CONFIG,
+  validate: (value: string) =>
+    isRuEmailDomain(value) || RU_EMAIL_ERROR_MESSAGE,
 };
 
 export const PASSWORD_VALIDATION_CONFIG = {

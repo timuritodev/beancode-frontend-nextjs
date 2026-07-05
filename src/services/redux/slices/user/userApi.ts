@@ -7,6 +7,8 @@ import {
   IChangePassword,
   IRecoverPassword,
   IResetPassword,
+  IRequestEmailChange,
+  IConfirmEmailChange,
 } from "../../../../../src/types/Auth.types";
 
 const checkRes = (res: Response) => {
@@ -20,7 +22,7 @@ const checkRes = (res: Response) => {
 export const fetchData = (
   url: string,
   method: string,
-  data?: ISignInData | ISignUpData | IUser | IEditProfileData | IChangePassword | IRecoverPassword | IResetPassword,
+  data?: ISignInData | ISignUpData | IUser | IEditProfileData | IChangePassword | IRecoverPassword | IResetPassword | IRequestEmailChange | IConfirmEmailChange,
   token?: string
 ) => {
   return fetch(url, {
@@ -86,6 +88,24 @@ export const fetchResetPassword = (
   data: IResetPassword,
 ): Promise<Response> => {
   return fetchData(`${API_BASE_URL}/reset-password`, "POST", data).then(
+    (res) => checkRes(res)
+  );
+};
+
+export const fetchRequestEmailChange = (
+  data: IRequestEmailChange,
+  token: string,
+): Promise<Response> => {
+  return fetchData(`${API_BASE_URL}/email-change/request`, "POST", data, token).then(
+    (res) => checkRes(res)
+  );
+};
+
+export const fetchConfirmEmailChange = (
+  data: IConfirmEmailChange,
+  token: string,
+): Promise<Response> => {
+  return fetchData(`${API_BASE_URL}/email-change/confirm`, "POST", data, token).then(
     (res) => checkRes(res)
   );
 };

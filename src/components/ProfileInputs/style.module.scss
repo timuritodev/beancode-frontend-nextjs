@@ -1,48 +1,63 @@
 .account__container {
-  width: 100%;
-  margin: 0 auto;
+	width: 100%;
+	margin: 0 auto;
 }
 
 .input__container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 32px;
-  max-width: 800px;
-  margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 32px;
+	max-width: 800px;
+	margin: 0 auto;
 }
 
-
 .profile__link {
-  color: var(--grey, #797979);
-  font-family: Ubuntu;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  text-decoration: none;
-  /* margin: 82px 0 0 193px; */
-  margin: 0;
-  height: 30px;
+	color: var(--grey, #797979);
+	font-family: Ubuntu;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	text-decoration: none;
+	/* margin: 82px 0 0 193px; */
+	margin: 0;
+	height: 30px;
 }
 
 @media screen and (max-width: 767px) {
-  .input__container {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    row-gap: 32px;
-    column-gap: 48px;
-    width: 328px;
-    margin: 0 16px;
-  }
+	.input__container {
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		row-gap: 32px;
+		column-gap: 48px;
+		width: 328px;
+		margin: 0 16px;
+	}
 
-  .profile__link {
-    color: var(--grey, #797979);
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    /* margin: 100px 0; */
-    margin: 0;
-  }
+	.profile__link {
+		color: var(--grey, #797979);
+		font-size: 20px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: normal;
+		/* margin: 100px 0; */
+		margin: 0;
+	}
+}
+.profile__change_email_link {
+	display: inline-block;
+	margin: -24px 0 0 0;
+	color: var(--Black_text, #0f100f);
+	font-family: Montserrat;
+	font-size: 14px;
+	font-weight: 500;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.profile__links_container {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
 }

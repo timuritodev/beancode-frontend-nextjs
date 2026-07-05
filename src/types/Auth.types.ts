@@ -51,3 +51,11 @@ export interface IResetPassword {
   token: string;
   newPassword: string;
 }
+
+export interface IRequestEmailChange {
+  email: string;
+}
+
+export interface IConfirmEmailChange {
+  code: string;
+}

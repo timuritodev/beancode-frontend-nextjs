@@ -19,7 +19,7 @@ import {
   ADDRESS_VALIDATION_CONFIG,
   AREA_VALIDATION_CONFIG,
   CITY_VALIDATION_CONFIG,
-  EMAIL_VALIDATION_CONFIG,
+  EMAIL_RU_VALIDATION_CONFIG,
   NAME_VALIDATION_CONFIG,
   PASSWORD_VALIDATION_CONFIG,
   PHONE_VALIDATION_CONFIG,
@@ -133,7 +133,7 @@ const SignUpPage = () => {
               inputType={CustomInputTypes.email}
               labelText={"Электронная почта"}
               validation={{
-                ...register("email", EMAIL_VALIDATION_CONFIG),
+                ...register("email", EMAIL_RU_VALIDATION_CONFIG),
               }}
               placeholder="email@example.com"
               error={errors?.email?.message}

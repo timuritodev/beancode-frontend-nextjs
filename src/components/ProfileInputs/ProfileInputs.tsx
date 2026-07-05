@@ -14,7 +14,6 @@ import {
   ADDRESS_VALIDATION_CONFIG,
   AREA_VALIDATION_CONFIG,
   CITY_VALIDATION_CONFIG,
-  EMAIL_VALIDATION_CONFIG,
   NAME_VALIDATION_CONFIG,
   PHONE_VALIDATION_CONFIG,
   SURNAME_VALIDATION_CONFIG,
@@ -116,15 +115,13 @@ export const ProfileInputs = () => {
           defaultValue={user.phone}
           error={errors?.phone?.message}
         />
+        {/* Email меняется только через подтверждаемый код на новый адрес. */}
         <CustomInput
           inputType={CustomInputTypes.email}
           labelText={"Электронная почта"}
-          validation={{
-            ...register("email", EMAIL_VALIDATION_CONFIG),
-          }}
+          value={user.email}
+          readOnly={true}
           placeholder="email@example.com"
-          defaultValue={user.email}
-          error={errors?.email?.message}
         />
         <CustomInput
           inputType={CustomInputTypes.address}
@@ -164,9 +161,14 @@ export const ProfileInputs = () => {
           disabled={!isDirty || !isValid}
           type="button"
         />
-        <Link href="/change-password" className={styles.profile__link}>
-          Сменить пароль
-        </Link>
+        <div className={styles.profile__links_container}>
+          <Link href="/change-password" className={styles.profile__link}>
+            Сменить пароль
+          </Link>
+          <Link href="/change-email" className={styles.profile__link}>
+            Сменить почту
+          </Link>
+        </div>
       </form>
       <PopupChanges
         isOpened={isSavedPopupOpened}

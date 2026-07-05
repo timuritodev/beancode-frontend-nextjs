@@ -8,6 +8,8 @@ import {
   fetchChangePassword,
   fetchRecoverPassword,
   fetchResetPassword,
+  fetchRequestEmailChange,
+  fetchConfirmEmailChange,
 } from "./userApi";
 import {
   IUser,
@@ -17,6 +19,8 @@ import {
   IChangePassword,
   IRecoverPassword,
   IResetPassword,
+  IRequestEmailChange,
+  IConfirmEmailChange,
 } from "../../../../types/Auth.types";
 
 export interface IUserState {
@@ -33,6 +37,52 @@ export const signInUser = createAsyncThunk(
       const json = await response.json();
       return fulfillWithValue(json);
     } catch (error: unknown) {
+      // Пароль верный, но почта зарубежная — бэкенд отвечает 403 с билетом на
+      // смену email. Прокидываем тело, чтобы страница увела на /change-email.
+      if (error instanceof Response && error.status === 403) {
+        const body = await error.json().catch(() => ({}));
+        return rejectWithValue({ requireEmailChange: true, ...body });
+      }
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const requestEmailChange = createAsyncThunk(
+  "@@user/requestEmailChange",
+  async (
+    arg: { data: IRequestEmailChange; token: string },
+    { fulfillWithValue, rejectWithValue }
+  ) => {
+    try {
+      const response = await fetchRequestEmailChange(arg.data, arg.token);
+      const json = await response.json();
+      return fulfillWithValue(json);
+    } catch (error: unknown) {
+      if (error instanceof Response) {
+        const body = await error.json().catch(() => ({}));
+        return rejectWithValue(body);
+      }
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const confirmEmailChange = createAsyncThunk(
+  "@@user/confirmEmailChange",
+  async (
+    arg: { data: IConfirmEmailChange; token: string },
+    { fulfillWithValue, rejectWithValue }
+  ) => {
+    try {
+      const response = await fetchConfirmEmailChange(arg.data, arg.token);
+      const json = await response.json();
+      return fulfillWithValue(json);
+    } catch (error: unknown) {
+      if (error instanceof Response) {
+        const body = await error.json().catch(() => ({}));
+        return rejectWithValue(body);
+      }
       return rejectWithValue(error);
     }
   }

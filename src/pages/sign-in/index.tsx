@@ -19,9 +19,11 @@ import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { PopupLogin } from "../../components/Popups/PopupLogin";
 import { PopupErrorLogin } from "../../components/Popups/PopupErrorLogin";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const SignInPage = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const [authError, setAuthError] = useState(false);
   const [isSavedPopupOpened, setIsSavedPopupOpened] = useState<boolean>(false);
@@ -49,6 +51,13 @@ const SignInPage = () => {
         setIsSavedPopupOpened(true);
       })
       .catch((err) => {
+        // Зарубежная почта: бэкенд прислал билет на смену email — уводим юзера
+        // на страницу смены почты вместо обычной ошибки входа.
+        if (err?.requireEmailChange && err?.changeEmailToken) {
+          sessionStorage.setItem("changeEmailToken", err.changeEmailToken);
+          router.push("/change-email");
+          return;
+        }
         setIsErrorPopupOpened(true);
         console.log("dispatch signInUser err:", err);
       });
